@@ -2,6 +2,26 @@ import requests
 import feedparser
 from bs4 import BeautifulSoup
 
+# 通用屏蔽词（黑名单），如果标题包含这些词，直接丢弃
+EXCLUDE_KEYWORDS = [
+    "招商", "报名", "峰会", "直播", "课程", 
+    "培训", "咨询", "服务商", "开店顾问", "会员", 
+    "活动", "大会", "交流群", "广告"
+]
+
+def is_valid_news(title, include_keywords=None):
+    # 1. 检查黑名单屏蔽词
+    for bad_word in EXCLUDE_KEYWORDS:
+        if bad_word in title:
+            return False
+            
+    # 2. 如果有白名单强制关键词，检查是否包含
+    if include_keywords:
+        if not any(k in title for k in include_keywords):
+            return False
+            
+    return True
+
 def get_feed_data(url, limit=5, keywords=None):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
@@ -15,11 +35,9 @@ def get_feed_data(url, limit=5, keywords=None):
             title = entry.title
             link = entry.link
             
-            # 如果提供了关键词，则严格过滤
-            if keywords:
-                if not any(k in title for k in keywords):
-                    continue
-                    
+            if not is_valid_news(title, include_keywords=keywords):
+                continue
+                
             if title and link not in [n['link'] for n in news_list]:
                 news_list.append({"title": title, "link": link})
                 if len(news_list) >= limit:
@@ -42,9 +60,12 @@ def fetch_cifnews():
             if '/article/' in a['href']:
                 title = a.text.strip()
                 link = "https://www.cifnews.com" + a['href'] if a['href'].startswith('/') else a['href']
-                # 过滤掉无效或太短的标题
-                if title and len(title) > 6 and link not in [n['link'] for n in news_list]:
-                    news_list.append({"title": title, "link": link})
+                
+                # 过滤掉过短的标题和黑名单内容
+                if title and len(title) > 6 and is_valid_news(title):
+                    if link not in [n['link'] for n in news_list]:
+                        news_list.append({"title": title, "link": link})
+                        
                 if len(news_list) >= 8:
                     break
     except Exception as e:
@@ -59,6 +80,7 @@ def fetch_daily_news():
     
     print("抓取 36氪 (出海精选)...")
     url_36kr = "https://36kr.com/feed"
+    # 白名单：必须包含这些词才抓取
     keywords = ["出海", "跨境", "亚马逊", "TikTok", "Shopee", "独立站", "速卖通", "海外"]
     all_news["36氪 (商业出海)"] = get_feed_data(url_36kr, limit=6, keywords=keywords)
     
