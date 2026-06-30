@@ -1,25 +1,19 @@
 import os
 from scraper import fetch_daily_news
-from emailer import send_email
+from web_builder import build_webpage
 
 def main():
-    print("开始抓取最新跨境资讯...")
+    print("开始执行每日资讯收集任务...")
+    
+    # 1. 抓取新闻并经过 AI 筛选
     news_data = fetch_daily_news()
     
-    # 过滤掉空的数据源
-    news_data = {k: v for k, v in news_data.items() if v}
-    
-    if not news_data:
-        print("今日未抓取到任何资讯。")
-        return
-        
-    print(f"抓取完成，共 {sum(len(v) for v in news_data.values())} 条新闻。")
-    
-    # 优先从环境变量获取，如果没有则使用默认配置
-    to_email = os.environ.get("TO_EMAIL", "n9_0927@qq.com")
-    
-    print(f"准备发送邮件至: {to_email}")
-    send_email(news_data, to_email)
-    
+    # 2. 生成静态网页
+    if any(news_data.values()):
+        build_webpage(news_data)
+        print(f"抓取完成，共 {sum(len(v) for v in news_data.values())} 条新闻。")
+    else:
+        print("今日没有抓取到符合要求的新闻，无需生成网页。")
+
 if __name__ == "__main__":
     main()

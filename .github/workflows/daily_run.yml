@@ -9,7 +9,9 @@ on:
 jobs:
   run-scraper:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write
+      
     steps:
     - name: 检出代码
       uses: actions/checkout@v3
@@ -24,14 +26,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         
-    - name: 运行资讯收集和邮件发送程序
+    - name: 运行资讯收集并生成网页
       env:
-        # SMTP_USER 和 SMTP_PASS 需要在 GitHub 的 Settings -> Secrets 中配置
-        SMTP_SERVER: smtp.qq.com
-        SMTP_PORT: 465
-        SMTP_USER: ${{ secrets.SMTP_USER }}
-        SMTP_PASS: ${{ secrets.SMTP_PASS }}
-        TO_EMAIL: ${{ secrets.TO_EMAIL }}
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: |
         python main.py
+        
+    - name: 部署到 GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+        keep_files: false

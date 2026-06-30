@@ -1,8 +1,5 @@
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-import datetime
 import os
+import datetime
 
 def generate_html(news_data):
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -11,8 +8,12 @@ def generate_html(news_data):
     total_news = sum(len(v) for v in news_data.values())
     
     html = f"""
-    <html>
+    <!DOCTYPE html>
+    <html lang="zh-CN">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>每日跨境新鲜事</title>
         <style>
             body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #ffffff; color: #333; line-height: 1.6; margin: 0; padding: 20px; }}
             .container {{ max-width: 600px; margin: 0 auto; background-color: #ffffff; }}
@@ -61,7 +62,7 @@ def generate_html(news_data):
             
     html += """
             <div class="footer">
-                本邮件由你的专属跨境资讯小助手自动生成，代码运行于 GitHub Actions。
+                本网页由 AI 智能驱动，代码运行于 GitHub Actions。
             </div>
         </div>
     </body>
@@ -69,47 +70,13 @@ def generate_html(news_data):
     """
     return html
 
-def send_email(news_data, to_email):
-    smtp_server = os.environ.get("SMTP_SERVER", "smtp.qq.com")
-    smtp_port = int(os.environ.get("SMTP_PORT", 465))
-    from_email = os.environ.get("SMTP_USER", "")
-    password = os.environ.get("SMTP_PASS", "")  # 授权码
-    
-    if not from_email or not password:
-        print("未配置发件邮箱账号密码，仅在本地生成 HTML 预览文件 (news_preview.html)，不发送邮件。")
-        with open("news_preview.html", "w", encoding="utf-8") as f:
-            f.write(generate_html(news_data))
-        return
-        
-    # 如果是群发，用逗号分隔
-    to_addrs = [addr.strip() for addr in to_email.split(',')]
-    
+def build_webpage(news_data):
     html_content = generate_html(news_data)
     
-    try:
-        print(f"正在连接 SMTP 服务器 {smtp_server}:{smtp_port}...")
-        if smtp_port == 465:
-            server = smtplib.SMTP_SSL(smtp_server, smtp_port)
-        else:
-            server = smtplib.SMTP(smtp_server, smtp_port)
-            server.starttls()
-            
-        server.login(from_email, password)
+    # 确保 public 目录存在
+    os.makedirs("public", exist_ok=True)
+    
+    with open("public/index.html", "w", encoding="utf-8") as f:
+        f.write(html_content)
         
-        # 逐个发送，避免被当作群发垃圾邮件直接静默拦截
-        for target in to_addrs:
-            if not target: continue
-            msg = MIMEMultipart()
-            msg['From'] = from_email
-            msg['To'] = target
-            msg['Subject'] = f"【每日跨境资讯】{datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}"
-            msg.attach(MIMEText(html_content, 'html', 'utf-8'))
-            
-            server.send_message(msg, from_addr=from_email, to_addrs=[target])
-            print(f"邮件已成功发送至 {target}")
-            
-        server.quit()
-    except Exception as e:
-        print(f"发送邮件失败: {e}")
-        import sys
-        sys.exit(1)
+    print("网页生成成功：public/index.html")
