@@ -59,7 +59,7 @@ def send_email(news_data, to_email):
     msg = MIMEMultipart()
     msg['From'] = from_email
     msg['To'] = to_email
-    msg['Subject'] = f"【每日跨境资讯】{datetime.datetime.now().strftime('%Y-%m-%d')}"
+    msg['Subject'] = f"【每日跨境资讯】{datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}"
     
     html_content = generate_html(news_data)
     msg.attach(MIMEText(html_content, 'html', 'utf-8'))

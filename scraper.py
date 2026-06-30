@@ -1,8 +1,8 @@
 import requests
 import feedparser
-from datetime import datetime, timedelta
+from bs4 import BeautifulSoup
 
-def get_feed_data(url, limit=5, keyword=None):
+def get_feed_data(url, limit=5, keywords=None):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
@@ -15,9 +15,11 @@ def get_feed_data(url, limit=5, keyword=None):
             title = entry.title
             link = entry.link
             
-            if keyword and keyword not in title:
-                continue
-                
+            # 如果提供了关键词，则严格过滤
+            if keywords:
+                if not any(k in title for k in keywords):
+                    continue
+                    
             if title and link not in [n['link'] for n in news_list]:
                 news_list.append({"title": title, "link": link})
                 if len(news_list) >= limit:
@@ -27,20 +29,38 @@ def get_feed_data(url, limit=5, keyword=None):
         
     return news_list
 
+def fetch_cifnews():
+    url = "https://www.cifnews.com/"
+    headers = {"User-Agent": "Mozilla/5.0"}
+    news_list = []
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        response.encoding = 'utf-8'
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        for a in soup.find_all('a', href=True):
+            if '/article/' in a['href']:
+                title = a.text.strip()
+                link = "https://www.cifnews.com" + a['href'] if a['href'].startswith('/') else a['href']
+                # 过滤掉无效或太短的标题
+                if title and len(title) > 6 and link not in [n['link'] for n in news_list]:
+                    news_list.append({"title": title, "link": link})
+                if len(news_list) >= 8:
+                    break
+    except Exception as e:
+        print(f"获取雨果网失败: {e}")
+    return news_list
+
 def fetch_daily_news():
     all_news = {}
     
-    # 因为 Google News 在国内存在重定向被拦截的问题，所以我们替换为国内可以直接点击的原生直链 RSS 源
+    print("抓取 雨果跨境 (专业跨境电商资讯)...")
+    all_news["雨果跨境 (最新干货)"] = fetch_cifnews()
     
-    print("抓取 36氪...")
+    print("抓取 36氪 (出海精选)...")
     url_36kr = "https://36kr.com/feed"
-    # 获取 36氪 最新商业与科技动态
-    all_news["36氪 (商业/创投动态)"] = get_feed_data(url_36kr, limit=8)
-    
-    print("抓取 钛媒体...")
-    url_tmt = "https://www.tmtpost.com/rss.xml"
-    # 获取钛媒体前瞻资讯
-    all_news["钛媒体 (前沿商业)"] = get_feed_data(url_tmt, limit=5)
+    keywords = ["出海", "跨境", "亚马逊", "TikTok", "Shopee", "独立站", "速卖通", "海外"]
+    all_news["36氪 (商业出海)"] = get_feed_data(url_36kr, limit=6, keywords=keywords)
     
     return all_news
 
