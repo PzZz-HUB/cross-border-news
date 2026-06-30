@@ -60,7 +60,13 @@ def filter_news_with_ai(news_list):
                 filtered_list.append(item)
                 
     except Exception as e:
-        print(f"AI 判断过程发生错误: {e}")
+        print(f"AI 接口调用或解析发生错误: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        try:
+            print(f"API返回的原始文本为: {response.text}")
+        except:
+            pass
         return news_list
         
     return filtered_list

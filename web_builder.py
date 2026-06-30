@@ -23,41 +23,133 @@ def generate_html(archive_data):
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>跨境内参库</title>
+        <title>跨境内参库 Dashboard</title>
         <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #f9fafb; color: #333; line-height: 1.6; margin: 0; padding: 20px; }
-            .container { max-width: 600px; margin: 0 auto; background-color: transparent; }
-            .header { text-align: center; padding: 20px 0; margin-bottom: 20px; }
-            .header h1 { margin: 0; font-size: 28px; color: #1f2937; font-weight: 800; }
-            .search-box { width: 100%; padding: 12px 16px; margin-bottom: 30px; border: 1px solid #d1d5db; border-radius: 12px; font-size: 16px; box-sizing: border-box; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: border-color 0.2s; }
-            .search-box:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+            :root {
+                --primary: #2563eb;
+                --bg-main: #f8fafc;
+                --text-main: #0f172a;
+                --text-muted: #64748b;
+                --card-bg: #ffffff;
+            }
+            body { 
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+                background-color: var(--bg-main); 
+                color: var(--text-main); 
+                margin: 0; 
+                padding: 0;
+            }
+            /* 悬浮顶部导航栏 */
+            .navbar {
+                position: fixed;
+                top: 0; left: 0; right: 0;
+                height: 70px;
+                background-color: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-bottom: 1px solid #e2e8f0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 5%;
+                z-index: 1000;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+            }
+            .logo { font-size: 22px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px;}
+            .search-wrapper { flex: 0 1 400px; position: relative; }
+            .search-box { 
+                width: 100%; padding: 10px 16px 10px 40px; 
+                border: 1px solid #cbd5e1; border-radius: 9999px; 
+                font-size: 15px; background-color: #f1f5f9;
+                transition: all 0.2s; outline: none;
+            }
+            .search-box:focus { background-color: #fff; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+            .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.5;}
             
-            .date-group { margin-bottom: 40px; }
-            .date-header { font-size: 18px; font-weight: 700; color: #4b5563; margin-bottom: 16px; display: flex; align-items: center; }
-            .date-header::after { content: ""; flex: 1; height: 1px; background-color: #e5e7eb; margin-left: 12px; }
+            /* 主体内容区 */
+            .main-content {
+                max-width: 1400px;
+                margin: 100px auto 40px;
+                padding: 0 5%;
+            }
             
-            .card { background-color: #ffffff; border: 1px solid #f3f4f6; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02); transition: transform 0.2s; }
-            .card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08); }
-            .card-title { font-size: 17px; font-weight: 600; color: #111827; margin: 0 0 10px 0; line-height: 1.5; }
-            .card-title a { color: #1f2937; text-decoration: none; }
-            .card-title a:hover { color: #2563eb; }
-            .card-summary { font-size: 14px; color: #4b5563; line-height: 1.6; margin: 0 0 16px 0; padding-left: 12px; border-left: 3px solid #3b82f6; background: #f8fafc; padding: 8px 12px; border-radius: 0 8px 8px 0; }
-            .card-footer { display: flex; align-items: center; font-size: 12px; }
-            .source-tag { background-color: #e0e7ff; color: #4338ca; padding: 4px 10px; border-radius: 9999px; font-weight: 600; }
+            /* 日期分组 */
+            .date-group { margin-bottom: 50px; }
+            .date-header { 
+                font-size: 24px; font-weight: 800; color: var(--text-main); 
+                margin-bottom: 24px; display: inline-block;
+                position: relative; padding-left: 16px;
+            }
+            .date-header::before {
+                content: ''; position: absolute; left: 0; top: 10%; height: 80%; width: 4px;
+                background-color: var(--primary); border-radius: 4px;
+            }
             
-            .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; font-size: 0.85em; color: #9ca3af; }
-            .no-results { text-align: center; color: #6b7280; padding: 40px 0; display: none; }
+            /* 网格瀑布流排版 */
+            .news-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+                gap: 24px;
+            }
+            
+            /* 新闻卡片 */
+            .card { 
+                background-color: var(--card-bg); 
+                border: 1px solid #e2e8f0; border-radius: 16px; 
+                padding: 24px; 
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02); 
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                display: flex; flex-direction: column;
+                height: 100%; box-sizing: border-box;
+            }
+            .card:hover { 
+                transform: translateY(-4px); 
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04); 
+                border-color: #cbd5e1;
+            }
+            .card-title { font-size: 17px; font-weight: 700; color: var(--text-main); margin: 0 0 14px 0; line-height: 1.5; }
+            .card-title a { color: var(--text-main); text-decoration: none; }
+            .card-title a:hover { color: var(--primary); }
+            
+            .card-summary { 
+                font-size: 15px; color: var(--text-muted); line-height: 1.6; margin: 0 0 20px 0; 
+                flex-grow: 1; /* 让内容撑开，把底部标签推到底部 */
+            }
+            
+            .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 16px; }
+            .source-tag { font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; letter-spacing: 0.5px;}
+            
+            /* 标签颜色 */
+            .tag-36kr { background-color: #fffbeb; color: #b45309; border: 1px solid #fef3c7; }
+            .tag-hugo { background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe; }
+            
+            .footer { margin-top: 60px; padding: 30px; text-align: center; font-size: 0.9em; color: var(--text-muted); border-top: 1px solid #e2e8f0; }
+            .no-results { text-align: center; color: var(--text-muted); padding: 80px 0; font-size: 18px; display: none; }
+            
+            /* 手机端适配 */
+            @media (max-width: 768px) {
+                .navbar { padding: 0 20px; flex-direction: column; height: 120px; justify-content: center; gap: 15px; }
+                .search-wrapper { flex: none; width: 100%; }
+                .main-content { margin-top: 140px; padding: 0 20px; }
+                .news-grid { grid-template-columns: 1fr; }
+            }
         </style>
     </head>
     <body>
-        <div class="container">
-            <div class="header">
-                <h1>🌐 跨境内参库</h1>
+        <!-- 悬浮导航栏 -->
+        <nav class="navbar">
+            <div class="logo">🌐 跨境内参库</div>
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-box" placeholder="搜索资讯、平台或关键词..." onkeyup="searchNews()">
             </div>
-            
-            <input type="text" id="searchInput" class="search-box" placeholder="搜索资讯、平台或关键词..." onkeyup="searchNews()">
-            
-            <div id="noResults" class="no-results">没有找到相关的资讯，换个关键词试试吧 💡</div>
+        </nav>
+        
+        <div class="main-content">
+            <div id="noResults" class="no-results">
+                <h2>没有找到相关资讯 💡</h2>
+                <p>换个关键词试试吧，比如“亚马逊”或“政策”</p>
+            </div>
             
             <div id="newsContainer">
     """
@@ -69,45 +161,44 @@ def generate_html(archive_data):
         html += f"""
                 <div class="date-group" data-date="{date_str}">
                     <div class="date-header">{date_str}</div>
+                    <div class="news-grid">
         """
         
         for source, news_list in news_data.items():
             if not news_list:
                 continue
                 
-            if "36氪" in source:
-                tag_style = "background-color: #fef3c7; color: #b45309;"
-            else:
-                tag_style = "background-color: #e0e7ff; color: #4338ca;"
+            tag_class = "tag-36kr" if "36氪" in source else "tag-hugo"
                 
             for item in news_list:
                 summary = item.get('summary', '点击查看原文了解详情')
+                if not summary.strip():
+                    summary = '点击查看原文了解详情'
                 title = item.get('title', '')
                 
-                # 为搜索准备纯文本，转换为小写以实现不区分大小写的搜索
                 search_text = f"{title} {summary} {source}".lower().replace('"', '&quot;')
                 
                 html += f"""
-                    <div class="card" data-search="{search_text}">
-                        <h2 class="card-title"><a href="{item.get('link', '#')}" target="_blank">{title}</a></h2>
-                        <p class="card-summary">{summary}</p>
-                        <div class="card-footer">
-                            <span class="source-tag" style="{tag_style}">{source}</span>
+                        <div class="card" data-search="{search_text}">
+                            <h2 class="card-title"><a href="{item.get('link', '#')}" target="_blank">{title}</a></h2>
+                            <p class="card-summary">{summary}</p>
+                            <div class="card-footer">
+                                <span class="source-tag {tag_class}">{source}</span>
+                            </div>
                         </div>
-                    </div>
                 """
         
         html += """
-                </div>
+                    </div> <!-- end news-grid -->
+                </div> <!-- end date-group -->
         """
             
     html += """
             </div>
-            
-            <div class="footer">
-                本网页由 AI 智能驱动，自动归档并部署于 GitHub Pages。<br>
-                在上方搜索框输入关键词，即可快速检索历史资讯。
-            </div>
+        </div>
+        
+        <div class="footer">
+            本仪表盘由 AI 自动归档并部署于 GitHub Pages。<br>数据安全持久，永不丢失。
         </div>
         
         <script>
@@ -126,7 +217,7 @@ def generate_html(archive_data):
                         var searchText = card.getAttribute('data-search');
                         
                         if (searchText.indexOf(input) > -1) {
-                            card.style.display = "";
+                            card.style.display = "flex";
                             hasVisibleCardInGroup = true;
                             hasAnyVisibleCard = true;
                         } else {
@@ -134,15 +225,13 @@ def generate_html(archive_data):
                         }
                     }
                     
-                    // 如果这个日期下没有任何卡片可见，就隐藏整个日期组
                     if (hasVisibleCardInGroup) {
-                        group.style.display = "";
+                        group.style.display = "block";
                     } else {
                         group.style.display = "none";
                     }
                 }
                 
-                // 显示或隐藏"无结果"提示
                 document.getElementById('noResults').style.display = hasAnyVisibleCard ? "none" : "block";
             }
         </script>
