@@ -1,6 +1,8 @@
 name: 每日跨境资讯收集
 
 on:
+  push:
+    branches: [ main ]
   schedule:
     # 每天北京时间早晨 8:00 执行 (UTC 时间 0:00)
     - cron: '0 0 * * *'
