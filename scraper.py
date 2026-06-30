@@ -1,6 +1,7 @@
 import requests
 import feedparser
 from bs4 import BeautifulSoup
+from ai_judge import filter_news_with_ai
 
 # 通用屏蔽词（黑名单），如果标题包含这些词，直接丢弃
 EXCLUDE_KEYWORDS = [
@@ -76,13 +77,15 @@ def fetch_daily_news():
     all_news = {}
     
     print("抓取 雨果跨境 (专业跨境电商资讯)...")
-    all_news["雨果跨境 (最新干货)"] = fetch_cifnews()
+    cifnews_raw = fetch_cifnews()
+    all_news["雨果跨境 (最新干货)"] = filter_news_with_ai(cifnews_raw)
     
     print("抓取 36氪 (出海精选)...")
     url_36kr = "https://36kr.com/feed"
     # 白名单：必须包含这些词才抓取
     keywords = ["出海", "跨境", "亚马逊", "TikTok", "Shopee", "独立站", "速卖通", "海外"]
-    all_news["36氪 (商业出海)"] = get_feed_data(url_36kr, limit=6, keywords=keywords)
+    kr_raw = get_feed_data(url_36kr, limit=6, keywords=keywords)
+    all_news["36氪 (商业出海)"] = filter_news_with_ai(kr_raw)
     
     return all_news
 
