@@ -14,19 +14,19 @@ def generate_html(news_data):
     <html>
     <head>
         <style>
-            body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #f3f4f6; color: #333; line-height: 1.6; margin: 0; padding: 20px; }}
-            .container {{ max-width: 600px; margin: 0 auto; background-color: #f3f4f6; }}
-            .header {{ text-align: center; padding: 20px 0; }}
+            body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #ffffff; color: #333; line-height: 1.6; margin: 0; padding: 20px; }}
+            .container {{ max-width: 600px; margin: 0 auto; background-color: #ffffff; }}
+            .header {{ text-align: center; padding: 20px 0; border-bottom: 1px solid #f0f0f0; margin-bottom: 20px; }}
             .header h1 {{ margin: 0; font-size: 24px; color: #1f2937; }}
             .date {{ color: #6b7280; font-size: 14px; margin-top: 5px; }}
-            .card {{ background-color: #ffffff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }}
+            .card {{ background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04); }}
             .card-title {{ font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 10px 0; line-height: 1.4; }}
             .card-title a {{ color: #111827; text-decoration: none; }}
             .card-title a:hover {{ color: #3b82f6; text-decoration: underline; }}
             .card-summary {{ font-size: 15px; color: #4b5563; line-height: 1.6; margin: 0 0 16px 0; padding-left: 12px; border-left: 3px solid #3b82f6; }}
             .card-footer {{ display: flex; align-items: center; font-size: 12px; }}
             .source-tag {{ background-color: #e0e7ff; color: #4338ca; padding: 4px 10px; border-radius: 9999px; font-weight: 500; }}
-            .footer {{ margin-top: 30px; text-align: center; font-size: 0.9em; color: #7f8c8d; }}
+            .footer {{ margin-top: 30px; padding-top: 20px; border-top: 1px solid #f0f0f0; text-align: center; font-size: 0.9em; color: #7f8c8d; }}
         </style>
     </head>
     <body>

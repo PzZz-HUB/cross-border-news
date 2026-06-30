@@ -33,16 +33,18 @@ def filter_news_with_ai(news_list):
     print("正在请求 Gemini AI 进行语义判断...")
     try:
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-1.5-flash',
             contents=prompt,
         )
         import json
         text = response.text.strip()
-        if text.startswith("```json"): text = text[7:]
-        elif text.startswith("```"): text = text[3:]
-        if text.endswith("```"): text = text[:-3]
-        text = text.strip()
         
+        # 寻找JSON数组的起始和结束位置，防止包含额外的文字
+        start_idx = text.find('[')
+        end_idx = text.rfind(']')
+        if start_idx != -1 and end_idx != -1:
+            text = text[start_idx:end_idx+1]
+            
         results = json.loads(text)
         
         for idx, item in enumerate(news_list):
