@@ -30,18 +30,17 @@ def get_feed_data(url, limit=5, keyword=None):
 def fetch_daily_news():
     all_news = {}
     
-    print("抓取 Google News (跨境电商)...")
-    url_kuajing = "https://news.google.com/rss/search?q=%E8%B7%A8%E5%A2%83%E7%94%B5%E5%95%86&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
-    all_news["跨境电商 (综合资讯)"] = get_feed_data(url_kuajing, limit=8)
+    # 因为 Google News 在国内存在重定向被拦截的问题，所以我们替换为国内可以直接点击的原生直链 RSS 源
     
-    print("抓取 Google News (品牌出海)...")
-    url_chuhai = "https://news.google.com/rss/search?q=%E5%93%81%E7%89%8C%E5%87%BA%E6%B5%B7&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
-    all_news["品牌出海 (综合资讯)"] = get_feed_data(url_chuhai, limit=5)
-    
-    print("抓取 36氪 (出海/跨境相关)...")
+    print("抓取 36氪...")
     url_36kr = "https://36kr.com/feed"
-    # 对于 36 氪，我们稍微多抓一点，因为要通过关键字过滤
-    all_news["36氪 (创投/科技出海)"] = get_feed_data(url_36kr, limit=5, keyword="出海")
+    # 获取 36氪 最新商业与科技动态
+    all_news["36氪 (商业/创投动态)"] = get_feed_data(url_36kr, limit=8)
+    
+    print("抓取 钛媒体...")
+    url_tmt = "https://www.tmtpost.com/rss.xml"
+    # 获取钛媒体前瞻资讯
+    all_news["钛媒体 (前沿商业)"] = get_feed_data(url_tmt, limit=5)
     
     return all_news
 
