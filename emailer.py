@@ -6,34 +6,59 @@ import os
 
 def generate_html(news_data):
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
+    
+    # 获取总新闻数
+    total_news = sum(len(v) for v in news_data.values())
+    
     html = f"""
     <html>
     <head>
         <style>
-            body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; }}
-            .container {{ max-width: 600px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }}
-            h1 {{ color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; }}
-            .source-title {{ color: #e67e22; font-size: 1.2em; margin-top: 20px; border-left: 4px solid #e67e22; padding-left: 10px; }}
-            ul {{ list-style-type: none; padding-left: 0; }}
-            li {{ margin-bottom: 10px; padding: 10px; background: #f9f9f9; border-radius: 5px; }}
-            a {{ color: #2980b9; text-decoration: none; font-weight: 500; }}
-            a:hover {{ text-decoration: underline; }}
+            body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #f3f4f6; color: #333; line-height: 1.6; margin: 0; padding: 20px; }}
+            .container {{ max-width: 600px; margin: 0 auto; background-color: #f3f4f6; }}
+            .header {{ text-align: center; padding: 20px 0; }}
+            .header h1 {{ margin: 0; font-size: 24px; color: #1f2937; }}
+            .date {{ color: #6b7280; font-size: 14px; margin-top: 5px; }}
+            .card {{ background-color: #ffffff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }}
+            .card-title {{ font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 10px 0; line-height: 1.4; }}
+            .card-title a {{ color: #111827; text-decoration: none; }}
+            .card-title a:hover {{ color: #3b82f6; text-decoration: underline; }}
+            .card-summary {{ font-size: 15px; color: #4b5563; line-height: 1.6; margin: 0 0 16px 0; padding-left: 12px; border-left: 3px solid #3b82f6; }}
+            .card-footer {{ display: flex; align-items: center; font-size: 12px; }}
+            .source-tag {{ background-color: #e0e7ff; color: #4338ca; padding: 4px 10px; border-radius: 9999px; font-weight: 500; }}
             .footer {{ margin-top: 30px; text-align: center; font-size: 0.9em; color: #7f8c8d; }}
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>🌐 每日跨境资讯 ({today_str})</h1>
+            <div class="header">
+                <h1>🌐 每日跨境新鲜事</h1>
+                <div class="date">{today_str} (今日精选 {total_news} 条)</div>
+            </div>
     """
     
     for source, news_list in news_data.items():
         if not news_list:
             continue
-        html += f"<div class='source-title'>{source}</div><ul>"
+            
+        # 根据来源使用不同的标签颜色
+        if "36氪" in source:
+            tag_style = "background-color: #fef3c7; color: #b45309;"
+        else:
+            tag_style = "background-color: #e0e7ff; color: #4338ca;"
+            
         for item in news_list:
-            html += f"<li><a href='{item['link']}' target='_blank'>{item['title']}</a></li>"
-        html += "</ul>"
-        
+            summary = item.get('summary', '点击查看原文了解详情')
+            html += f"""
+            <div class="card">
+                <h2 class="card-title"><a href="{item['link']}" target="_blank">{item['title']}</a></h2>
+                <p class="card-summary">{summary}</p>
+                <div class="card-footer">
+                    <span class="source-tag" style="{tag_style}">{source}</span>
+                </div>
+            </div>
+            """
+            
     html += """
             <div class="footer">
                 本邮件由你的专属跨境资讯小助手自动生成，代码运行于 GitHub Actions。
