@@ -32,6 +32,12 @@ jobs:
       run: |
         python main.py
         
+    - name: 提交历史数据归档
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "自动归档今日资讯数据"
+        file_pattern: 'data/archive.json'
+        
     - name: 部署到 GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
