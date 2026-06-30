@@ -98,8 +98,12 @@ def send_email(news_data, to_email):
             server.starttls()
             
         server.login(from_email, password)
-        server.send_message(msg)
+        # 如果是群发，需要把逗号分隔的字符串转为列表
+        to_addrs = [addr.strip() for addr in to_email.split(',')]
+        server.send_message(msg, from_addr=from_email, to_addrs=to_addrs)
         server.quit()
-        print(f"邮件已成功发送至 {to_email}")
+        print(f"邮件已成功发送至 {to_addrs}")
     except Exception as e:
         print(f"发送邮件失败: {e}")
+        import sys
+        sys.exit(1)
