@@ -17,15 +17,16 @@ def filter_news_with_ai(news_list):
     filtered_list = []
     
     # 批量判断为了省时间，我们把所有标题合并成一个 Prompt 发给 AI
-    prompt = "你是一个资深的跨境行业前沿观察家。你的任务是帮我挑选出今天最值得一看的【跨境新鲜事】。\n"
+    prompt = "你是一个极度严格的跨境电商官方政策提取器。\n"
+    prompt += "你的唯一任务是：从以下新闻列表中，精准提取出【跨境电商平台（如亚马逊、TikTok、Shopee等）发布的官方公告、最新政策、费率变动、功能上线】。\n"
     prompt += "挑选标准：\n"
-    prompt += "- 广泛保留所有有价值的新鲜事：只要是与【跨境、出海、外贸、全球化】相关的任何重要资讯（不仅限于跨境电商），只要你认为从业者看了会有启发，就必须保留！\n"
-    prompt += "- 坚决剔除：卖课、招商大会、拉群、无价值的服务商引流广告。\n"
-    prompt += "- 去除重复：如果有多条新闻说的是同一个事件，只保留最重要的一条。\n"
+    prompt += "- 必须保留：任何具有官方性质的平台规则变化、后台系统更新、关税政策变动。\n"
+    prompt += "- 坚决剔除：所有第三方的分析文章、卖家故事、行业趋势预测、服务商广告、招商大会、以及任何非官方的“小道消息”。哪怕它写得再好，只要不是官方动作，一律剔除！\n"
+    prompt += "- 去除重复：如果有多条新闻说的是同一个官方公告，只保留最核心的一条。\n"
     prompt += "请必须返回一个严格的 JSON 数组格式（不要加 ```json 代码块，直接返回纯数组）。对于每一条输入的新闻，生成一个对象，包含两个字段：\n"
-    prompt += "1. 'judgement': 如果保留则填写 '新闻'，如果剔除则填写 '营销'。\n"
-    prompt += "2. 'summary': 如果 judgement 是 '新闻'，请写一句精炼的一句话总结（根据标题合理推测或提炼核心亮点，不要超过30个字）。如果是 '营销'，留空。\n"
-    prompt += '示例：[{"judgement": "新闻", "summary": "亚马逊发布最新政策，影响卖家利润。"}, {"judgement": "营销", "summary": ""}]\n\n标题列表：\n'
+    prompt += "1. 'judgement': 如果保留则填写 '官方公告'，如果剔除则填写 '无效信息'。\n"
+    prompt += "2. 'summary': 如果 judgement 是 '官方公告'，请写一句精炼的一句话总结（提炼政策的核心要点，不要超过30个字）。如果是 '无效信息'，留空。\n"
+    prompt += '示例：[{"judgement": "官方公告", "summary": "亚马逊更新FBA退货政策，要求卖家在30天内处理。"}, {"judgement": "无效信息", "summary": ""}]\n\n标题列表：\n'
     
     for idx, item in enumerate(news_list):
         prompt += f"{idx + 1}. {item['title']}\n"
@@ -50,8 +51,8 @@ def filter_news_with_ai(news_list):
         for idx, item in enumerate(news_list):
             if idx < len(results):
                 judgement = results[idx].get("judgement", "")
-                if "营销" in judgement:
-                    print(f"[AI 判定为营销，已剔除]: {item['title']}")
+                if "无效信息" in judgement:
+                    print(f"[AI 判定为无效信息，已剔除]: {item['title']}")
                 else:
                     item['summary'] = results[idx].get("summary", "点击查看原文了解详情")
                     filtered_list.append(item)
