@@ -81,13 +81,10 @@ def send_email(news_data, to_email):
             f.write(generate_html(news_data))
         return
         
-    msg = MIMEMultipart()
-    msg['From'] = from_email
-    msg['To'] = to_email
-    msg['Subject'] = f"【每日跨境资讯】{datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}"
+    # 如果是群发，用逗号分隔
+    to_addrs = [addr.strip() for addr in to_email.split(',')]
     
     html_content = generate_html(news_data)
-    msg.attach(MIMEText(html_content, 'html', 'utf-8'))
     
     try:
         print(f"正在连接 SMTP 服务器 {smtp_server}:{smtp_port}...")
@@ -98,11 +95,20 @@ def send_email(news_data, to_email):
             server.starttls()
             
         server.login(from_email, password)
-        # 如果是群发，需要把逗号分隔的字符串转为列表
-        to_addrs = [addr.strip() for addr in to_email.split(',')]
-        server.send_message(msg, from_addr=from_email, to_addrs=to_addrs)
+        
+        # 逐个发送，避免被当作群发垃圾邮件直接静默拦截
+        for target in to_addrs:
+            if not target: continue
+            msg = MIMEMultipart()
+            msg['From'] = from_email
+            msg['To'] = target
+            msg['Subject'] = f"【每日跨境资讯】{datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}"
+            msg.attach(MIMEText(html_content, 'html', 'utf-8'))
+            
+            server.send_message(msg, from_addr=from_email, to_addrs=[target])
+            print(f"邮件已成功发送至 {target}")
+            
         server.quit()
-        print(f"邮件已成功发送至 {to_addrs}")
     except Exception as e:
         print(f"发送邮件失败: {e}")
         import sys
