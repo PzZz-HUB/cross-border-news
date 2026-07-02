@@ -39,6 +39,11 @@ def filter_news_with_ai(news_list):
             contents=prompt,
         )
         import json
+        
+        if not response.text:
+            print("警告：API 返回的文本为空（可能触发了安全策略或无内容）。")
+            return {"系统提示: AI API返回空值": news_list}
+            
         text = response.text.strip()
         
         # 寻找JSON数组的起始和结束位置，防止包含额外的文字
@@ -47,7 +52,11 @@ def filter_news_with_ai(news_list):
         if start_idx != -1 and end_idx != -1:
             text = text[start_idx:end_idx+1]
             
-        results = json.loads(text)
+        try:
+            results = json.loads(text)
+        except json.JSONDecodeError as e:
+            print(f"JSON 解析失败: {e}\n原始文本: {text}")
+            return {"系统提示: AI JSON格式错误": news_list}
         
         for idx, item in enumerate(news_list):
             if idx < len(results):
@@ -67,10 +76,6 @@ def filter_news_with_ai(news_list):
         print(f"AI 接口调用或解析发生错误: {str(e)}")
         import traceback
         traceback.print_exc()
-        try:
-            print(f"API返回的原始文本为: {response.text}")
-        except:
-            pass
-        return {"通用资讯": news_list}
+        return {"系统提示: AI 接口调用失败 (可能由于网络或额度限制)": news_list}
         
     return categorized_dict
