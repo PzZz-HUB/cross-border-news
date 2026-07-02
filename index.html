@@ -12,6 +12,10 @@
                 --text-main: #0f172a;
                 --text-muted: #64748b;
                 --card-bg: #ffffff;
+                --success: #10b981;
+                --error: #ef4444;
+                --warning: #f59e0b;
+                --neutral: #94a3b8;
             }
             body { 
                 font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
@@ -20,650 +24,988 @@
                 margin: 0; 
                 padding: 0;
             }
-            /* 悬浮顶部导航栏 */
             .navbar {
-                position: fixed;
-                top: 0; left: 0; right: 0;
-                height: 70px;
-                background-color: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                border-bottom: 1px solid #e2e8f0;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 0 5%;
-                z-index: 1000;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+                position: fixed; top: 0; left: 0; right: 0; height: 70px;
+                background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+                border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;
+                padding: 0 5%; z-index: 1000; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
             }
             .logo { font-size: 22px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px;}
             .search-wrapper { flex: 0 1 400px; position: relative; }
             .search-box { 
                 width: 100%; padding: 10px 16px 10px 40px; 
-                border: 1px solid #cbd5e1; border-radius: 9999px; 
-                font-size: 15px; background-color: #f1f5f9;
-                transition: all 0.2s; outline: none;
+                border: 1px solid #cbd5e1; border-radius: 9999px; font-size: 15px; background-color: #f1f5f9; outline: none;
             }
             .search-box:focus { background-color: #fff; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
             .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.5;}
             
-            /* 主体内容区 */
-            .main-content {
-                max-width: 1400px;
-                margin: 100px auto 40px;
-                padding: 0 5%;
-            }
+            .main-content { max-width: 1400px; margin: 100px auto 40px; padding: 0 5%; }
+
+            /* Dashboard 面板 */
+            .dashboard-panel { background: white; border-radius: 12px; padding: 24px; margin-bottom: 40px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); }
+            .dashboard-title { font-size: 18px; font-weight: 700; margin-top: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+            .status-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+            .status-item { padding: 12px 16px; border-radius: 8px; background: #f8fafc; font-size: 14px; border: 1px solid #e2e8f0; }
+            .status-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;}
+            .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; }
             
+            .dot-ok_with_confirmed { background-color: var(--success); }
+            .dot-ok_all_quarantined { background-color: var(--warning); }
+            .dot-ok_no_candidates { background-color: var(--neutral); }
+            .dot-error { background-color: var(--error); }
+            
+            .funnel-stats { font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; line-height: 1.6;}
+            .funnel-error { color: var(--error); font-size: 12px; margin-top: 4px; word-break: break-all;}
+
             /* 日期分组 */
             .date-group { margin-bottom: 50px; }
-            .date-header { 
-                font-size: 24px; font-weight: 800; color: var(--text-main); 
-                margin-bottom: 24px; display: inline-block;
-                position: relative; padding-left: 16px;
-            }
-            .date-header::before {
-                content: ''; position: absolute; left: 0; top: 10%; height: 80%; width: 4px;
-                background-color: var(--primary); border-radius: 4px;
-            }
+            .date-header { font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 24px; display: inline-block; position: relative; padding-left: 16px; }
+            .date-header::before { content: ''; position: absolute; left: 0; top: 10%; height: 80%; width: 4px; background-color: var(--primary); border-radius: 4px; }
             
             /* 网格瀑布流排版 */
-            .news-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-                gap: 24px;
-            }
-            
-            /* 新闻卡片 */
-            .card { 
-                background-color: var(--card-bg); 
-                border: 1px solid #e2e8f0; border-radius: 16px; 
-                padding: 24px; 
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02); 
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                display: flex; flex-direction: column;
-                height: 100%; box-sizing: border-box;
-            }
-            .card:hover { 
-                transform: translateY(-4px); 
-                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04); 
-                border-color: #cbd5e1;
-            }
+            .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+            .card { background-color: var(--card-bg); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; }
+            .card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08); border-color: #cbd5e1; }
             .card-title { font-size: 17px; font-weight: 700; color: var(--text-main); margin: 0 0 14px 0; line-height: 1.5; }
             .card-title a { color: var(--text-main); text-decoration: none; }
             .card-title a:hover { color: var(--primary); }
-            
-            .card-summary { 
-                font-size: 15px; color: var(--text-muted); line-height: 1.6; margin: 0 0 20px 0; 
-                flex-grow: 1; /* 让内容撑开，把底部标签推到底部 */
-            }
-            
+            .card-summary { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin: 0 0 20px 0; flex-grow: 1; }
             .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 16px; }
-            .source-tag { font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; letter-spacing: 0.5px;}
+            .source-tag { font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; }
+
+            /* 隔离审查区 */
+            .review-section { margin-top: 80px; padding: 24px; background: #fff5f5; border: 1px solid #fed7d7; border-radius: 12px; }
+            .review-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+            .review-title { font-size: 18px; font-weight: 700; color: #c53030; margin: 0; }
             
-            /* 标签颜色 */
-            .tag-36kr { background-color: #fffbeb; color: #b45309; border: 1px solid #fef3c7; }
-            .tag-hugo { background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe; }
-            
+            .review-content { margin-top: 20px; display: none; }
+            .review-source-group { margin-bottom: 24px; background: white; border-radius: 8px; border: 1px solid #fecaca; overflow: hidden; }
+            .review-source-title { background: #fee2e2; padding: 10px 16px; font-weight: 700; font-size: 15px; color: #991b1b; }
+            .review-item { padding: 12px 16px; border-bottom: 1px solid #fee2e2; font-size: 14px; display: flex; flex-direction: column; gap: 8px;}
+            .review-item:last-child { border-bottom: none; }
+            .review-meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+            .review-reason { padding: 2px 8px; background: #fecaca; color: #991b1b; border-radius: 4px; font-size: 12px; font-weight: 600; }
+            .review-rule { padding: 2px 8px; background: #e2e8f0; color: #475569; border-radius: 4px; font-size: 12px; }
+            .review-link { font-weight: 600; color: #1f2937; text-decoration: none; }
+            .review-link:hover { text-decoration: underline; }
+            .show-more-btn { width: 100%; text-align: center; padding: 12px; background: #f8fafc; border: none; border-top: 1px solid #fee2e2; color: #3b82f6; cursor: pointer; font-weight: 600; }
+            .show-more-btn:hover { background: #f1f5f9; }
+
             .footer { margin-top: 60px; padding: 30px; text-align: center; font-size: 0.9em; color: var(--text-muted); border-top: 1px solid #e2e8f0; }
             .no-results { text-align: center; color: var(--text-muted); padding: 80px 0; font-size: 18px; display: none; }
-            
-            /* 手机端适配 */
-            @media (max-width: 768px) {
-                .navbar { padding: 0 20px; flex-direction: column; height: 120px; justify-content: center; gap: 15px; }
-                .search-wrapper { flex: none; width: 100%; }
-                .main-content { margin-top: 140px; padding: 0 20px; }
-                .news-grid { grid-template-columns: 1fr; }
-            }
         </style>
     </head>
     <body>
-        <!-- 悬浮导航栏 -->
         <nav class="navbar">
             <div class="logo">🌐 跨境内参库</div>
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-box" placeholder="搜索资讯、平台或关键词..." onkeyup="searchNews()">
+                <input type="text" id="searchInput" class="search-box" placeholder="搜索资讯..." onkeyup="searchNews()">
             </div>
         </nav>
         
         <div class="main-content">
             <div id="noResults" class="no-results">
                 <h2>没有找到相关资讯 💡</h2>
-                <p>换个关键词试试吧，比如“亚马逊”或“政策”</p>
             </div>
             
             <div id="newsContainer">
     
                 <div class="date-group" data-date="2026-07-02">
                     <div class="date-header">2026-07-02</div>
+        
+                    <div class="dashboard-panel">
+                        <h3 class="dashboard-title">📡 系统运行大盘 (节点全景监控)</h3>
+                        <div class="status-grid">
+            
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>Amazon Seller News</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 2</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 2</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_no_candidates"></span><strong>TikTok Shop Seller</strong></div>
+                                    <span>⚪ 成功 (无数据)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 0</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_no_candidates"></span><strong>Shopify Changelog</strong></div>
+                                    <span>⚪ 成功 (无数据)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 0</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_no_candidates"></span><strong>eBay Seller Updates</strong></div>
+                                    <span>⚪ 成功 (无数据)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 0</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>Walmart Release Notes</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 2</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 2</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>Federal Register</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 8</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 7</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 1</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_all_quarantined"></span><strong>GOV.UK</strong></div>
+                                    <span>🟡 成功 (全隔离)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 3</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 3</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>CBP</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 6</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 6</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>USTR</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 2</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 2</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>EU Taxation</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 1</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 1</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>海关总署</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 8</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 1</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 7</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>商务部</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 8</span>
+                                    <span>丢弃: 1</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 7</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>税务总局</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 8</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 8</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>USPS Service Alerts</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 3</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 3</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>DHL</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 8</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 8</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>FedEx</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 1</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 1</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>UPS</strong></div>
+                                    <span>✅ 成功 (含核心)</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: 1</span>
+                                    <span>丢弃: 0</span>
+                                    <span style="color:var(--warning)">隔离: 0</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: 1</span>
+                                </div>
+                </div>
+                        </div>
+                    </div>
+            
                     <div class="news-grid">
         
-                        <div class="card" data-search="4 ways amazon is investing in ohio - about amazon amazon 官方发布 amazon seller news">
+                        <div class="card" data-search="anthropic's claude fable 5 model back on amazon bedrock - about amazon amazon seller news">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxNandjN0EwRGllQVdWUFFTR3ItWUJYWkJMQjV0NEZnUE5OTEM4TERPRkxtWTJ6bFZMcmJYRjZkYjFTRmRBV2lQWVBsUzlXUFBWTG9JOG1BVDBVTzA2WV9TZzdXQTVUTHEyd3p4UXdtbkZVazEwazBXb2dqVDIzNllGTmRB?oc=5" target="_blank">Anthropic's Claude Fable 5 model back on Amazon Bedrock - About Amazon</a></h2>
+                            <p class="card-summary">Amazon 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Amazon Seller News</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="4 ways amazon is investing in ohio - about amazon amazon seller news">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxQbFpuaEkxd1R2a1JjRFdDYUxfYWFibHFmUEhBTHo0WVNkajA3Q19CRXdRdDVhZlV6TVB4YWtxYmJJcmREb1BmOTdlQnNFWlBCMVZ0Uk5HVndZNEdmRF9UaV8tN2tLY00temo5TVFFa0JGWUtyUy1KaTYyM3d4MHhuYUZsaTVDXzkzdUZaZ0VOMG05LTZ4NS1NSDB3QUFnbEpIU2c?oc=5" target="_blank">4 ways Amazon is investing in Ohio - About Amazon</a></h2>
                             <p class="card-summary">Amazon 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;">Amazon Seller News</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Amazon Seller News</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="sam’s club reveals its most popular meats for the fourth of july walmart 官方发布 walmart release notes">
+                        <div class="card" data-search="sam’s club reveals its most popular meats for the fourth of july walmart release notes">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxNR2laOTFrb0NUSTV6NHIyMUcwMk9VVnVlaEd1UF84ZXMtNmhOSlhDcnJBanJ6V2ktRUxwLUNwMXJOUHdYM1pmbkt6Q1FEMmlfX2lQRHhFNVhsME5lcGh5OVprSWlLVTBtU2VLYVJsbUh4OERjeWpwQnBTYVRERlhvZEU5Y0NlM05yZF92V2ljOHNsVy1tTUVMQWk3Mnlfd2pORVpJZXZfYVBxTGZwRlh3Yzd0aTNKRjEyOTB6OHhNNWFGZw?oc=5" target="_blank">Sam’s Club Reveals Its Most Popular Meats for the Fourth Of July</a></h2>
                             <p class="card-summary">Walmart 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">Walmart Release Notes</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Walmart Release Notes</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="councils supported to identify and support vulnerable teenagers gov.uk 官方通告 gov.uk">
-                            <h2 class="card-title"><a href="https://www.gov.uk/government/news/councils-supported-to-identify-and-support-vulnerable-teenagers" target="_blank">Councils supported to identify and support vulnerable teenagers</a></h2>
-                            <p class="card-summary">GOV.UK 官方通告</p>
+                        <div class="card" data-search="wellness is personal. walmart is helping make it more accessible. walmart release notes">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxPN3hpSUt6OGhvd1YxeEMwaUN0UnFCZVpxNmFKeVEwcXg0UVBaTmVhTE5JZ21IZjgxVGdfZ25WdVVpYnkwWDdzRlROaDE0LUhNT1ZFZkdZOURVRzVJdThIS2stRVdTZGIyRGx6V3BKUWZxTnZvMlBMT1AtRDJrWmxNeUNGYjUzSjNrQTBZb1NwWkNocURoSzUxbjBiQzhnMEVoRmZHbUlGS2RPT1J1RlE?oc=5" target="_blank">Wellness Is Personal. Walmart Is Helping Make It More Accessible.</a></h2>
+                            <p class="card-summary">Walmart 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">GOV.UK</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Walmart Release Notes</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="remaking the state gov.uk 官方通告 gov.uk">
-                            <h2 class="card-title"><a href="https://www.gov.uk/government/speeches/remaking-the-state" target="_blank">Remaking the state</a></h2>
-                            <p class="card-summary">GOV.UK 官方通告</p>
+                        <div class="card" data-search="agency information collection activities; proposed collection; comment request; regulation agency protests federal register">
+                            <h2 class="card-title"><a href="https://www.federalregister.gov/documents/2026/07/02/2026-13468/agency-information-collection-activities-proposed-collection-comment-request-regulation-agency" target="_blank">Agency Information Collection Activities; Proposed Collection; Comment Request; Regulation Agency Protests</a></h2>
+                            <p class="card-summary">Federal Register 官方通告</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">GOV.UK</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Federal Register</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="remaking the state annual conference 2026 gov.uk 官方通告 gov.uk">
-                            <h2 class="card-title"><a href="https://www.gov.uk/government/speeches/remaking-the-state-annual-conference-2026" target="_blank">Remaking the State Annual Conference 2026</a></h2>
-                            <p class="card-summary">GOV.UK 官方通告</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">GOV.UK</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="customs bulletin weekly vol 60, july 1, 2026, no. 17 - u.s. customs and border protection (.gov) cbp 官方发布 cbp">
+                        <div class="card" data-search="customs bulletin weekly vol 60, july 1, 2026, no. 17 - u.s. customs and border protection (.gov) cbp">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQd3ktVjRzMXN5RmpncW5WQ3FBS1YxclJRRUsyMF9aYkZvdFRqLTJUWVNvSm1wUVVFNmV5ODhNNjhFc1ptUzRMVDFYTlo0SWFDd3VIemR4RXhvRjFHR01xTG56ejhYalJoZDVDcVRlU2xWWEI4b2ROTzlWa2VIRXN5MGR0NnUwaWJFR1lPbjhfdEc?oc=5" target="_blank">Customs Bulletin Weekly Vol 60, July 1, 2026, No. 17 - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">CBP</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="cbp officers seize more than 57 pounds of methamphetamine at the paso del norte port of entry - u.s. customs and border protection (.gov) cbp 官方发布 cbp">
+                        <div class="card" data-search="cbp officers seize more than 57 pounds of methamphetamine at the paso del norte port of entry - u.s. customs and border protection (.gov) cbp">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxOWkQyUzRqbmk3aTNxQWxDMzV5OEk2SUY3SHd0MXhUcGtTZW4ybDBLUFN3LWRvS0tjTUZoaUtYRldXQzV6YlJoOFkyZUVsb3YzQ0U1LXFDVHhZbjUzcVRBdTdYRnlsVXNYVlJHR2VVeGp3TGZoX0ItMVB3ck9TLVdFcy1jSUVXWTU0VDV2RUdTLVRUWjlkRm02SDYtLUtDUlhWTG1leWFoam05eVNabGJhemVlMVQ2cFJZNmc?oc=5" target="_blank">CBP officers seize more than 57 pounds of methamphetamine at the Paso Del Norte Port of Entry - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">CBP</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="strengthening customs enforcement - u.s. customs and border protection (.gov) cbp 官方发布 cbp">
+                        <div class="card" data-search="strengthening customs enforcement - u.s. customs and border protection (.gov) cbp">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBjaTNwN093Vk95aExzUkhvX2VBal9tWWc4T3I2NWVYNVhSREVxaDNOOEtQd3hSeVRsdVlUYXkzbGdVSGpKTXBkbkhaUTNxMXhlZDNhbzByWlF2NFBBMHR0aWVrbUJwZTBCNlFF?oc=5" target="_blank">Strengthening Customs Enforcement - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">CBP</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="ruling document 808378 is not available - u.s. customs and border protection (.gov) cbp 官方发布 cbp">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE1oZ1VYRk90UG9FWVNMelR1VVlhYm9FdmJMMDA0aGt5UXVuSmQzYkNDbWhBa2xjR25kS3FPaTVUeFVmdHdIMUdlU0k2ODFrdw?oc=5" target="_blank">Ruling document 808378 is not available - U.S. Customs and Border Protection (.gov)</a></h2>
+                        <div class="card" data-search="error - cbp careers (.gov) cbp">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMixgJBVV95cUxONHlkNVJrYWxDTU94TzBON2l6a0V4Y1pxdHFMNEVRUl8wcE5ubS1fblFRcWlhdUhmOHhvSnI1NnI3NUJjMUlPYnRWTG9kN1l6Um92ek5kdTBta0sybk1iYmpKRlhLd3BDd3NmUTZUZmphX1lpdWFTMXpKRzdXSzRFTFFiRUxFTUo0VTVNWmQtME9aTmdaTDRkUmMtRjkzRHZGSGdlZEVkNTFYWnU4amlhbW8zdXNKbkdoclRwTW1vTnBkZHRiVUI4MWM1cDM1T2NnV1R5S1VxT1pGWTktYzNjZmx1N1FyUFJ4TG5KU25ra0xnYjRwRy1qeGxxOXQzaFoxTFU0ZjdEWDlpWVA1MEV6SEtyN1FGTTNYN3hRN2xiSmtmeGRWandJdjRDcnlvdXloZWhXRjBacTVkMUlFWHVhS3NTMnRiUQ?oc=5" target="_blank">Error - CBP Careers (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">CBP</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="cbp history timeline, part v: 2006-2025 - u.s. customs and border protection (.gov) cbp 官方发布 cbp">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiWEFVX3lxTE9Md2tTai1vZnpFMEJtLUEyUDlYd1VWcjJWQS1pbFlkaVNyM3BFT0dCSENDRDJuV1JyMEJJRU50WGlYVlY0TUMxaF8xcVNWX25KbzUxTExOZEI?oc=5" target="_blank">CBP History Timeline, Part V: 2006-2025 - U.S. Customs and Border Protection (.gov)</a></h2>
+                        <div class="card" data-search="cross ruling - u.s. customs and border protection (.gov) cbp">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE1Fa2JIaU95N1IzYmlrOG5yZE9vWlZHczB2WmgtcVpKVDhMYXRNYktFWGV4bGphZThHZ21QRUJnOE5JWFpVR3A2RmViekN6dTQ?oc=5" target="_blank">CROSS Ruling - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">CBP</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="ruling date: may 9, 1990 - u.s. customs and border protection (.gov) cbp 官方发布 cbp">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE1YUG9ybHFCWHktQlhlRzAwYUtWcEt2LXBzcFF1TEdqS3pjMFc1S1FDOGNNOUtDekhxazdqTnVMX0NjUWsydHhiNUg4UXVOQQ?oc=5" target="_blank">Ruling Date: May 9, 1990 - U.S. Customs and Border Protection (.gov)</a></h2>
-                            <p class="card-summary">CBP 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">CBP</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="canadian border ports of entry - u.s. customs and border protection (.gov) cbp 官方发布 cbp">
+                        <div class="card" data-search="canadian border ports of entry - u.s. customs and border protection (.gov) cbp">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiR0FVX3lxTE5HS0RsWHBsVUdqSDlXOERzQVRwN3B4S2U1V3FlbWh1VVRlSkxrbUEwVmZuNVhxNjRTOExVaUFxQjdkSkxaNGo0?oc=5" target="_blank">Canadian Border Ports of Entry - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">CBP</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="docket for public comments - ustr portal - ustr comment portal (.gov) ustr 官方发布 ustr">
+                        <div class="card" data-search="ambassador greer issues statement on the usmca joint review - ustr.gov ustr">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMixwFBVV95cUxQOFMtYkdYelBuTnBBam02VWtrTnFsSnhQV0p5RElmZ0lWT19IRDdYZzhuLWF2VUMtcTU1T1JIYUVvdlptXzRVZkxycmFOMVkwUEs3djRQcVBZUnBDdVJMWFIzZmFkVlVld1hhcldRRnI5eGs4bXlUN3c4enZIc1RHUThpUHViN2Ffc2dTbFpGNkdQNWp6Zm14WTBHeWNwSURSRHVabjFOLXExMzk2V1VpZERWQTBiNVZob3hFWGVmODFiRlBPVWJn?oc=5" target="_blank">Ambassador Greer Issues Statement on the USMCA Joint Review - ustr.gov</a></h2>
+                            <p class="card-summary">USTR 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USTR</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="docket for public comments - ustr portal - ustr comment portal (.gov) ustr">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiQkFVX3lxTE5WTDd2UjgxRWtvbS0tX0hfUFRmMG9xSkFiSUh6MUFsWGh0MTJwWXZ5bTdYc1paeEZ6TGE0N2JjMUdPZw?oc=5" target="_blank">docket for public comments - USTR portal - USTR comment portal (.gov)</a></h2>
                             <p class="card-summary">USTR 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">USTR</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USTR</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="state-of-play cbam accreditation - taxation and customs union eu taxation 官方发布 eu taxation">
+                        <div class="card" data-search="state-of-play cbam accreditation - taxation and customs union eu taxation">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMi3gFBVV95cUxOclM5OHFOd2FlZ250b3U5WjZuV2lQalVvUEpsZEpEMlZtNmJJNlBWN2hoZGNTRkFvQU40cHFTSUE3X3d2enlOMTlpejdwdE1QT3UtdEdGWjdTWHViR1dMMUxQejJURGcyNW5TU051TEE4SnlSQ3BTeW91SXRCSXpIMldVSXliUnpFZEc3Tmw5c2hoTUtaOGt6cEVxMlNxSEFrX2c2UWZiTHEyeFBtQ3BHd0ZhM0F5SC1KTlp1aDl3U0RGYlNLWTcySVppU3ZQbHF1a2R3SEpMckdoRmhMV3c?oc=5" target="_blank">State-of-play CBAM accreditation - Taxation and Customs Union</a></h2>
                             <p class="card-summary">EU Taxation 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">EU Taxation</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">EU Taxation</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="《光明日报》客户端：深圳小家电乘“风”出海送“清凉” - 中华人民共和国海关总署广东分署 中国海关总署 官方发布 海关总署">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOX1NYZzVISUJpYXVRSmpGbTlFZl9Xa1pJRmVjRmtyd1piOXZYT0xCQTBlTU5QRWI0Z1VmNlh2V0FiOG5TQXRVYlYyclJ4MVNXdy12Z012UndFRnlQV3pFaGVzS1RiUmtwb3VwYkFtUUV2WGNyQUtpT0U0WWZzNUp3YWFR?oc=5" target="_blank">《光明日报》客户端：深圳小家电乘“风”出海送“清凉” - 中华人民共和国海关总署广东分署</a></h2>
+                        <div class="card" data-search="广西国际旅行卫生保健中心2026年医用试剂耗材定点供应商（重2）的废标公告 - 中华人民共和国海关总署广东分署 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQTGxLSHpvNFdUdlhST1pwckJWVXJVUXlzQjV5YzJxdS1Rc1hTZlhLYmxING1raDZ1al9ZV0lQcF9pN2s0UV9EZEtUd0U1WGxpb180Q3JWaXY2NEdqMkoxb3I4NURVM3Rsc3Rha1p1WTZVdzQxUmtQQWR6NWg2X25QMktiT2czX0Z4U184UEV4bjZBcDVPTTlCb2poelpsSXJ1bjlNaHN3?oc=5" target="_blank">广西国际旅行卫生保健中心2026年医用试剂耗材定点供应商（重2）的废标公告 - 中华人民共和国海关总署广东分署</a></h2>
                             <p class="card-summary">中国海关总署 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">海关总署</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="《经济日报》客户端：全国首单保税游艇试航试驾业务落地深圳前海 - 中华人民共和国海关总署广东分署 中国海关总署 官方发布 海关总署">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOZkJVdFg3YnF0NGxJNkZzSW1zbXFEdDFJM3pqVjA2TzhXWFgxM1dZeGtzc04yRWNNMUhKU3RPM0J1ell5ZXgwWUdoUGY3ZEhaUVU5NlZiQjJuN2x1NEUzc0JfakFaWmh5NC0yeEFfdU41RGZaMl9NQkp3MU9mM2tGXzJ3?oc=5" target="_blank">《经济日报》客户端：全国首单保税游艇试航试驾业务落地深圳前海 - 中华人民共和国海关总署广东分署</a></h2>
-                            <p class="card-summary">中国海关总署 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">海关总署</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="南沙海关行政处罚决定书（穗南关知字〔2026〕第0068号）（成都铁港亚蓉欧进出口贸易有限公司） - 中华人民共和国广州海关 中国海关总署 官方发布 海关总署">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxNSUVVUVNPeWowajZ5NDVpSHZZbnFjd25SakNzcXdZM0Z6Y3QyeUNSQ09sMWkxNU9sMmZNbHdMRkZwdi1PenVWLXhzRGpUTDF6d1c5bWd5RDBaNlp4OUF5YjhWUFBPUE5obktPOGp4LUpuSnl2MDRzenhjWE1mOS1oanJqNFhxbmZNT3RsV3g2WHJpQWdFdmg2bUsyZ25VM0VyQVdybnl4d3E2QklBUzZ5WmpwenBhQQ?oc=5" target="_blank">南沙海关行政处罚决定书（穗南关知字〔2026〕第0068号）（成都铁港亚蓉欧进出口贸易有限公司） - 中华人民共和国广州海关</a></h2>
-                            <p class="card-summary">中国海关总署 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">海关总署</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="﻿《中国国门时报》：以法治底色绘就国门安全新画卷 “党旗红”引领“海关蓝” - 宁波海关 中国海关总署 官方发布 海关总署">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOZDFoVzNsWlNvakF1ZFZqbmhHaEluSllRLXhsclFhOHJFdmhqQnBvSGRqelVrMTR2M28yaUdWVjVQWmZLZG1QZzJXck1vd1BWRHhVZUh4WHp1eXFWenFBWnl4Z1pQVlFKcEZnSTNBV2NnSDBONmFBcnV6MEt1YWloMkJB?oc=5" target="_blank">﻿《中国国门时报》：以法治底色绘就国门安全新画卷 “党旗红”引领“海关蓝” - 宁波海关</a></h2>
-                            <p class="card-summary">中国海关总署 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">海关总署</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="石家庄海关护航国产工程车驰骋“一带一路” - 石家庄海关 中国海关总署 官方发布 海关总署">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxNeEFFT1ppUm5lT0hCdDlVWEtsTGF2Q3RURlRMQ0xfWUlOUTNrZUFMU0tQcWYwU0ZPYUVWcUdlWElOQXh0TldvWHBIOFJnX3cxLVVqbmszYldRa0FrVEtwUlV0SW9YMm83UHFhZW43QWIydDRHQmx4YlFLUHROb2tUZVk5ODdocGJ0Wkl6b2ZUdWhoUQ?oc=5" target="_blank">石家庄海关护航国产工程车驰骋“一带一路” - 石家庄海关</a></h2>
-                            <p class="card-summary">中国海关总署 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">海关总署</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="﻿新京报社官方账号：中国降温神器成欧洲“救命稻草”：义乌商户订单暴涨，工厂连轴转仍供不上货 - 宁波海关 中国海关总署 官方发布 海关总署">
+                        <div class="card" data-search="﻿新京报社官方账号：中国降温神器成欧洲“救命稻草”：义乌商户订单暴涨，工厂连轴转仍供不上货 - 宁波海关 海关总署">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxPTDFQdk9QX0VNTmFmakZPRXF5akRock1YZ2YxNTFBd3hCOEF6anh3dnRzYXdaN1VnWkJ4bTdvQXZYSFNYWVhXSDRiMXM1M0h3TzFuUGE5T0VsWmdTVmpFd1ZUQ0xDNDVkR01XTmZlRHRaSE0wbk1QckY5Ujg3T2hvYnNB?oc=5" target="_blank">﻿新京报社官方账号：中国降温神器成欧洲“救命稻草”：义乌商户订单暴涨，工厂连轴转仍供不上货 - 宁波海关</a></h2>
                             <p class="card-summary">中国海关总署 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">海关总署</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="untitled - 中华人民共和国海关总署广东分署 中国海关总署 官方发布 海关总署">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxPVzZsaWZwS09wZ3J2WFZJWmF2R0oxQlk1QkdwdGI3bmticFVXUE9pMmExVi1URlBWNl9iMVRWTFhkOFhmLXdHTnZSbWYycVBHRXR5YnJ1azZ6NWJNNlQ0V0R5MTI2TUlDWU9Wazk5ZS11My1BUzU0SW14M3IzMHNxdTRyZFR0TWU5YzJfeTN3T0xUVkVtSFg0anZJUUhCdVRScThYRDZ3dFFpbEVsd1loakRXWWxvMEVNNDBXQmdITVRfZzUwaVV4UDRtTQ?oc=5" target="_blank">Untitled - 中华人民共和国海关总署广东分署</a></h2>
+                        <div class="card" data-search="南沙海关行政处罚决定书（南关缉违字〔2026〕1255 号）（广东金莱特智能科技有限公司） - 中华人民共和国广州海关 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxOYjFiM2ptd0kyd0RxX2M0el9HZF95dnJCVk54MXphYVlBWFhVNXRZc1BvcVlodWZVd09DaU1RdVBBV0VGZWRYTUNoWVJPcF9MbENPQ1d2ajM4T0tOZXczOTkxRUdnOHZtSjdGVkpWdGttSFpBVGhuNkh3d1QzOW1JT0l1SXVtbjhZYkVIb0JmRzVsa0dsblpBTkJPN0RlUmFoUVMtUDBvOUQ0dlJyM0d2WUk1aEZNQQ?oc=5" target="_blank">南沙海关行政处罚决定书（南关缉违字〔2026〕1255 号）（广东金莱特智能科技有限公司） - 中华人民共和国广州海关</a></h2>
                             <p class="card-summary">中国海关总署 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">海关总署</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="椰城海关危化品取样检测项目比选流标公告 - 海口海关 中国海关总署 官方发布 海关总署">
+                        <div class="card" data-search="椰城海关危化品取样检测项目比选流标公告 - 海口海关 海关总署">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPOUNaWWl4QUxwSzA5SEROMDZsMWotWHUyZ1ZKOUNtYmJRTE9fMmFmNTZGNDBvanpjSVFyV1VTcXV4NllIMFpxNWExMmhvamU1VGp2Y1g0OVJhdS1zNVRSNkdFVUIwaTVlNGlIR0ZJX1pxZUI4elFhWUI1cmFuTGp4Z1p6czV5QWp3dEpzVWs3UG4?oc=5" target="_blank">椰城海关危化品取样检测项目比选流标公告 - 海口海关</a></h2>
                             <p class="card-summary">中国海关总署 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">海关总署</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="商务部服贸司负责人介绍2026年1-5月服务贸易发展情况 - 中国服务贸易指南网 中国商务部 官方发布 商务部">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTFBCN2JtSnJBbG5WUFFadU9lTTVtSlQwWVptWUtfOG5kSnZuc0ZScGZzYUZaS2dkbkl5dDlWZEloVlh2WHFDNUlvMF9mNXpGZkc1cDdTTjUwNGF2QnNiZ29PVTRsM2VvZzlVa0V1b0FCbEpGbXc4cjNzSGRGUC1qbW8?oc=5" target="_blank">商务部服贸司负责人介绍2026年1-5月服务贸易发展情况 - 中国服务贸易指南网</a></h2>
-                            <p class="card-summary">中国商务部 官方发布</p>
+                        <div class="card" data-search="业务咨询问题 - 中华人民共和国海关总署广东分署 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNVnJOODVNcmpNbkxBR0pwYkJaZXBENWF4YmVtM2dEU0tQdktBREhmZVA5OEYyelJWWnJkQnNBcmI3VmQ4VkpUSVR5WXFUZlJ3akZBaXNVUTNjb1gwTGd3LVBKVWgxSjZFSFJ4bGF0aEFwNkpoeGRTMF9DRUlPNmNrMHpLSF9xbmRmRUlPUW5kREp3MmhtbXFiSDFB?oc=5" target="_blank">业务咨询问题 - 中华人民共和国海关总署广东分署</a></h2>
+                            <p class="card-summary">中国海关总署 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">商务部</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="- mofcom.gov.cn 中国商务部 官方发布 商务部">
+                        <div class="card" data-search="《光明日报》客户端：深圳小家电乘“风”出海送“清凉” - 中华人民共和国海关总署广东分署 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOX1NYZzVISUJpYXVRSmpGbTlFZl9Xa1pJRmVjRmtyd1piOXZYT0xCQTBlTU5QRWI0Z1VmNlh2V0FiOG5TQXRVYlYyclJ4MVNXdy12Z012UndFRnlQV3pFaGVzS1RiUmtwb3VwYkFtUUV2WGNyQUtpT0U0WWZzNUp3YWFR?oc=5" target="_blank">《光明日报》客户端：深圳小家电乘“风”出海送“清凉” - 中华人民共和国海关总署广东分署</a></h2>
+                            <p class="card-summary">中国海关总署 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="央广网：宁波差异化创新“清凉制造” 抢抓海外“热”机 - 宁波海关 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxPLUh2MFBZSjRjNG8wQzUzVnpVQVJfaEJpZXhaQzF3d3QzRGRiZkJJeXhXQTJtd2FjX0QyNk5sdzh6QjJkQURJQlBIWFlaTmdVWW1seGR2OTBWbzZodGgxYk1Vb0JfNmZhUUJqTGFIWWlpR19WSUpVZE02cjRwVHhqNWN3?oc=5" target="_blank">央广网：宁波差异化创新“清凉制造” 抢抓海外“热”机 - 宁波海关</a></h2>
+                            <p class="card-summary">中国海关总署 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="- mofcom.gov.cn 商务部">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxPdDg4ZGJqb3lHd1dCYngwSXdBUjVjal85Qk9nX2dmT000N3BORzlDbXh3TmdlMnJFLUxEWVVrZzlFYkJmRmMySF9taDFtWmpaeThzemVMRUtMQkh0WlV5SHF4ZVVwNl9PU3B6YlF5U3dKanBPcGRyemJBVllzSHU0VjZidzhTQ3AydW1jbmNSMA?oc=5" target="_blank">- mofcom.gov.cn</a></h2>
                             <p class="card-summary">中国商务部 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">商务部</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="美国itc正式对车辆空间防护装置启动337调查 - 中国贸易救济信息网 中国商务部 官方发布 商务部">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE9iRElNR2NBVi1iNXAzWnBoUmdYQ2lJd2dEbGc2amZwOW5aWTMxbnJXYjZ1TUE4dk0xNVpuU3pUYTFzVzY3bDRDUGdzTXVGT3BwZEtqVkpwM2FOTGtXSVpQUG5vM2JyR3RVVkVaQkdKM01uSE13Vmd2WkxnZw?oc=5" target="_blank">美国ITC正式对车辆空间防护装置启动337调查 - 中国贸易救济信息网</a></h2>
-                            <p class="card-summary">中国商务部 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">商务部</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="美国itc发布对微电流面部紧致设备及其系统的337部分终裁 - 中国贸易救济信息网 中国商务部 官方发布 商务部">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE1DNEFFaXVJVXdTYU1IUEVad3ByVUd5STdETllDY01QTEpYdlhOT0JMOHlQS2V3OXpvOVdLTHBpcFNqSEVnVlI5M3QxZ0FlLXhVX2pLakdaY3NJVy1FTGR3OWNlRTMwMmVEbHBlMjBjTjhNX1ZkSi1YaFpRUQ?oc=5" target="_blank">美国ITC发布对微电流面部紧致设备及其系统的337部分终裁 - 中国贸易救济信息网</a></h2>
-                            <p class="card-summary">中国商务部 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">商务部</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="中国银行助力人民币国际使用驶入“快车道” - 中国服务贸易指南网 中国商务部 官方发布 商务部">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPQkFXbkRBdXlqVzZNS0pWYWc3Yk5za3E3T2lsVWpfR1RoR2FtVFA1QVlzcWdrYzdzNkNkMk9EVHJWU25tdktmcVVqMWpPRmUyZFE5eDIxaDlTYThuWVVVekZNcVhHdGgycnhmTExLYVJPUmRxN3ZTcEVGMWthUFRhMmx6U1EtaGc?oc=5" target="_blank">中国银行助力人民币国际使用驶入“快车道” - 中国服务贸易指南网</a></h2>
-                            <p class="card-summary">中国商务部 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">商务部</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="商务视频首页 - 商务部 中国商务部 官方发布 商务部">
+                        <div class="card" data-search="商务视频首页 - 商务部 商务部">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxNc1JrUTdJUVhrai1fUndoaWhwV3lVSFJxZjZuSmZWVXhUWU5ZdlpTUjgtT2I5dGIzSUJ1a2pwMzY4VjNlUVpGbWI3aHhVbWxPQzk5X2ZjQmppZk1RV3hlOUx2bWRpV1RacEdBSkxNN0VCWkYxMTBEME9NQWdsckhCUDhkSUZrdlk?oc=5" target="_blank">商务视频首页 - 商务部</a></h2>
                             <p class="card-summary">中国商务部 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">商务部</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="印度对涉华pet薄膜启动反倾销调查 - 中国贸易救济信息网 中国商务部 官方发布 商务部">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiekFVX3lxTE1jWGtwaFE1bEVvR3JZVHVYLW80c1RoM21Tckh3RXJtQkExam13ZHg1OE5mNURGQmhLOFFkVFV6OWVKU0lyQkJTZ0NTajF6ckp2WGlMQVN5TldlSnBuNGlKRXd5X3RqdC1xdVZ3NTlmMm5GNDU5RXpKdXVB?oc=5" target="_blank">印度对涉华PET薄膜启动反倾销调查 - 中国贸易救济信息网</a></h2>
+                        <div class="card" data-search="美联储主席：当前美国通胀水平仍然过高 - 商务部 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE54WG1oaTMyUlhsdzZkd2NGWWZtRWx6RHdJZUNDOUpwV25xS1l6TkstMnJfeFF4dzZNWU5MeG8tQ2VBZkRVNlpoYWUxV3AzZkdWZVJUVnlTbnNuMTJkMVFBOGRGTllMVklvQXNRZkZhNV9maXlZcy1tLUdzYXBhdw?oc=5" target="_blank">美联储主席：当前美国通胀水平仍然过高 - 商务部</a></h2>
                             <p class="card-summary">中国商务部 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">商务部</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="前5个月国有企业利润总额同比增长3.5% - 中国服务贸易指南网 中国商务部 官方发布 商务部">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxPVXE5SDh3aEFwWmpoZThmbkhQUEVCYmsyeWgwX3Ixd2xhMjlaR3FHeDRxWWFlYXB2cWRLOFVfXzZoLVFVUFJwMldLdDd0ZFhKbUxmZXdpTjBKUS1JaUNRU0VxYVp0SjBJV3dPbTdpQVZHR253Y29lUkZuUmJhZGhwZmw5eGttOG9YRWJEblZvZjkxenBFTWFRbmtJVm0?oc=5" target="_blank">前5个月国有企业利润总额同比增长3.5% - 中国服务贸易指南网</a></h2>
+                        <div class="card" data-search="美国不同意以现有形式续签美墨加协定 - 商务部 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTFBSbXBwbXE2bVNoMVIzUjhJbTg1V0xBZmVKRmFUNU1tN0ozR2VVTzUwb0F1TVl3SnlVbWJxLVBBQlpiZlJkSXBRYm8wMzI2R25GdGRpeE5JZ2tQNUIteUVta3hyREY4WDVoXzRFVVhmcGlUWDFjNWRZdmVpWERtUQ?oc=5" target="_blank">美国不同意以现有形式续签美墨加协定 - 商务部</a></h2>
                             <p class="card-summary">中国商务部 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">商务部</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="优化核税模式 提速企业不动产转移登记 - 江苏省税务局 中国税务总局 官方发布 税务总局">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE4zQnQ0SnkyVXdHUVdRMXM0ZkhRaXVUZ1Z2ZXp3bWtPeGNDekRVWjZDcWxEOHZaeDVqRjAyWThidnd0QUMyX2R1aVRXeGltN2Z6UlgtZ1gzVnVycmtNbUdqcWZCZ0JfOUlzWHo3d21BelpZU0JK?oc=5" target="_blank">优化核税模式 提速企业不动产转移登记 - 江苏省税务局</a></h2>
+                        <div class="card" data-search="联合国机构警告刚果（金）埃博拉疫情将冲击地区经济 - 商务部 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTFBaUEQycHVYOVA0OGJMaDVKUkhmb2lGV0JIa2c2LWkycHlSWTVVMTBVVHhXRlpuTEFESzRwQWJxRnJoeE1YWTZwRU9Vem4wTkQ1cHpnLWxma0xXZjJIbENieTFoLWxUUEN1Vzl5U1ROWGpCZDN2UmtVa1Y3c0NsZw?oc=5" target="_blank">联合国机构警告刚果（金）埃博拉疫情将冲击地区经济 - 商务部</a></h2>
+                            <p class="card-summary">中国商务部 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="湖南商务预报 - 商务部 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxPWFI5SmlNYjc3WDFHRFpUQTRiaFNydVFHZTFwb3JzVHFOMDJXRzdhUm5PRjNBUnlodGp0T3ZDRGVVdEl1ZlB6aFpWbjhVV2ZmVC1KM0RTa0c4SkdfT1JlRzNZYXRwSG4yQkxveGtrY2k3aWhKR05BRnhQbGJQaG1POWNzRFpEUXlvUzZ5UA?oc=5" target="_blank">湖南商务预报 - 商务部</a></h2>
+                            <p class="card-summary">中国商务部 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="美国itc正式对车辆空间防护装置启动337调查 - 中国贸易救济信息网 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE9iRElNR2NBVi1iNXAzWnBoUmdYQ2lJd2dEbGc2amZwOW5aWTMxbnJXYjZ1TUE4dk0xNVpuU3pUYTFzVzY3bDRDUGdzTXVGT3BwZEtqVkpwM2FOTGtXSVpQUG5vM2JyR3RVVkVaQkdKM01uSE13Vmd2WkxnZw?oc=5" target="_blank">美国ITC正式对车辆空间防护装置启动337调查 - 中国贸易救济信息网</a></h2>
+                            <p class="card-summary">中国商务部 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="- 国家税务总局 税务总局">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTFBidnJBRl9VSUI5MGlVajZCNm00RTVPaHBqUkV1bDh1UHp4bnQweElObUloVVgwVFlKX2ZwbG1KaC1ZdmJWLXk2OGVEV19xYmJ6TlE?oc=5" target="_blank">- 国家税务总局</a></h2>
                             <p class="card-summary">中国税务总局 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">税务总局</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="国家税务总局长春市南关区税务局税务文书送达公告 - 吉林省税务局 中国税务总局 官方发布 税务总局">
+                        <div class="card" data-search="海南 - etax.hainan.chinatax.gov.cn 税务总局">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE5lVWZXOFBSSW84VXlLSnVja2FvNjhKUXFyR29oYTNscHhITzdkR1FYaXNjbGNkalA4V0tzYnhEYWNldnBPZzVEZF9jNXB3b3VKMTNN?oc=5" target="_blank">海南 - etax.hainan.chinatax.gov.cn</a></h2>
+                            <p class="card-summary">中国税务总局 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="- tpass.hubei.chinatax.gov.cn 税务总局">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE1icktwYl84ZXF3Zzk4cU41N1ktTEZQcEs2WEoyT18wTGFpMS1MTGNRaDd0VVRGV0wyWWZxR3RZRkZEaEh1UnF3SDJFRkpvOWl1NWZV?oc=5" target="_blank">- tpass.hubei.chinatax.gov.cn</a></h2>
+                            <p class="card-summary">中国税务总局 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="国家税务总局连云港市税务局一、四类出口企业名单（2026年7月1日） - 江苏省税务局 税务总局">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE9yZEpuWGFRUFRCTHZOdzJKUTZGckUwcHdraWVoNk9ob2Q2NHhMTEpVcHJCdS1nS0JLaE5STzVkakROQ2lxeGFVb3EzLWRHR3Z4VEtRSlFoSXEzNFJ6VFBQUTVOQ29ja3F6eEpaaXdOLXUtQ0c1?oc=5" target="_blank">国家税务总局连云港市税务局一、四类出口企业名单（2026年7月1日） - 江苏省税务局</a></h2>
+                            <p class="card-summary">中国税务总局 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="国家税务总局上海市宝山区税务局关于一、四类出口退税企业名单公示 - 国家税务总局 税务总局">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE0zQ1Q5X1NqS242N0FRR1dxZF9iM3lkU09hNXFSX3FHVTRKMzJCaVhXeVlfUjZ1WmUxN1J6NldNeTFIeE5nZzFRSmhiTFdiejNqeWdKalp0eUIzV1VBM3JvYWpHTjNMZmgwQVAwZkRnZ2s4bFFYbmc?oc=5" target="_blank">国家税务总局上海市宝山区税务局关于一、四类出口退税企业名单公示 - 国家税务总局</a></h2>
+                            <p class="card-summary">中国税务总局 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="国家税务总局珠海市香洲区吉大税务分局关于送达《社会保险费责令限期缴纳通知书》的公告 - 国家税务总局广东省税务局 税务总局">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPODdHMFhZaDVaS0N2bXVYWVNaSXpwa3pNaEFzUG94eWFLc1p3dWZWWjNpemdlUG14MERvTU93eDN6X2h2cGphNG14djFpc0FJMWx3WE9jTGZDVTlBRnVPNzVsUVd5cmpXYU8xT19qYmRrUV9ISElTWFdxWmhMMjBTRm05TEFnd1RkTThReGFITnFDMjVPaVJzcmctMWpCVVM0VG1zS0puUzhOeGVDY3VwLVJQVHY?oc=5" target="_blank">国家税务总局珠海市香洲区吉大税务分局关于送达《社会保险费责令限期缴纳通知书》的公告 - 国家税务总局广东省税务局</a></h2>
+                            <p class="card-summary">中国税务总局 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="国家税务总局长春市南关区税务局税务文书送达公告 - 吉林省税务局 税务总局">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMib0FVX3lxTE9ocGs4Q0ZJWXktNnFjdnUyekdWaERaSHpaNUdPYnZuUks4dlg5TUFBZlR5MmZ1TmJzYkVoVmoyRDFQcEY0T2NtanFFbENDeHZScEZMLUo5VDYtVUx4eHBJMUxSV2tFc0dpeXNya2pSMA?oc=5" target="_blank">国家税务总局长春市南关区税务局税务文书送达公告 - 吉林省税务局</a></h2>
                             <p class="card-summary">中国税务总局 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">税务总局</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="usps to dedicate the figures of the american revolution stamps usps 官方发布 usps service alerts">
+                        <div class="card" data-search="2020-10-30 国家税务总局辽宁省税务局2020年10至12月政府采购意向 - 国家税务总局 税务总局">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE9DZzZySDctcHNjMEhVenk2ZWtoNGRBSW5rOHVDVmZRaEVCenBWc1JucnduSnlMREdYTWh3b24zWHpEVkl1Z2x6US14eDBCVTYxSjdGT01sUU1iMEttT2M0RThObldneXVrbHh6RlRtOWVmdXoxWlAzalEwS2VGWTQ?oc=5" target="_blank">2020-10-30 国家税务总局辽宁省税务局2020年10至12月政府采购意向 - 国家税务总局</a></h2>
+                            <p class="card-summary">中国税务总局 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="usps to dedicate the figures of the american revolution stamps usps service alerts">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMixAFBVV95cUxPX3ZUNGtTV0ptenlGc25SVzExTXhibkRVaGpWcVFUQkktSlhabFp2eE1fa05GUnpqbEdKUWgwTnU0dmJSNEtXTXFoMmJPQTR3N0VFWlJJVHo0YUlBc3lrSnRmRV9SclFISnRvRXE1VjA5MmF4VkVlOXFxbkFFLVdwTG0xZENfbER0SG41VEk0Qy1ZYnVNa0dfV01RNjJBLTBhWGZ1QjU1aXI1NTBpRE9RTEd5QnVINjJ1VWYtblZxTTVmb3Ja?oc=5" target="_blank">USPS to Dedicate the Figures of the American Revolution Stamps</a></h2>
                             <p class="card-summary">USPS 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">USPS Service Alerts</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USPS Service Alerts</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="massillon post office is hiring usps 官方发布 usps service alerts">
+                        <div class="card" data-search="massillon post office is hiring usps service alerts">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQaTdUNUlJX1JBZ2t3cjI1amdpcHFMWFpwQUhha1NiX2xIS3RQclJuanpLWXFadXgwN3pxVkFWazNDdVlkcnJjR09XUnl1YlB5dkFGUndBQjIyUklYejZsb3Z3eWdiTmhQRmtWYmE4bU8wUHpYMTM0QXQ0MG5LS0VEUTdVUXNickNjOWFyR0ZJU0UxUVUtQ3dRdGZldw?oc=5" target="_blank">Massillon Post Office is Hiring</a></h2>
                             <p class="card-summary">USPS 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">USPS Service Alerts</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USPS Service Alerts</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="historic pa post offices to offer “250 years of delivering” pictorial postmark in honor of 250 anniversary of america usps 官方发布 usps service alerts">
+                        <div class="card" data-search="historic pa post offices to offer “250 years of delivering” pictorial postmark in honor of 250 anniversary of america usps service alerts">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOb0g2NkF0QVNnODFWN09rX01xS3lncy0tdGk3QkQybkdSZUIxWWlTWkd6MDhfbkY0TGZaR0ZVWl9ucUc2aFFTWFI5UHBhOTBXOUthUGIweVJQaU1pd3ZCV1ZmTTBzRXdEZVVONzNPcXVEQVp3T3dFRE1faTZGV2liWGw5UndueVhCb19SYUt5Ynd1eFBqMUc5N3dUazNJQ1JhcjZiX2M1ZUpPa1dFMFpScUhiQWFvdWs2NVNmT00zaWJtaW9Tc1phRjRHektaZnp0SXpWYjZqa2xCUQ?oc=5" target="_blank">Historic PA Post Offices to Offer “250 Years of Delivering” Pictorial Postmark in honor of 250 Anniversary of America</a></h2>
                             <p class="card-summary">USPS 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">USPS Service Alerts</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USPS Service Alerts</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="query handling administrator job | jobs at dhl group dhl 官方发布 dhl">
+                        <div class="card" data-search="- gcpt.dhl.com dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE5ZTjFKV0d6MFVaV1pnLVlxYkdvMUhEVjExMXFYYnZMUlp1U2NNcWx3V0tpWUxIbWlnckVGdXVBanBuN21LVk1lSg?oc=5" target="_blank">- gcpt.dhl.com</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="- dhl dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiSkFVX3lxTE5SanYtYWlfWERwRlNDYU80NDhWcHRBQXRWSEV0R2tzaTZERmlmN0tFZldudEl2SVgtNVBVaDhpNFZjQllpUFhOZWNR?oc=5" target="_blank">- DHL</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="query handling administrator job | jobs at dhl group dhl">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxOeVVqNzZ1bGVaTWlRNFQ1WTV1UTZtWDduOWMxZmM3NV9lQi16blAxejkwYXRDZFZULTUxcXdHelJhN091VG1reV9iN0lGOWVybkRtSTRtV2o2YlE5YWwzN3FKdkZCNGZWdzh3MlZWbUUtYkEzaWRPVXBTWndZUGtjZVBHbjdhZzN2YnY1QTRqdGFidnZzRUJKeFJ1YjZuU0FBSUdv?oc=5" target="_blank">Query Handling Administrator job | jobs at DHL Group</a></h2>
                             <p class="card-summary">DHL 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">DHL</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="returns processor job | operations jobs at dhl group dhl 官方发布 dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxQcjRWSzZxZU1MdFFFUWZETkZoX2tnbWFzSnR4alhnT1Ywd2p3eXpYUXhIX1g1MExXQVJaQWFSTmxNdzZMcS0tUEN5WlEweTI0SmxiVGV6WjUzakRBek5SWU9fMEdiTW0teFF4bWRVTTh4UkY4R0JfdVZMOWdHc0xqOXNrVEJKZDFwakhWWmRNUmR0Y2wwOS0zWkFPZVVfWW9NRlE?oc=5" target="_blank">Returns Processor job | Operations jobs at DHL Group</a></h2>
+                        <div class="card" data-search="dce flight agent (monday-friday 8am-4:30pm) job | jobs at dhl dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxQcnZfdm9QMGFrbWJWc180Q3VqRlYxenhoeWxWX0NkbE1nUjlVUDhqaUVEelUwZlZidHhNZ3JFXzd0M2ZRWlJFc0JyS0lfSzZRUXlHZUU2TDJ2anp4Yjh4OHhqMWhHaXV0U1JQMFVzbFZNME80TE5qd0M0dUV1VGVsN1BqbWVmenJ5cVN3SmNxMGNSal9BYnczMmUwTlFkc1pIaWY0QnpOSlRFd1k2bWlz?oc=5" target="_blank">DCE Flight Agent (Monday-Friday 8AM-4:30PM) job | jobs at DHL</a></h2>
                             <p class="card-summary">DHL 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">DHL</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="work for supply chain dhl 官方发布 dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQT3FQSDdpX3ltNjMydy1YdXh6emJnNFdJRVdRRWlHMWlrZFMySVB2cUxQY2liOTc2cHlFNzFLRVQ5ZjR3UkJXLVQtNnk5TnNyU1dlbVZoWURXcVZkYUhtcVJmUWxLOWVjTVkyc1dHUHRubl84bFVUUlVXVEg0RUxfaVlSRXBzb2ZrV0REbG1fWDhUSTlkbHNV?oc=5" target="_blank">Work for Supply Chain</a></h2>
+                        <div class="card" data-search="customer service clerk job | administration jobs at dhl dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxPZkVfR1pCX2I0bW1lWEJiSmwzYTBxdDhtOF9sbUhySmRxejQyWklXTGpmeUJ5eFVWZzdxY0VCdWswNEFMSG9LdnpWY01XN0lKVkN3bGZnaEFQM3g3TWRWakVIYk51V192eXJCeUdTMWtfQlV4cVlxdGE5UDRXb3JyemNtQU5aQ3EtMW1xU2c2RENOazA?oc=5" target="_blank">Customer Service Clerk job | Administration jobs at DHL</a></h2>
                             <p class="card-summary">DHL 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">DHL</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="global customer development manager job | sales and business development jobs at dhl dhl 官方发布 dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPY0V0aTFUeEJoU2dQWkV6YVV6NFRWQnA0emVxUzg3clFjQndMeWxXUjh3YWhhM2Y3UWktYUhkVTg0Q1RrVEsxM0tLMi1nVllseGx5WXRRaVJLTVIwb1BnRmd3eHlfQTd2dVJDQ3NoU2lzNXFZY2RrZzI2QVBicTlXMGM2SHZEY0dqWm5ncUhrdFlHcWZjbmhmYW1Ca2VSU2JyWjlGMUIzRU9tMVRrcGFaSHF1WW8?oc=5" target="_blank">Global Customer Development Manager job | Sales and Business Development jobs at DHL</a></h2>
+                        <div class="card" data-search="flow controller job | administração jobs at dhl dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxOUEVIRkJaOHc2UFFqS1hxd2swLWY1YUhhOW1VYkhhWlFOY2xlTWpYQmlZaDRIdUJla2x2aDF2X3g1ZlJtRlRWSDA4My1FX2NOdWpaUlFWbHJWMFY1Z0w0S0VXeDByVHhaNWN1QXZHdXJsQXFBZ21jaDlyX3NNanRWNG9YYzE4OHVHeVE?oc=5" target="_blank">Flow Controller job | Administração jobs at DHL</a></h2>
                             <p class="card-summary">DHL 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">DHL</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="tasker job | administration jobs at dhl dhl 官方发布 dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxPM09fUVFmTlUweXVfN2p5cU8wdFktM3hOTFhVOExjdGVwTm5ETEhyU2lrTG1VWDl5aElrTnlIdC1xTmo0UGpxdjZpbHFwZE15aHQ0d0E0a3Y2Q0QyQ2plZVluU0d1REJrYVJJZ0xsLVFOMHhRY180dloxLTl4WFpwa3hfRWlDU2JvaTFPeUNR?oc=5" target="_blank">Tasker job | Administration jobs at DHL</a></h2>
+                        <div class="card" data-search="work for supply chain dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQUF9JWVFleEVmbGhSTzZkWGVDVzRuRlk1T3lWTWxFdkpRV05yN0lxU0s3QjdOSXJIN0ptMm5zMjRUTWZOTHhlbm1IR2pzbndIQUxmNDFpOEw4NjBHYVltZ3U1a3BuUEJzX2prX2pWaXBITTFQdWU4NC11N09meHhmZFoyNklrdTdDUjZfa2ZyckFkYlRBUlpF?oc=5" target="_blank">Work for Supply Chain</a></h2>
                             <p class="card-summary">DHL 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">DHL</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="senior operations manager (operations manager i) job | operacje jobs at dhl dhl 官方发布 dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxNQ1U1dXFRWEtGelB4Mmx6N0NFSktDel9Jc2pYVGlOSVhSWjlTOHU0RzRNYzF1QWhqekRacXpLNkRiTzhpSWJ4ZWMwanZpR2xoajU0ZkdMcjI0elZjR01td3BKOFlUNE5abHV6S3ZMTGdEOTE4cFlLQ3g5c240MEZ2OE9XeXFiTFVTankweC1aNWR5UGFoTERSNm5BWklQb3N5SFotc2ZCMUNaaGMtdmVyakZfQkhWLVU1a3BuZmhB?oc=5" target="_blank">Senior Operations Manager (Operations Manager I) job | Operacje jobs at DHL</a></h2>
+                        <div class="card" data-search="senior specialist, global operations & pmo (d/f/m) in troisdorf, nordrhein-westfalen, germany | at dhl group dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxPSzdGZlhLMmZRaGFIaHBSLUhnUWhfQ3ZmMDNJUVk0M0l3cGRzdlVXSGhjUnVqUVdka1YxTTRmNTlWN1QwUXFCbHgwZHc5a01YMHZ2cW95MlNvX040ZlBKOFhpR3pnbEt0c0puWl9jQVhFTlVnVzVwZlpRaXNxZEJPV3cxQ1lHdlpzdERWMl9UTXBRNENoZUNyeldBWjU4WG1XZVZtaFQtY3BYUk4tUkRn?oc=5" target="_blank">Senior Specialist, Global Operations & PMO (d/f/m) in Troisdorf, Nordrhein-Westfalen, Germany | at DHL Group</a></h2>
                             <p class="card-summary">DHL 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">DHL</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="manage-global-logistics-easily dhl 官方发布 dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxPSWEyNDFxZDdVcm5wMnBZOUhfQkVQOFJDemhCZ25YM3ZkbDdMWUEwR2dEUW1za3ZHX3liME55Skp0cjN2STBVdUlGdDktTktlbkRhMUN4d2FzaFhjMWJqd3U3NWF2QlJnaWsxMkc4SDZDdF9scFFuMzM3bjlmYnNiaFBFeWhOV3FQWmlxTHdfeTNxQQ?oc=5" target="_blank">manage-global-logistics-easily</a></h2>
-                            <p class="card-summary">DHL 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">DHL</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="returns processor in indianapolis, indiana, 46214 | betrieb at dhl group dhl 官方发布 dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxNQWxZd2N0TFNfQnlUcUZBdW4tbi01dXBSaGdaUXdVMHpBbExITnl4WDIzMkNvd2VaVGdqWTU5aDh1LTc5c052MUx4RHNNd3hCTG95aHJnMXB5eXZnQUh2UEVDSV8xOHhjTlMzY0c4ME84RjFwcHFTMUY4dHFrMDVsNGJQalBiMlR0VUk3cThMMGxBNjB3aFpJ?oc=5" target="_blank">Returns Processor in Indianapolis, Indiana, 46214 | Betrieb at DHL Group</a></h2>
-                            <p class="card-summary">DHL 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">DHL</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="fedex earns top spot for logistics and shipping on newsweek’s america’s best online platforms - fedex newsroom fedex 官方发布 fedex">
+                        <div class="card" data-search="fedex earns top spot for logistics and shipping on newsweek’s america’s best online platforms - fedex newsroom fedex">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPM3FsMEI0SXJPT1JCeWR1Y2I5ZVVfQTdDZUlYRGVtNFJPOUt1YWNwcHI3aUxjRERGWklkdGpYY3dqa044QXB2Y0NxcWw4S3lSYXVmWjdjUVpPaWgyU3R3dU02VmpqU1V0ZnpGdFJmLUl2aDJHejJjVUhRQ2RKakpOSTFRV3NSdjg4Y0xnNXJZYldfT2VyNWRSdHlUcVZKQjF3YjVhX2NURE1oZk1vcHNqRzg1elE0T3FybUE?oc=5" target="_blank">FedEx Earns Top Spot for Logistics and Shipping on Newsweek’s America’s Best Online Platforms - FedEx newsroom</a></h2>
                             <p class="card-summary">FedEx 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">FedEx</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">FedEx</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="ups helps singapore exporter deliver nearly 10,000 orders under pressure ups 官方发布 ups">
+                        <div class="card" data-search="ups helps singapore exporter deliver nearly 10,000 orders under pressure ups">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxNMzFCMjdmYjFxQzRjTEs3OFAxSDRscFRmaEpqc3c5elpBQkFxejFUZFF2Q2g5Y2RDSTJ3ZDJIaHJDQk9yNmhjeHZOTmdWSUtzbDdYZGVjaEdmTDF0RnZjejhtY1FOc0RwUmhwTWtrWjZBczNncjJIYmdmOHdiN1JQN3ZfQ1BWal9MdjBCcFVCWDZ5MzR1b2F3WWNNeTZmY1pCSzljd2hSODRhaXltb3RQLTZ6b2FfUWtsbzcxVg?oc=5" target="_blank">UPS helps Singapore exporter deliver nearly 10,000 orders under pressure</a></h2>
                             <p class="card-summary">UPS 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">UPS</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">UPS</span>
                             </div>
                         </div>
                 
                     </div> <!-- end news-grid -->
+        
+                    <div class="review-section">
+                        <div class="review-header" onclick="toggleReview(this)">
+                            <h3 class="review-title">🗑️ 隔离审查区 (11 条候选资讯未通过最终规则)</h3>
+                            <span>▼ 点击展开/收起</span>
+                        </div>
+                        <div class="review-content">
+            
+                            <div class="review-source-group">
+                                <div class="review-source-title">Federal Register (7 条)</div>
+                
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.federalregister.gov/documents/2026/07/02/2026-13480/government-owned-invention-available-for-license-a-conserved-viral-peptide-for-use-in-cancer" target="_blank">Government Owned Invention Available for License: A Conserved Viral Peptide for Use in Cancer Immunotherapy</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.federalregister.gov/documents/2026/07/02/2026-13479/government-owned-invention-available-for-license-chimeric-vlp-vaccines-to-prevent-htlv-1-infection" target="_blank">Government Owned Invention Available for License: Chimeric VLP Vaccines To Prevent HTLV-1 Infection</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.federalregister.gov/documents/2026/07/02/2026-13478/agency-information-collection-activities-request-for-comments-revision-of-currently-approved" target="_blank">Agency Information Collection Activities: Request for Comments; Revision of Currently Approved Information Collection(s): U.S. Department of Transportation, Individual Complaint of Employment Discrimination Form</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.federalregister.gov/documents/2026/07/02/2026-13477/agency-information-collection-activities-requests-for-comments-clearance-of-a-renewed-approval-of" target="_blank">Agency Information Collection Activities: Requests for Comments; Clearance of a Renewed Approval of Information Collection: Maintenance, Preventive Maintenance, Rebuilding, and Alteration</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.federalregister.gov/documents/2026/07/02/2026-13471/call-for-nominations-for-the-glen-canyon-dam-adaptive-management-work-group" target="_blank">Call for Nominations for the Glen Canyon Dam Adaptive Management Work Group</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" style="display:none;" class="hidden-review-item">
+                                    <div><a class="review-link" href="https://www.federalregister.gov/documents/2026/07/02/2026-13470/notice-of-public-meeting-of-the-oregon-advisory-committee-to-the-us-commission-on-civil-rights" target="_blank">Notice of Public Meeting of the Oregon Advisory Committee to the U.S. Commission on Civil Rights</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" style="display:none;" class="hidden-review-item">
+                                    <div><a class="review-link" href="https://www.federalregister.gov/documents/2026/07/02/2026-13469/takes-of-marine-mammals-incidental-to-specified-activities-taking-marine-mammals-incidental-to" target="_blank">Takes of Marine Mammals Incidental to Specified Activities; Taking Marine Mammals Incidental to Research, Monitoring, and Management Activities on the South Farallon Islands, Farallon Islands National Wildlife Refuge, California</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    
+                                <button class="show-more-btn" onclick="showMore(this)">展开全部 7 条 ▾</button>
+                    </div>
+                            <div class="review-source-group">
+                                <div class="review-source-title">GOV.UK (3 条)</div>
+                
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.gov.uk/government/news/councils-supported-to-identify-and-support-vulnerable-teenagers" target="_blank">Councils supported to identify and support vulnerable teenagers</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.gov.uk/government/speeches/remaking-the-state" target="_blank">Remaking the state</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.gov.uk/government/speeches/remaking-the-state-annual-conference-2026" target="_blank">Remaking the State Annual Conference 2026</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    </div>
+                            <div class="review-source-group">
+                                <div class="review-source-title">海关总署 (1 条)</div>
+                
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://news.google.com/rss/articles/CBMigwFBVV95cUxPamJwY2dnTmQwZFZNcjNYU2xGd1JEV3BFOGljQUdGUzluVkh5TXpsTkI5eWVVeVlLbHlDYVpLLVRTY3VHSDJrQ25RLXpiNklIX3ZIdHM1dzZ4RloxSnUzSGhMZzBWU2ZkSXNSbk56T0dxMElKbnd0Q0lSbzZmakQ1UWNTUQ?oc=5" target="_blank">庆祝中国共产党成立105周年系列之二：红船谣（昆明海关） - customs.gov.cn</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 触发关键词: 周年</span>
+                                        <span class="review-rule">触发规则: blacklist</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                    </div>
+                                </div>
+                    </div>
+                        </div>
+                    </div>
+            
                 </div> <!-- end date-group -->
         
                 <div class="date-group" data-date="2026-07-01">
                     <div class="date-header">2026-07-01</div>
+        
                     <div class="news-grid">
         
-                        <div class="card" data-search="迷雾中的分水岭：2026中国出海半年盘点与下半年展望 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="迷雾中的分水岭：2026中国出海半年盘点与下半年展望 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/187167" target="_blank">迷雾中的分水岭：2026中国出海半年盘点与下半年展望</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="卖家连夜改图！欧美严查ai，最高罚5000美元 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="卖家连夜改图！欧美严查ai，最高罚5000美元 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/186969" target="_blank">卖家连夜改图！欧美严查AI，最高罚5000美元</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="世界杯赛场之外：一台国产投影仪，如何在拉美踢赢出海跨境生意？丨“新”卖家故事① 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="世界杯赛场之外：一台国产投影仪，如何在拉美踢赢出海跨境生意？丨“新”卖家故事① 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/186962" target="_blank">世界杯赛场之外：一台国产投影仪，如何在拉美踢赢出海跨境生意？丨“新”卖家故事①</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="一封联名信，捅破了墨西哥税务合规的“窗户纸”|雨果独家 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="一封联名信，捅破了墨西哥税务合规的“窗户纸”|雨果独家 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/186756" target="_blank">一封联名信，捅破了墨西哥税务合规的“窗户纸”|雨果独家</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="千锁大战中活下来，出海战场上拿第一！解码凯迪仕kaadas的全球征途 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="千锁大战中活下来，出海战场上拿第一！解码凯迪仕kaadas的全球征途 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/187175" target="_blank">千锁大战中活下来，出海战场上拿第一！解码凯迪仕Kaadas的全球征途</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="销量暴涨5倍、退货率仅6%！盖世小鸡拉美市场实战方法论丨“新”卖家故事② 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="销量暴涨5倍、退货率仅6%！盖世小鸡拉美市场实战方法论丨“新”卖家故事② 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/187171" target="_blank">销量暴涨5倍、退货率仅6%！盖世小鸡拉美市场实战方法论丨“新”卖家故事②</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="亚马逊企业购卖家注意了！这个配送效率指标9月30日起会影响你的业绩 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="亚马逊企业购卖家注意了！这个配送效率指标9月30日起会影响你的业绩 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/187174" target="_blank">亚马逊企业购卖家注意了！这个配送效率指标9月30日起会影响你的业绩</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="备货倒计时！两大黄金类目撑起9月非洲销量|2026《next爆品指南》⑦ 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="备货倒计时！两大黄金类目撑起9月非洲销量|2026《next爆品指南》⑦ 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/187173" target="_blank">备货倒计时！两大黄金类目撑起9月非洲销量|2026《Next爆品指南》⑦</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="告别硬件出海上一个十年，前安克cmo做了款ai时代的memory产品｜硬氪专访 点击查看原文了解详情 36氪 (商业出海)">
+                        <div class="card" data-search="告别硬件出海上一个十年，前安克cmo做了款ai时代的memory产品｜硬氪专访 36氪 (商业出海)">
                             <h2 class="card-title"><a href="https://36kr.com/p/3867992509125636?f=rss" target="_blank">告别硬件出海上一个十年，前安克CMO做了款AI时代的Memory产品｜硬氪专访</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">36氪 (商业出海)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">36氪 (商业出海)</span>
                             </div>
                         </div>
                 
                     </div> <!-- end news-grid -->
+        
                 </div> <!-- end date-group -->
         
                 <div class="date-group" data-date="2026-06-30">
                     <div class="date-header">2026-06-30</div>
+        
                     <div class="news-grid">
         
-                        <div class="card" data-search="迷雾中的分水岭：2026中国出海半年盘点与下半年展望 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="迷雾中的分水岭：2026中国出海半年盘点与下半年展望 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/187167" target="_blank">迷雾中的分水岭：2026中国出海半年盘点与下半年展望</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="卖家连夜改图！欧美严查ai，最高罚5000美元 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="卖家连夜改图！欧美严查ai，最高罚5000美元 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/186969" target="_blank">卖家连夜改图！欧美严查AI，最高罚5000美元</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="世界杯赛场之外：一台国产投影仪，如何在拉美踢赢出海跨境生意？丨“新”卖家故事① 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="世界杯赛场之外：一台国产投影仪，如何在拉美踢赢出海跨境生意？丨“新”卖家故事① 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/186962" target="_blank">世界杯赛场之外：一台国产投影仪，如何在拉美踢赢出海跨境生意？丨“新”卖家故事①</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="一封联名信，捅破了墨西哥税务合规的“窗户纸”|雨果独家 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="一封联名信，捅破了墨西哥税务合规的“窗户纸”|雨果独家 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/186756" target="_blank">一封联名信，捅破了墨西哥税务合规的“窗户纸”|雨果独家</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="亚马逊全球开店与福布斯中国发布“2026福布斯中国新生代跨境电商30人评选”结果 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="亚马逊全球开店与福布斯中国发布“2026福布斯中国新生代跨境电商30人评选”结果 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/187170" target="_blank">亚马逊全球开店与福布斯中国发布“2026福布斯中国新生代跨境电商30人评选”结果</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="亚马逊又有新变化！有卖家反馈：这个按钮不见了 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="亚马逊又有新变化！有卖家反馈：这个按钮不见了 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/187169" target="_blank">亚马逊又有新变化！有卖家反馈：这个按钮不见了</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="防晒帽出口旺季拓客，海关数据精准预判市场需求 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="防晒帽出口旺季拓客，海关数据精准预判市场需求 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/187053" target="_blank">防晒帽出口旺季拓客，海关数据精准预判市场需求</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="新手村玩法介绍丨tiktok shop美国跨境新商冷启指南① 点击查看原文了解详情 雨果跨境 (最新干货)">
+                        <div class="card" data-search="新手村玩法介绍丨tiktok shop美国跨境新商冷启指南① 雨果跨境 (最新干货)">
                             <h2 class="card-title"><a href="https://www.cifnews.com/article/187165" target="_blank">新手村玩法介绍丨TikTok Shop美国跨境新商冷启指南①</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">雨果跨境 (最新干货)</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="智能血糖管理需求旺盛，微泰医疗海外营收大增227.2% 点击查看原文了解详情 36氪 (商业出海)">
+                        <div class="card" data-search="智能血糖管理需求旺盛，微泰医疗海外营收大增227.2% 36氪 (商业出海)">
                             <h2 class="card-title"><a href="https://36kr.com/p/3873902389794053?f=rss" target="_blank">智能血糖管理需求旺盛，微泰医疗海外营收大增227.2%</a></h2>
-                            <p class="card-summary">点击查看原文了解详情</p>
+                            <p class="card-summary"></p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">36氪 (商业出海)</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">36氪 (商业出海)</span>
                             </div>
                         </div>
                 
                     </div> <!-- end news-grid -->
+        
                 </div> <!-- end date-group -->
         
             </div>
-        </div>
-        
-        <div class="footer">
-            本仪表盘数据直接抓取自跨境平台官方官网（Newsroom）。<br>100% 官方原汁原味，无第三方加工，数据安全持久。
         </div>
         
         <script>
@@ -676,11 +1018,9 @@
                     var group = groups[i];
                     var cards = group.getElementsByClassName('card');
                     var hasVisibleCardInGroup = false;
-                    
                     for (var j = 0; j < cards.length; j++) {
                         var card = cards[j];
                         var searchText = card.getAttribute('data-search');
-                        
                         if (searchText.indexOf(input) > -1) {
                             card.style.display = "flex";
                             hasVisibleCardInGroup = true;
@@ -689,15 +1029,23 @@
                             card.style.display = "none";
                         }
                     }
-                    
-                    if (hasVisibleCardInGroup) {
-                        group.style.display = "block";
-                    } else {
-                        group.style.display = "none";
-                    }
+                    group.style.display = hasVisibleCardInGroup ? "block" : "none";
                 }
-                
                 document.getElementById('noResults').style.display = hasAnyVisibleCard ? "none" : "block";
+            }
+            
+            function toggleReview(element) {
+                var content = element.nextElementSibling;
+                content.style.display = (content.style.display === "block") ? "none" : "block";
+            }
+            
+            function showMore(btn) {
+                var group = btn.parentElement;
+                var hiddenItems = group.querySelectorAll('.hidden-review-item');
+                hiddenItems.forEach(function(item) {
+                    item.style.display = "flex";
+                });
+                btn.style.display = "none";
             }
         </script>
     </body>
