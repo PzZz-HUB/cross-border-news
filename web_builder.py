@@ -209,7 +209,7 @@ def generate_html(archive_data):
         </div>
         
         <div class="footer">
-            本仪表盘由 AI 自动归档并部署于 GitHub Pages。<br>数据安全持久，永不丢失。
+            本仪表盘数据直接抓取自跨境平台官方官网（Newsroom）。<br>100% 官方原汁原味，无第三方加工，数据安全持久。
         </div>
         
         <script>

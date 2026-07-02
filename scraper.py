@@ -1,100 +1,96 @@
-import requests
-import feedparser
-from bs4 import BeautifulSoup
-from ai_judge import filter_news_with_ai
+from playwright.sync_api import sync_playwright
+import time
 
-# 通用屏蔽词（黑名单），如果标题包含这些词，直接丢弃
-EXCLUDE_KEYWORDS = [
-    "招商", "报名", "峰会", "直播", "课程", 
-    "培训", "咨询", "服务商", "开店顾问", "会员", 
-    "活动", "大会", "交流群", "广告"
-]
-
-def is_valid_news(title, include_keywords=None):
-    # 1. 检查黑名单屏蔽词
-    for bad_word in EXCLUDE_KEYWORDS:
-        if bad_word in title:
-            return False
-            
-    # 2. 如果有白名单强制关键词，检查是否包含
-    if include_keywords:
-        if not any(k in title for k in include_keywords):
-            return False
-            
-    return True
-
-def get_feed_data(url, limit=5, keywords=None):
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-    }
+def fetch_amazon_official(page):
+    print("正在抓取 Amazon 官方新闻间...")
     news_list = []
     try:
-        response = requests.get(url, headers=headers, timeout=10)
-        feed = feedparser.parse(response.text)
+        # Amazon Small Business News
+        page.goto("https://www.aboutamazon.com/news/small-business", timeout=30000)
+        # 等待主要内容加载
+        page.wait_for_selector(".Promo-title", timeout=10000)
         
-        for entry in feed.entries:
-            title = entry.title
-            link = entry.link
-            
-            if not is_valid_news(title, include_keywords=keywords):
-                continue
-                
-            if title and link not in [n['link'] for n in news_list]:
-                news_list.append({"title": title, "link": link})
-                if len(news_list) >= limit:
-                    break
+        # 查找带有 Promo-title 的链接
+        elements = page.query_selector_all(".Promo-title a")
+        for el in elements[:6]:
+            title = el.inner_text().strip()
+            link = el.get_attribute("href")
+            if not link.startswith("http"):
+                link = "https://www.aboutamazon.com" + link
+            if title and link:
+                news_list.append({
+                    "title": title,
+                    "link": link,
+                    "summary": "Amazon 官方发布"
+                })
     except Exception as e:
-        print(f"获取 RSS 失败: {url}, 错误: {e}")
-        
+        print(f"抓取 Amazon 官方新闻失败: {e}")
     return news_list
 
-def fetch_cifnews():
-    url = "https://www.cifnews.com/"
-    headers = {"User-Agent": "Mozilla/5.0"}
+def fetch_tiktok_official(page):
+    print("正在抓取 TikTok 官方新闻间...")
     news_list = []
     try:
-        response = requests.get(url, headers=headers, timeout=10)
-        response.encoding = 'utf-8'
-        soup = BeautifulSoup(response.text, 'html.parser')
+        # TikTok Global Newsroom
+        page.goto("https://newsroom.tiktok.com/en-us/", timeout=30000)
+        # 等待文章卡片加载
+        page.wait_for_selector("article, .card", timeout=10000)
         
-        for a in soup.find_all('a', href=True):
-            if '/article/' in a['href']:
-                title = a.text.strip()
-                link = "https://www.cifnews.com" + a['href'] if a['href'].startswith('/') else a['href']
+        # 提取链接和标题 (新闻间的常规 a 标签带有标题内容)
+        elements = page.query_selector_all("a")
+        for el in elements:
+            title = el.inner_text().strip()
+            link = el.get_attribute("href")
+            # 过滤掉过短的无意义链接（如 Nav, Read More等）
+            if len(title) > 20 and link and "/en-us/article/" in link:
+                if not link.startswith("http"):
+                    link = "https://newsroom.tiktok.com" + link
+                    
+                # 去重
+                if link not in [n['link'] for n in news_list]:
+                    news_list.append({
+                        "title": title,
+                        "link": link,
+                        "summary": "TikTok 官方发布"
+                    })
                 
-                # 过滤掉过短的标题和黑名单内容
-                if title and len(title) > 6 and is_valid_news(title):
-                    if link not in [n['link'] for n in news_list]:
-                        news_list.append({"title": title, "link": link})
-                        
-                if len(news_list) >= 8:
-                    break
+            if len(news_list) >= 6:
+                break
     except Exception as e:
-        print(f"获取雨果网失败: {e}")
+        print(f"抓取 TikTok 官方新闻失败: {e}")
     return news_list
 
 def fetch_daily_news():
-    print("开始抓取全网最新鲜的跨境出海资讯 (即将交由 AI 剥离来源并提纯官方公告)...")
+    print("启动浏览器直连官方数据源 (不再使用 AI)...")
+    all_news = {}
     
-    cifnews_raw = fetch_cifnews()
-    
-    url_36kr = "https://36kr.com/feed"
-    keywords = ["出海", "跨境", "亚马逊", "TikTok", "Shopee", "独立站", "速卖通", "海外"]
-    kr_raw = get_feed_data(url_36kr, limit=6, keywords=keywords)
-    
-    # 将所有新闻合并成一个扁平的列表，彻底剥离“雨果网”和“36氪”的原始标签
-    combined_raw_news = cifnews_raw + kr_raw
-    
-    print(f"总共抓取到 {len(combined_raw_news)} 条待鉴定资讯，开始交给 AI 提取官方公告并分配平台归属...")
-    
-    # 统一扔给 AI 处理
-    categorized_news = filter_news_with_ai(combined_raw_news)
-    
-    return categorized_news
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            context = browser.new_context(
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            )
+            page = context.new_page()
+            
+            # 1. Amazon 官方
+            amazon_news = fetch_amazon_official(page)
+            if amazon_news:
+                all_news["Amazon 官方"] = amazon_news
+                
+            # 2. TikTok 官方
+            tiktok_news = fetch_tiktok_official(page)
+            if tiktok_news:
+                all_news["TikTok 官方"] = tiktok_news
+                
+            browser.close()
+    except Exception as e:
+        print(f"Playwright 抓取异常: {e}")
+        
+    return all_news
 
 if __name__ == "__main__":
     res = fetch_daily_news()
     for platform, news_list in res.items():
         print(f"--- {platform} ---")
         for item in news_list:
-            print(f"- {item['title']} ({item.get('summary', '')})")
+            print(f"- {item['title']}")
