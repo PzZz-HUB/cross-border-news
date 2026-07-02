@@ -16,6 +16,27 @@ def save_archive(archive_data):
     with open('data/archive.json', 'w', encoding='utf-8') as f:
         json.dump(archive_data, f, ensure_ascii=False, indent=2)
 
+def get_node_status(stat):
+    if stat.get("disabled"):
+        return "disabled"
+    if stat.get("error_message") or stat.get("status") == "error" or stat.get("status") == "failed":
+        return "failed"
+    
+    candidates = stat.get("candidates_found", 0)
+    stored = stat.get("confirmed_count", 0)
+    quarantined = stat.get("quarantined_count", 0)
+    
+    if stored > 0:
+        return "success_with_core"
+    if candidates == 0 and stored == 0:
+        return "success_no_data"
+    if candidates > 0 and quarantined == candidates and stored == 0:
+        return "all_quarantined"
+    if quarantined > 0:
+        return "partial_quarantined"
+        
+    return "success_no_data"
+
 def generate_html(archive_data):
     html = """
     <!DOCTYPE html>
@@ -31,10 +52,13 @@ def generate_html(archive_data):
                 --text-main: #0f172a;
                 --text-muted: #64748b;
                 --card-bg: #ffffff;
-                --success: #10b981;
-                --error: #ef4444;
-                --warning: #f59e0b;
-                --neutral: #94a3b8;
+                
+                /* Node Status Colors */
+                --status-green: #10b981;
+                --status-bluegray: #64748b;
+                --status-orange: #f59e0b;
+                --status-red: #ef4444;
+                --status-gray: #9ca3af;
             }
             body { 
                 font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
@@ -62,19 +86,29 @@ def generate_html(archive_data):
 
             /* Dashboard 面板 */
             .dashboard-panel { background: white; border-radius: 12px; padding: 24px; margin-bottom: 40px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); }
-            .dashboard-title { font-size: 18px; font-weight: 700; margin-top: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+            .dashboard-title { font-size: 18px; font-weight: 700; margin-top: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+            .legend { font-size: 13px; color: var(--text-muted); display: flex; gap: 12px; margin-left: 16px; font-weight: 400; }
+            .legend-item { display: flex; align-items: center; gap: 4px; }
+            .legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+            
             .status-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
             .status-item { padding: 12px 16px; border-radius: 8px; background: #f8fafc; font-size: 14px; border: 1px solid #e2e8f0; }
             .status-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;}
             .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; }
             
-            .dot-ok_with_confirmed { background-color: var(--success); }
-            .dot-ok_all_quarantined { background-color: var(--warning); }
-            .dot-ok_no_candidates { background-color: var(--neutral); }
-            .dot-error { background-color: var(--error); }
+            .dot-success_with_core { background-color: var(--status-green); }
+            .dot-success_no_data { background-color: var(--status-bluegray); }
+            .dot-all_quarantined, .dot-partial_quarantined { background-color: var(--status-orange); }
+            .dot-failed { background-color: var(--status-red); }
+            .dot-disabled { background-color: var(--status-gray); }
             
-            .funnel-stats { font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; line-height: 1.6;}
-            .funnel-error { color: var(--error); font-size: 12px; margin-top: 4px; word-break: break-all;}
+            .funnel-stats { font-size: 12px; display: flex; justify-content: space-between; line-height: 1.6;}
+            .stat-candidates { color: var(--status-bluegray); }
+            .stat-dropped { color: var(--status-gray); }
+            .stat-quarantined { color: var(--status-orange); }
+            .stat-stored { color: var(--status-green); font-weight: 600; }
+            
+            .funnel-error { color: var(--status-red); font-size: 12px; margin-top: 4px; word-break: break-all;}
 
             /* 日期分组 */
             .date-group { margin-bottom: 50px; }
@@ -134,9 +168,8 @@ def generate_html(archive_data):
     for day_data in archive_data:
         date_str = day_data.get('date', '')
         news_data = day_data.get('news', {})
-        quarantined_data = day_data.get('quarantined', {}) # Now it's grouped by source!
+        quarantined_data = day_data.get('quarantined', {})
         statuses = day_data.get('statuses', {})
-        summary = day_data.get('summary', {})
         
         html += f"""
                 <div class="date-group" data-date="{date_str}">
@@ -147,16 +180,27 @@ def generate_html(archive_data):
         if statuses:
             html += """
                     <div class="dashboard-panel">
-                        <h3 class="dashboard-title">📡 系统运行大盘 (节点全景监控)</h3>
+                        <h3 class="dashboard-title">
+                            📡 系统运行大盘 (节点全景监控)
+                            <div class="legend">
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-green)"></span>有入库</div>
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-bluegray)"></span>无数据</div>
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-orange)"></span>已隔离</div>
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-red)"></span>失败</div>
+                            </div>
+                        </h3>
                         <div class="status-grid">
             """
             for source, stat in statuses.items():
-                s = stat.get("status", "error")
+                s = get_node_status(stat)
                 dot_class = f"dot-{s}"
-                if s == "ok_with_confirmed": text = "✅ 成功 (含核心)"
-                elif s == "ok_all_quarantined": text = "🟡 成功 (全隔离)"
-                elif s == "ok_no_candidates": text = "⚪ 成功 (无数据)"
-                else: text = "❌ 失败"
+                
+                if s == "success_with_core": text = "成功（含核心）"
+                elif s == "success_no_data": text = "成功（无数据）"
+                elif s == "all_quarantined": text = "成功（全隔离）"
+                elif s == "partial_quarantined": text = "成功（部分隔离）"
+                elif s == "disabled": text = "停用"
+                else: text = "失败"
                 
                 html += f"""
                             <div class="status-item">
@@ -165,10 +209,10 @@ def generate_html(archive_data):
                                     <span>{text}</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: {stat.get('candidates_found', 0)}</span>
-                                    <span>丢弃: {stat.get('dropped_count', 0)}</span>
-                                    <span style="color:var(--warning)">隔离: {stat.get('quarantined_count', 0)}</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: {stat.get('confirmed_count', 0)}</span>
+                                    <span class="stat-candidates">初筛: {stat.get('candidates_found', 0)}</span>
+                                    <span class="stat-dropped">丢弃: {stat.get('dropped_count', 0)}</span>
+                                    <span class="stat-quarantined">隔离: {stat.get('quarantined_count', 0)}</span>
+                                    <span class="stat-stored">入库: {stat.get('confirmed_count', 0)}</span>
                                 </div>
                 """
                 if stat.get('error_message'):
