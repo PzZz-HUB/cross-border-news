@@ -1,24 +1,36 @@
 import os
 import sys
-if sys.stdout.encoding != 'utf-8':
-    sys.stdout.reconfigure(encoding='utf-8')
+import json
+import datetime
 import google.generativeai as genai
 from scraper import fetch_daily_news
 from web_builder import build_webpage
+
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
+
+AUTO_KEEP = ["Shopify Changelog", "eBay Seller Updates", "CBP", "USTR"]
+TRUSTED_RULE = ["Federal Register", "GOV.UK", "EU Taxation"]
+TRUSTED_KEYWORDS = ["tariff", "tax", "trade", "custom", "import", "export", "ecommerce", "seller", "shipping", "freight", "logistic", "border", "duty", "rule", "amendment", "regulation"]
+
+def check_trusted_rule(title):
+    title_lower = title.lower()
+    for kw in TRUSTED_KEYWORDS:
+        if kw in title_lower:
+            return True, f"命中业务关键词: {kw}", "weak_match"
+    return False, "未命中任何跨境业务关键词", "non_seller_news"
 
 def ai_is_relevant(title):
     # 1. 极速本地黑名单过滤
     blacklist = ["党建", "周年", "庆典", "合唱", "歌曲", "红船谣", "党委", "纪委", "党支部", "党课", "晚会", "歌咏", "比赛", "走访慰问", "离退休"]
     for word in blacklist:
         if word in title:
-            reason = f"[黑名单拦截] 触发关键词: {word}"
-            print(f" {reason} -> {title}")
-            return False, reason
+            return False, f"触发关键词: {word}", "blacklist"
 
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         print(f" [警告] 未配置 GEMINI_API_KEY，默认通过此新闻: {title}")
-        return True, "API Key Missing, Default Pass"
+        return True, "API Key Missing, Default Pass", "ai_bypass"
     
     try:
         genai.configure(api_key=api_key)
@@ -33,48 +45,112 @@ def ai_is_relevant(title):
         response = model.generate_content(prompt)
         text = response.text.strip().lower()
         if text.startswith('false') or 'false' in text:
-            return False, "[AI 智能拦截] 判定为无关公关稿"
-        return True, "AI Passed"
+            return False, "判定为无关公关稿", "ai"
+        return True, "AI 判定通过", "ai"
     except Exception as e:
         print(f"AI 过滤请求失败，默认通过 ({title}): {e}")
-        return True, f"AI Error: {e}"
+        return True, f"AI Error: {e}", "ai_error"
 
-def filter_with_ai(news_data):
-    print("开始清洗去噪，被剔除的资讯将进入隔离审查区...")
-    kept_data = {}
-    quarantined_data = []
+def process_data():
+    print("开始执行每日资讯收集任务...")
+    news_data, fetch_statuses = fetch_daily_news()
     
+    run_report = {
+        "run_at": datetime.datetime.now().isoformat(),
+        "source_statuses": {},
+        "raw_candidates": 0,
+        "confirmed_news": {},
+        "quarantined_news": {},
+        "dropped_items": 0,
+        "summary": {}
+    }
+    
+    total_confirmed = 0
+    total_quarantined = 0
+    total_dropped = 0
+    
+    # Initialize statuses
+    for src, status_info in fetch_statuses.items():
+        run_report["source_statuses"][src] = {
+            "candidates_found": status_info.get("count", 0),
+            "confirmed_count": 0,
+            "quarantined_count": 0,
+            "dropped_count": 0,
+            "error_message": status_info.get("status") if "Error" in status_info.get("status", "") else None,
+            "last_run_at": run_report["run_at"],
+            "status": "error" if "Error" in status_info.get("status", "") else "ok_no_candidates"
+        }
+        run_report["raw_candidates"] += status_info.get("count", 0)
+        
     for source, articles in news_data.items():
-        kept_articles = []
+        seen_titles = set()
         for a in articles:
-            is_rel, reason = ai_is_relevant(a['title'])
-            if is_rel:
-                kept_articles.append(a)
-            else:
-                a['reject_reason'] = reason
-                a['source'] = source
-                quarantined_data.append(a)
-        if kept_articles:
-            kept_data[source] = kept_articles
+            title = a.get('title', '').strip()
+            link = a.get('link', '').strip()
             
-    print(f"去噪完成：保留 {sum(len(v) for v in kept_data.values())} 条，隔离 {len(quarantined_data)} 条。")
-    return kept_data, quarantined_data
+            # Dropped Check (empty, duplicate)
+            if not title or not link or title in seen_titles:
+                run_report["source_statuses"][source]["dropped_count"] += 1
+                total_dropped += 1
+                continue
+                
+            seen_titles.add(title)
+            
+            is_rel = False
+            reason = ""
+            rule = ""
+            
+            # Auto Keep
+            if source in AUTO_KEEP:
+                is_rel, reason, rule = True, "源端白名单直通", "auto_keep"
+            # Trusted Rule
+            elif source in TRUSTED_RULE:
+                is_rel, reason, rule = check_trusted_rule(title)
+            # Mixed (AI & Blacklist)
+            else:
+                is_rel, reason, rule = ai_is_relevant(title)
+                
+            a['reject_reason'] = reason
+            a['rule_triggered'] = rule
+            a['source'] = source
+            a['pub_time'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+            if is_rel:
+                run_report["confirmed_news"].setdefault(source, []).append(a)
+                run_report["source_statuses"][source]["confirmed_count"] += 1
+                total_confirmed += 1
+            else:
+                run_report["quarantined_news"].setdefault(source, []).append(a)
+                run_report["source_statuses"][source]["quarantined_count"] += 1
+                total_quarantined += 1
+
+    # Finalize statuses
+    for src, stat in run_report["source_statuses"].items():
+        if stat["error_message"]:
+            stat["status"] = "error"
+        elif stat["confirmed_count"] > 0:
+            stat["status"] = "ok_with_confirmed"
+        elif stat["quarantined_count"] > 0:
+            stat["status"] = "ok_all_quarantined"
+        else:
+            stat["status"] = "ok_no_candidates"
+
+    run_report["summary"] = {
+        "total_confirmed": total_confirmed,
+        "total_quarantined": total_quarantined,
+        "total_dropped": total_dropped
+    }
+    
+    os.makedirs("data/latest", exist_ok=True)
+    with open("data/latest/run_report.json", "w", encoding="utf-8") as f:
+        json.dump(run_report, f, ensure_ascii=False, indent=2)
+        
+    print(f"数据清洗完毕，报告已生成 data/latest/run_report.json")
+    print(f"有效: {total_confirmed}, 隔离: {total_quarantined}, 丢弃: {total_dropped}")
 
 def main():
-    print("开始执行每日资讯收集任务...")
-    
-    # 1. 抓取新闻 (纯官方，仅限当天)
-    news_data, source_statuses = fetch_daily_news()
-    
-    # 2. 经过多层过滤 (黑名单 + AI)
-    kept_news = {}
-    quarantined_news = []
-    if news_data:
-        kept_news, quarantined_news = filter_with_ai(news_data)
-    
-    # 3. 生成包含大盘和隔离区的静态网页
-    build_webpage(kept_news, quarantined_news, source_statuses)
-    print("今日任务全部执行完毕！")
+    process_data()
+    build_webpage()
 
 if __name__ == "__main__":
     main()

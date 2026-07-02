@@ -34,6 +34,7 @@ def generate_html(archive_data):
                 --success: #10b981;
                 --error: #ef4444;
                 --warning: #f59e0b;
+                --neutral: #94a3b8;
             }
             body { 
                 font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
@@ -42,134 +43,75 @@ def generate_html(archive_data):
                 margin: 0; 
                 padding: 0;
             }
-            /* 悬浮顶部导航栏 */
             .navbar {
-                position: fixed;
-                top: 0; left: 0; right: 0;
-                height: 70px;
-                background-color: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                border-bottom: 1px solid #e2e8f0;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 0 5%;
-                z-index: 1000;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+                position: fixed; top: 0; left: 0; right: 0; height: 70px;
+                background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+                border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;
+                padding: 0 5%; z-index: 1000; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
             }
             .logo { font-size: 22px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px;}
             .search-wrapper { flex: 0 1 400px; position: relative; }
             .search-box { 
                 width: 100%; padding: 10px 16px 10px 40px; 
-                border: 1px solid #cbd5e1; border-radius: 9999px; 
-                font-size: 15px; background-color: #f1f5f9;
-                transition: all 0.2s; outline: none;
+                border: 1px solid #cbd5e1; border-radius: 9999px; font-size: 15px; background-color: #f1f5f9; outline: none;
             }
             .search-box:focus { background-color: #fff; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
             .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.5;}
             
-            /* 主体内容区 */
-            .main-content {
-                max-width: 1400px;
-                margin: 100px auto 40px;
-                padding: 0 5%;
-            }
+            .main-content { max-width: 1400px; margin: 100px auto 40px; padding: 0 5%; }
 
             /* Dashboard 面板 */
-            .dashboard-panel {
-                background: white;
-                border-radius: 12px;
-                padding: 24px;
-                margin-bottom: 40px;
-                border: 1px solid #e2e8f0;
-                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            }
-            .dashboard-title {
-                font-size: 18px; font-weight: 700; margin-top: 0; margin-bottom: 16px;
-                display: flex; align-items: center; gap: 8px;
-            }
-            .status-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 12px;
-            }
-            .status-item {
-                display: flex; align-items: center; justify-content: space-between;
-                padding: 10px 12px; border-radius: 8px; background: #f8fafc;
-                font-size: 14px; border: 1px solid #e2e8f0;
-            }
+            .dashboard-panel { background: white; border-radius: 12px; padding: 24px; margin-bottom: 40px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); }
+            .dashboard-title { font-size: 18px; font-weight: 700; margin-top: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+            .status-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+            .status-item { padding: 12px 16px; border-radius: 8px; background: #f8fafc; font-size: 14px; border: 1px solid #e2e8f0; }
+            .status-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;}
             .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; }
-            .dot-success { background-color: var(--success); }
-            .dot-error { background-color: var(--error); }
-            .dot-nodata { background-color: var(--warning); }
             
+            .dot-ok_with_confirmed { background-color: var(--success); }
+            .dot-ok_all_quarantined { background-color: var(--warning); }
+            .dot-ok_no_candidates { background-color: var(--neutral); }
+            .dot-error { background-color: var(--error); }
+            
+            .funnel-stats { font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; line-height: 1.6;}
+            .funnel-error { color: var(--error); font-size: 12px; margin-top: 4px; word-break: break-all;}
+
             /* 日期分组 */
             .date-group { margin-bottom: 50px; }
-            .date-header { 
-                font-size: 24px; font-weight: 800; color: var(--text-main); 
-                margin-bottom: 24px; display: inline-block;
-                position: relative; padding-left: 16px;
-            }
-            .date-header::before {
-                content: ''; position: absolute; left: 0; top: 10%; height: 80%; width: 4px;
-                background-color: var(--primary); border-radius: 4px;
-            }
+            .date-header { font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 24px; display: inline-block; position: relative; padding-left: 16px; }
+            .date-header::before { content: ''; position: absolute; left: 0; top: 10%; height: 80%; width: 4px; background-color: var(--primary); border-radius: 4px; }
             
             /* 网格瀑布流排版 */
-            .news-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-                gap: 24px;
-            }
-            
-            /* 新闻卡片 */
-            .card { 
-                background-color: var(--card-bg); 
-                border: 1px solid #e2e8f0; border-radius: 16px; 
-                padding: 24px; 
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02); 
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                display: flex; flex-direction: column;
-                height: 100%; box-sizing: border-box;
-            }
-            .card:hover { 
-                transform: translateY(-4px); 
-                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04); 
-                border-color: #cbd5e1;
-            }
+            .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+            .card { background-color: var(--card-bg); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; }
+            .card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08); border-color: #cbd5e1; }
             .card-title { font-size: 17px; font-weight: 700; color: var(--text-main); margin: 0 0 14px 0; line-height: 1.5; }
             .card-title a { color: var(--text-main); text-decoration: none; }
             .card-title a:hover { color: var(--primary); }
-            
-            .card-summary { 
-                font-size: 15px; color: var(--text-muted); line-height: 1.6; margin: 0 0 20px 0; 
-                flex-grow: 1;
-            }
-            
+            .card-summary { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin: 0 0 20px 0; flex-grow: 1; }
             .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 16px; }
-            .source-tag { font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; letter-spacing: 0.5px;}
+            .source-tag { font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; }
 
             /* 隔离审查区 */
-            .review-section {
-                margin-top: 80px; padding: 30px; background: #fff5f5; border: 1px solid #fed7d7; border-radius: 12px;
-            }
+            .review-section { margin-top: 80px; padding: 24px; background: #fff5f5; border: 1px solid #fed7d7; border-radius: 12px; }
             .review-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
-            .review-title { font-size: 18px; font-weight: 700; color: #c53030; margin: 0; display: flex; align-items: center; gap: 8px;}
-            .review-content { margin-top: 20px; display: none; }
-            .review-item { padding: 12px 16px; border-bottom: 1px solid #fed7d7; font-size: 14px; }
-            .review-item:last-child { border-bottom: none; }
-            .review-reason { display: inline-block; padding: 2px 8px; background: #fed7d7; color: #9b2c2c; border-radius: 4px; font-size: 12px; margin-right: 12px; font-weight: 600; }
+            .review-title { font-size: 18px; font-weight: 700; color: #c53030; margin: 0; }
             
+            .review-content { margin-top: 20px; display: none; }
+            .review-source-group { margin-bottom: 24px; background: white; border-radius: 8px; border: 1px solid #fecaca; overflow: hidden; }
+            .review-source-title { background: #fee2e2; padding: 10px 16px; font-weight: 700; font-size: 15px; color: #991b1b; }
+            .review-item { padding: 12px 16px; border-bottom: 1px solid #fee2e2; font-size: 14px; display: flex; flex-direction: column; gap: 8px;}
+            .review-item:last-child { border-bottom: none; }
+            .review-meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+            .review-reason { padding: 2px 8px; background: #fecaca; color: #991b1b; border-radius: 4px; font-size: 12px; font-weight: 600; }
+            .review-rule { padding: 2px 8px; background: #e2e8f0; color: #475569; border-radius: 4px; font-size: 12px; }
+            .review-link { font-weight: 600; color: #1f2937; text-decoration: none; }
+            .review-link:hover { text-decoration: underline; }
+            .show-more-btn { width: 100%; text-align: center; padding: 12px; background: #f8fafc; border: none; border-top: 1px solid #fee2e2; color: #3b82f6; cursor: pointer; font-weight: 600; }
+            .show-more-btn:hover { background: #f1f5f9; }
+
             .footer { margin-top: 60px; padding: 30px; text-align: center; font-size: 0.9em; color: var(--text-muted); border-top: 1px solid #e2e8f0; }
             .no-results { text-align: center; color: var(--text-muted); padding: 80px 0; font-size: 18px; display: none; }
-            
-            @media (max-width: 768px) {
-                .navbar { padding: 0 20px; flex-direction: column; height: 120px; justify-content: center; gap: 15px; }
-                .search-wrapper { flex: none; width: 100%; }
-                .main-content { margin-top: 140px; padding: 0 20px; }
-                .news-grid { grid-template-columns: 1fr; }
-            }
         </style>
     </head>
     <body>
@@ -177,14 +119,13 @@ def generate_html(archive_data):
             <div class="logo">🌐 跨境内参库</div>
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-box" placeholder="搜索资讯、平台或关键词..." onkeyup="searchNews()">
+                <input type="text" id="searchInput" class="search-box" placeholder="搜索资讯..." onkeyup="searchNews()">
             </div>
         </nav>
         
         <div class="main-content">
             <div id="noResults" class="no-results">
                 <h2>没有找到相关资讯 💡</h2>
-                <p>换个关键词试试吧，比如“亚马逊”或“政策”</p>
             </div>
             
             <div id="newsContainer">
@@ -193,8 +134,9 @@ def generate_html(archive_data):
     for day_data in archive_data:
         date_str = day_data.get('date', '')
         news_data = day_data.get('news', {})
-        quarantined_data = day_data.get('quarantined', [])
+        quarantined_data = day_data.get('quarantined', {}) # Now it's grouped by source!
         statuses = day_data.get('statuses', {})
+        summary = day_data.get('summary', {})
         
         html += f"""
                 <div class="date-group" data-date="{date_str}">
@@ -205,27 +147,34 @@ def generate_html(archive_data):
         if statuses:
             html += """
                     <div class="dashboard-panel">
-                        <h3 class="dashboard-title">📡 系统运行大盘 (抓取节点状态)</h3>
+                        <h3 class="dashboard-title">📡 系统运行大盘 (节点全景监控)</h3>
                         <div class="status-grid">
             """
-            for source, status_info in statuses.items():
-                s = status_info.get("status", "Unknown")
-                c = status_info.get("count", 0)
-                if s == "OK":
-                    dot_class = "dot-success"
-                    text = f"✅ {c} 条"
-                elif s == "No Data Today":
-                    dot_class = "dot-nodata"
-                    text = "⚪ 无更新"
-                else:
-                    dot_class = "dot-error"
-                    text = "❌ 失败"
+            for source, stat in statuses.items():
+                s = stat.get("status", "error")
+                dot_class = f"dot-{s}"
+                if s == "ok_with_confirmed": text = "✅ 成功 (含核心)"
+                elif s == "ok_all_quarantined": text = "🟡 成功 (全隔离)"
+                elif s == "ok_no_candidates": text = "⚪ 成功 (无数据)"
+                else: text = "❌ 失败"
+                
                 html += f"""
                             <div class="status-item">
-                                <div><span class="status-dot {dot_class}"></span><strong>{source}</strong></div>
-                                <span>{text}</span>
-                            </div>
+                                <div class="status-header">
+                                    <div><span class="status-dot {dot_class}"></span><strong>{source}</strong></div>
+                                    <span>{text}</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span>初筛: {stat.get('candidates_found', 0)}</span>
+                                    <span>丢弃: {stat.get('dropped_count', 0)}</span>
+                                    <span style="color:var(--warning)">隔离: {stat.get('quarantined_count', 0)}</span>
+                                    <span style="color:var(--success); font-weight:600;">入库: {stat.get('confirmed_count', 0)}</span>
+                                </div>
                 """
+                if stat.get('error_message'):
+                    html += f'<div class="funnel-error">{stat.get("error_message")}</div>'
+                html += "</div>"
+                
             html += """
                         </div>
                     </div>
@@ -236,35 +185,17 @@ def generate_html(archive_data):
         """
         
         for source, news_list in news_data.items():
-            if not news_list:
-                continue
-                
-            source_lower = source.lower()
-            if "amazon" in source_lower or "亚马逊" in source_lower:
-                tag_style = "background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;"
-            elif "tiktok" in source_lower:
-                tag_style = "background-color: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1;"
-            elif "shopee" in source_lower or "虾皮" in source_lower:
-                tag_style = "background-color: #fff1f2; color: #be123c; border: 1px solid #ffe4e6;"
-            elif "temu" in source_lower:
-                tag_style = "background-color: #fdf4ff; color: #a21caf; border: 1px solid #fae8ff;"
-            else:
-                tag_style = "background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;"
-                
+            if not news_list: continue
             for item in news_list:
-                summary = item.get('summary', '点击查看原文了解详情')
-                if not summary.strip():
-                    summary = '点击查看原文了解详情'
                 title = item.get('title', '')
-                
-                search_text = f"{title} {summary} {source}".lower().replace('"', '&quot;')
-                
+                summary_text = item.get('summary', '')
+                link = item.get('link', '#')
                 html += f"""
-                        <div class="card" data-search="{search_text}">
-                            <h2 class="card-title"><a href="{item.get('link', '#')}" target="_blank">{title}</a></h2>
-                            <p class="card-summary">{summary}</p>
+                        <div class="card" data-search="{title.lower()} {source.lower()}">
+                            <h2 class="card-title"><a href="{link}" target="_blank">{title}</a></h2>
+                            <p class="card-summary">{summary_text}</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="{tag_style}">{source}</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">{source}</span>
                             </div>
                         </div>
                 """
@@ -273,26 +204,40 @@ def generate_html(archive_data):
                     </div> <!-- end news-grid -->
         """
 
-        # Quarantine Zone for today
+        # Quarantine Zone
         if quarantined_data:
+            total_q = sum(len(items) for items in quarantined_data.values())
             html += f"""
                     <div class="review-section">
                         <div class="review-header" onclick="toggleReview(this)">
-                            <h3 class="review-title">🗑️ 隔离审查区 ({len(quarantined_data)} 条被剔除资讯)</h3>
+                            <h3 class="review-title">🗑️ 隔离审查区 ({total_q} 条候选资讯未通过最终规则)</h3>
                             <span>▼ 点击展开/收起</span>
                         </div>
                         <div class="review-content">
             """
-            for q in quarantined_data:
-                reason = q.get('reject_reason', 'Unknown')
-                title = q.get('title', '')
-                src = q.get('source', '')
+            for source, q_list in quarantined_data.items():
+                if not q_list: continue
                 html += f"""
-                            <div class="review-item">
-                                <span class="review-reason">{reason}</span>
-                                <strong>[{src}]</strong> {title}
-                            </div>
+                            <div class="review-source-group">
+                                <div class="review-source-title">{source} ({len(q_list)} 条)</div>
                 """
+                for idx, q in enumerate(q_list):
+                    hidden = 'style="display:none;" class="hidden-review-item"' if idx >= 5 else ''
+                    html += f"""
+                                <div class="review-item" {hidden}>
+                                    <div><a class="review-link" href="{q.get('link', '#')}" target="_blank">{q.get('title', '')}</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: {q.get('reject_reason', 'Unknown')}</span>
+                                        <span class="review-rule">触发规则: {q.get('rule_triggered', 'Unknown')}</span>
+                                        <span style="color:#64748b; font-size:12px;">{q.get('pub_time', '')}</span>
+                                    </div>
+                                </div>
+                    """
+                if len(q_list) > 5:
+                    html += f"""
+                                <button class="show-more-btn" onclick="showMore(this)">展开全部 {len(q_list)} 条 ▾</button>
+                    """
+                html += "</div>"
             html += """
                         </div>
                     </div>
@@ -306,10 +251,6 @@ def generate_html(archive_data):
             </div>
         </div>
         
-        <div class="footer">
-            本仪表盘数据直接抓取自跨境平台官方官网（Newsroom）。<br>100% 官方原汁原味，无第三方加工，数据安全持久。
-        </div>
-        
         <script>
             function searchNews() {
                 var input = document.getElementById('searchInput').value.toLowerCase();
@@ -320,11 +261,9 @@ def generate_html(archive_data):
                     var group = groups[i];
                     var cards = group.getElementsByClassName('card');
                     var hasVisibleCardInGroup = false;
-                    
                     for (var j = 0; j < cards.length; j++) {
                         var card = cards[j];
                         var searchText = card.getAttribute('data-search');
-                        
                         if (searchText.indexOf(input) > -1) {
                             card.style.display = "flex";
                             hasVisibleCardInGroup = true;
@@ -333,24 +272,23 @@ def generate_html(archive_data):
                             card.style.display = "none";
                         }
                     }
-                    
-                    if (hasVisibleCardInGroup) {
-                        group.style.display = "block";
-                    } else {
-                        group.style.display = "none";
-                    }
+                    group.style.display = hasVisibleCardInGroup ? "block" : "none";
                 }
-                
                 document.getElementById('noResults').style.display = hasAnyVisibleCard ? "none" : "block";
             }
             
             function toggleReview(element) {
                 var content = element.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
-                }
+                content.style.display = (content.style.display === "block") ? "none" : "block";
+            }
+            
+            function showMore(btn) {
+                var group = btn.parentElement;
+                var hiddenItems = group.querySelectorAll('.hidden-review-item');
+                hiddenItems.forEach(function(item) {
+                    item.style.display = "flex";
+                });
+                btn.style.display = "none";
             }
         </script>
     </body>
@@ -358,7 +296,15 @@ def generate_html(archive_data):
     """
     return html
 
-def build_webpage(today_news_data, quarantined_news, source_statuses):
+def build_webpage():
+    report_path = "data/latest/run_report.json"
+    if not os.path.exists(report_path):
+        print(f"找不到运行报告 {report_path}，跳过生成网页。")
+        return
+        
+    with open(report_path, "r", encoding="utf-8") as f:
+        run_report = json.load(f)
+        
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     archive_data = load_archive()
     
@@ -370,9 +316,10 @@ def build_webpage(today_news_data, quarantined_news, source_statuses):
             
     today_entry = {
         'date': today_str,
-        'news': today_news_data,
-        'quarantined': quarantined_news,
-        'statuses': source_statuses
+        'news': run_report.get('confirmed_news', {}),
+        'quarantined': run_report.get('quarantined_news', {}),
+        'statuses': run_report.get('source_statuses', {}),
+        'summary': run_report.get('summary', {})
     }
     
     if existing_idx >= 0:
@@ -389,3 +336,6 @@ def build_webpage(today_news_data, quarantined_news, source_statuses):
         f.write(html_content)
         
     print("网页生成成功：public/index.html")
+
+if __name__ == "__main__":
+    build_webpage()
