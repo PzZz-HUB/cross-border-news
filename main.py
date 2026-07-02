@@ -4,6 +4,13 @@ from scraper import fetch_daily_news
 from web_builder import build_webpage
 
 def ai_is_relevant(title):
+    # 1. 极速本地黑名单过滤（防止因为没有配置 API Key 导致明显的垃圾信息漏网）
+    blacklist = ["党建", "周年", "庆典", "合唱", "歌曲", "红船谣", "党委", "纪委", "党支部", "党课", "晚会", "歌咏", "比赛", "走访慰问", "离退休"]
+    for word in blacklist:
+        if word in title:
+            print(f" [本地黑名单剔除] {title} (触发关键词: {word})")
+            return False
+
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         print(f" [警告] 未配置 GEMINI_API_KEY，默认通过此新闻: {title}")
