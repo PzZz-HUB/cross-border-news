@@ -135,13 +135,13 @@ def fetch_daily_news():
     gov_uk_news = fetch_gov_uk()
     if gov_uk_news: all_news["GOV.UK"] = gov_uk_news
         
-    cbp_news = fetch_google_news_rss("cbp.gov", "CBP", query="trade OR tariff OR import OR export OR customs")
+    cbp_news = fetch_google_news_rss("cbp.gov", "CBP")
     if cbp_news: all_news["CBP"] = cbp_news
         
-    ustr_news = fetch_google_news_rss("ustr.gov", "USTR", query="trade OR tariff OR section 301")
+    ustr_news = fetch_google_news_rss("ustr.gov", "USTR")
     if ustr_news: all_news["USTR"] = ustr_news
         
-    eu_tax_news = fetch_google_news_rss("taxation-customs.ec.europa.eu", "EU Taxation", query="customs OR vat OR tariff OR trade")
+    eu_tax_news = fetch_google_news_rss("taxation-customs.ec.europa.eu", "EU Taxation")
     if eu_tax_news: all_news["EU Taxation"] = eu_tax_news
         
     gacc_news = fetch_google_news_rss("customs.gov.cn", "中国海关总署", "zh-CN", "CN", "CN:zh-Hans", query="跨境电商 OR 进出口 OR 关税 OR 清关 OR 申报 OR 监管 OR 进境")
