@@ -6,6 +6,7 @@ from web_builder import build_webpage
 def ai_is_relevant(title):
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
+        print(f" [警告] 未配置 GEMINI_API_KEY，默认通过此新闻: {title}")
         return True # 如果没有 API Key，就不进行过滤，默认全量通过
     
     try:
@@ -15,16 +16,17 @@ def ai_is_relevant(title):
 你是一个无情的二极管过滤器。以下是一条电商平台或政府发布的官方新闻标题：
 "{title}"
 请判断这条新闻是否与【跨境电商卖家】有关（比如关税、平台政策、运营更新、物流变动）。
-如果它纯粹是企业内部事件（比如高管变动、慈善捐款、颁奖典礼、社区服务）请判断为无关。
+如果它纯粹是企业内部事件、国家庆典或娱乐（比如高管变动、慈善捐款、颁奖典礼、社区服务、晚会、党建、歌曲、合唱等）请判断为无关。
 只需要回答 True 或者 False，不要回答任何其他多余的字。
 """
         response = model.generate_content(prompt)
         text = response.text.strip().lower()
-        if 'false' in text and 'true' not in text:
+        # 更严谨的判断逻辑，只要以 false 开头或者包含 false 就视为无关
+        if text.startswith('false') or 'false' in text:
             return False
         return True
     except Exception as e:
-        print(f"AI 过滤请求失败，默认通过: {e}")
+        print(f"AI 过滤请求失败，默认通过 ({title}): {e}")
         return True
 
 def filter_with_ai(news_data):
