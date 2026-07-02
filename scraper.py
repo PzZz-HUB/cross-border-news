@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+import feedparser
 
 def fetch_amazon_official():
     print("正在抓取 Amazon 官方新闻间...")
@@ -40,17 +41,13 @@ def fetch_tiktok_official():
         }
         r = requests.get("https://newsroom.tiktok.com/en-us/", headers=headers, timeout=15)
         
-        # 提取 HTML 中的标题和链接
         soup = BeautifulSoup(r.text, 'html.parser')
         for a in soup.find_all('a'):
             title = a.text.strip()
             href = a.get('href', '')
             
-            # TikTok 的新闻链接现在是长相对路径，如 /tiktok-celebrates-madonnas...
             if href.startswith('/') and len(href) > 20 and not href.startswith('/?') and len(title) > 10:
-                # 排除标签和作者页面
                 if '/tag/' not in href and '/author/' not in href:
-                    # 清理标题里的 'News' 标签（如果有）
                     if title.startswith('News'):
                         title = title[4:].strip()
                     elif title.startswith('Product'):
@@ -69,6 +66,39 @@ def fetch_tiktok_official():
         print(f"抓取 TikTok 官方新闻失败: {e}")
     return news_list
 
+def fetch_federal_register():
+    print("正在抓取 Federal Register 官方 API...")
+    news_list = []
+    try:
+        r = requests.get("https://www.federalregister.gov/api/v1/documents.json?conditions[type][]=NOTICE&per_page=8", timeout=15)
+        data = r.json()
+        for item in data.get('results', []):
+            news_list.append({
+                "title": item.get('title'),
+                "link": item.get('html_url'),
+                "summary": "Federal Register 官方通告"
+            })
+    except Exception as e:
+        print(f"抓取 Federal Register 失败: {e}")
+    return news_list
+
+def fetch_shopify_changelog():
+    print("正在抓取 Shopify Changelog...")
+    news_list = []
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+        r = requests.get("https://changelog.shopify.com/feed.xml", headers=headers, timeout=15)
+        feed = feedparser.parse(r.text)
+        for entry in feed.entries[:8]:
+            news_list.append({
+                "title": entry.title,
+                "link": entry.link,
+                "summary": "Shopify 官方发布"
+            })
+    except Exception as e:
+        print(f"抓取 Shopify 失败: {e}")
+    return news_list
+
 def fetch_daily_news():
     print("启动直连官方数据源...")
     all_news = {}
@@ -82,6 +112,16 @@ def fetch_daily_news():
     tiktok_news = fetch_tiktok_official()
     if tiktok_news:
         all_news["TikTok 官方"] = tiktok_news
+        
+    # 3. Federal Register
+    federal_news = fetch_federal_register()
+    if federal_news:
+        all_news["Federal Register"] = federal_news
+        
+    # 4. Shopify
+    shopify_news = fetch_shopify_changelog()
+    if shopify_news:
+        all_news["Shopify Changelog"] = shopify_news
         
     return all_news
 
