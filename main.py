@@ -1,20 +1,24 @@
 import os
+import sys
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
 import google.generativeai as genai
 from scraper import fetch_daily_news
 from web_builder import build_webpage
 
 def ai_is_relevant(title):
-    # 1. 极速本地黑名单过滤（防止因为没有配置 API Key 导致明显的垃圾信息漏网）
+    # 1. 极速本地黑名单过滤
     blacklist = ["党建", "周年", "庆典", "合唱", "歌曲", "红船谣", "党委", "纪委", "党支部", "党课", "晚会", "歌咏", "比赛", "走访慰问", "离退休"]
     for word in blacklist:
         if word in title:
-            print(f" [本地黑名单剔除] {title} (触发关键词: {word})")
-            return False
+            reason = f"[黑名单拦截] 触发关键词: {word}"
+            print(f" {reason} -> {title}")
+            return False, reason
 
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         print(f" [警告] 未配置 GEMINI_API_KEY，默认通过此新闻: {title}")
-        return True # 如果没有 API Key，就不进行过滤，默认全量通过
+        return True, "API Key Missing, Default Pass"
     
     try:
         genai.configure(api_key=api_key)
@@ -28,48 +32,49 @@ def ai_is_relevant(title):
 """
         response = model.generate_content(prompt)
         text = response.text.strip().lower()
-        # 更严谨的判断逻辑，只要以 false 开头或者包含 false 就视为无关
         if text.startswith('false') or 'false' in text:
-            return False
-        return True
+            return False, "[AI 智能拦截] 判定为无关公关稿"
+        return True, "AI Passed"
     except Exception as e:
         print(f"AI 过滤请求失败，默认通过 ({title}): {e}")
-        return True
+        return True, f"AI Error: {e}"
 
 def filter_with_ai(news_data):
-    print("开始 AI 智能去噪（仅剔除无关资讯）...")
-    filtered_data = {}
-    total_removed = 0
+    print("开始清洗去噪，被剔除的资讯将进入隔离审查区...")
+    kept_data = {}
+    quarantined_data = []
+    
     for source, articles in news_data.items():
         kept_articles = []
         for a in articles:
-            if ai_is_relevant(a['title']):
+            is_rel, reason = ai_is_relevant(a['title'])
+            if is_rel:
                 kept_articles.append(a)
             else:
-                total_removed += 1
-                print(f" [AI 剔除] {a['title']}")
+                a['reject_reason'] = reason
+                a['source'] = source
+                quarantined_data.append(a)
         if kept_articles:
-            filtered_data[source] = kept_articles
-    
-    print(f"AI 去噪完成，共剔除 {total_removed} 条无关公关稿。")
-    return filtered_data
+            kept_data[source] = kept_articles
+            
+    print(f"去噪完成：保留 {sum(len(v) for v in kept_data.values())} 条，隔离 {len(quarantined_data)} 条。")
+    return kept_data, quarantined_data
 
 def main():
     print("开始执行每日资讯收集任务...")
     
     # 1. 抓取新闻 (纯官方，仅限当天)
-    news_data = fetch_daily_news()
+    news_data, source_statuses = fetch_daily_news()
     
-    # 2. 经过 AI 轻量级判定过滤 (不翻译，不总结)
-    if any(news_data.values()):
-        news_data = filter_with_ai(news_data)
+    # 2. 经过多层过滤 (黑名单 + AI)
+    kept_news = {}
+    quarantined_news = []
+    if news_data:
+        kept_news, quarantined_news = filter_with_ai(news_data)
     
-    # 3. 生成静态网页
-    if any(news_data.values()):
-        build_webpage(news_data)
-        print(f"抓取完成，最终保留 {sum(len(v) for v in news_data.values())} 条高价值新闻。")
-    else:
-        print("今日没有抓取到符合要求的新闻，无需生成网页。")
+    # 3. 生成包含大盘和隔离区的静态网页
+    build_webpage(kept_news, quarantined_news, source_statuses)
+    print("今日任务全部执行完毕！")
 
 if __name__ == "__main__":
     main()

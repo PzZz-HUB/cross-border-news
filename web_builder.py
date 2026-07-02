@@ -31,6 +31,9 @@ def generate_html(archive_data):
                 --text-main: #0f172a;
                 --text-muted: #64748b;
                 --card-bg: #ffffff;
+                --success: #10b981;
+                --error: #ef4444;
+                --warning: #f59e0b;
             }
             body { 
                 font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
@@ -72,6 +75,34 @@ def generate_html(archive_data):
                 margin: 100px auto 40px;
                 padding: 0 5%;
             }
+
+            /* Dashboard 面板 */
+            .dashboard-panel {
+                background: white;
+                border-radius: 12px;
+                padding: 24px;
+                margin-bottom: 40px;
+                border: 1px solid #e2e8f0;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            }
+            .dashboard-title {
+                font-size: 18px; font-weight: 700; margin-top: 0; margin-bottom: 16px;
+                display: flex; align-items: center; gap: 8px;
+            }
+            .status-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 12px;
+            }
+            .status-item {
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 10px 12px; border-radius: 8px; background: #f8fafc;
+                font-size: 14px; border: 1px solid #e2e8f0;
+            }
+            .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+            .dot-success { background-color: var(--success); }
+            .dot-error { background-color: var(--error); }
+            .dot-nodata { background-color: var(--warning); }
             
             /* 日期分组 */
             .date-group { margin-bottom: 50px; }
@@ -113,20 +144,26 @@ def generate_html(archive_data):
             
             .card-summary { 
                 font-size: 15px; color: var(--text-muted); line-height: 1.6; margin: 0 0 20px 0; 
-                flex-grow: 1; /* 让内容撑开，把底部标签推到底部 */
+                flex-grow: 1;
             }
             
             .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 16px; }
             .source-tag { font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; letter-spacing: 0.5px;}
-            
-            /* 标签颜色 */
-            .tag-36kr { background-color: #fffbeb; color: #b45309; border: 1px solid #fef3c7; }
-            .tag-hugo { background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe; }
+
+            /* 隔离审查区 */
+            .review-section {
+                margin-top: 80px; padding: 30px; background: #fff5f5; border: 1px solid #fed7d7; border-radius: 12px;
+            }
+            .review-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+            .review-title { font-size: 18px; font-weight: 700; color: #c53030; margin: 0; display: flex; align-items: center; gap: 8px;}
+            .review-content { margin-top: 20px; display: none; }
+            .review-item { padding: 12px 16px; border-bottom: 1px solid #fed7d7; font-size: 14px; }
+            .review-item:last-child { border-bottom: none; }
+            .review-reason { display: inline-block; padding: 2px 8px; background: #fed7d7; color: #9b2c2c; border-radius: 4px; font-size: 12px; margin-right: 12px; font-weight: 600; }
             
             .footer { margin-top: 60px; padding: 30px; text-align: center; font-size: 0.9em; color: var(--text-muted); border-top: 1px solid #e2e8f0; }
             .no-results { text-align: center; color: var(--text-muted); padding: 80px 0; font-size: 18px; display: none; }
             
-            /* 手机端适配 */
             @media (max-width: 768px) {
                 .navbar { padding: 0 20px; flex-direction: column; height: 120px; justify-content: center; gap: 15px; }
                 .search-wrapper { flex: none; width: 100%; }
@@ -136,7 +173,6 @@ def generate_html(archive_data):
         </style>
     </head>
     <body>
-        <!-- 悬浮导航栏 -->
         <nav class="navbar">
             <div class="logo">🌐 跨境内参库</div>
             <div class="search-wrapper">
@@ -157,10 +193,45 @@ def generate_html(archive_data):
     for day_data in archive_data:
         date_str = day_data.get('date', '')
         news_data = day_data.get('news', {})
+        quarantined_data = day_data.get('quarantined', [])
+        statuses = day_data.get('statuses', {})
         
         html += f"""
                 <div class="date-group" data-date="{date_str}">
                     <div class="date-header">{date_str}</div>
+        """
+
+        # Dashboard for today
+        if statuses:
+            html += """
+                    <div class="dashboard-panel">
+                        <h3 class="dashboard-title">📡 系统运行大盘 (抓取节点状态)</h3>
+                        <div class="status-grid">
+            """
+            for source, status_info in statuses.items():
+                s = status_info.get("status", "Unknown")
+                c = status_info.get("count", 0)
+                if s == "OK":
+                    dot_class = "dot-success"
+                    text = f"✅ {c} 条"
+                elif s == "No Data Today":
+                    dot_class = "dot-nodata"
+                    text = "⚪ 无更新"
+                else:
+                    dot_class = "dot-error"
+                    text = "❌ 失败"
+                html += f"""
+                            <div class="status-item">
+                                <div><span class="status-dot {dot_class}"></span><strong>{source}</strong></div>
+                                <span>{text}</span>
+                            </div>
+                """
+            html += """
+                        </div>
+                    </div>
+            """
+
+        html += """
                     <div class="news-grid">
         """
         
@@ -168,7 +239,6 @@ def generate_html(archive_data):
             if not news_list:
                 continue
                 
-            # 根据官方平台动态分配高级色彩
             source_lower = source.lower()
             if "amazon" in source_lower or "亚马逊" in source_lower:
                 tag_style = "background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;"
@@ -201,6 +271,34 @@ def generate_html(archive_data):
         
         html += """
                     </div> <!-- end news-grid -->
+        """
+
+        # Quarantine Zone for today
+        if quarantined_data:
+            html += f"""
+                    <div class="review-section">
+                        <div class="review-header" onclick="toggleReview(this)">
+                            <h3 class="review-title">🗑️ 隔离审查区 ({len(quarantined_data)} 条被剔除资讯)</h3>
+                            <span>▼ 点击展开/收起</span>
+                        </div>
+                        <div class="review-content">
+            """
+            for q in quarantined_data:
+                reason = q.get('reject_reason', 'Unknown')
+                title = q.get('title', '')
+                src = q.get('source', '')
+                html += f"""
+                            <div class="review-item">
+                                <span class="review-reason">{reason}</span>
+                                <strong>[{src}]</strong> {title}
+                            </div>
+                """
+            html += """
+                        </div>
+                    </div>
+            """
+
+        html += """
                 </div> <!-- end date-group -->
         """
             
@@ -245,17 +343,25 @@ def generate_html(archive_data):
                 
                 document.getElementById('noResults').style.display = hasAnyVisibleCard ? "none" : "block";
             }
+            
+            function toggleReview(element) {
+                var content = element.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            }
         </script>
     </body>
     </html>
     """
     return html
 
-def build_webpage(today_news_data):
+def build_webpage(today_news_data, quarantined_news, source_statuses):
     today_str = datetime.datetime.now().strftime("%Y-%m-%d")
     archive_data = load_archive()
     
-    # 查找今天是否已经有数据，如果有则覆盖，没有则插入到最前面
     existing_idx = -1
     for i, data in enumerate(archive_data):
         if data.get('date') == today_str:
@@ -264,7 +370,9 @@ def build_webpage(today_news_data):
             
     today_entry = {
         'date': today_str,
-        'news': today_news_data
+        'news': today_news_data,
+        'quarantined': quarantined_news,
+        'statuses': source_statuses
     }
     
     if existing_idx >= 0:
@@ -272,10 +380,8 @@ def build_webpage(today_news_data):
     else:
         archive_data.insert(0, today_entry)
         
-    # 保存更新后的数据
     save_archive(archive_data)
     
-    # 生成网页
     html_content = generate_html(archive_data)
     
     os.makedirs("public", exist_ok=True)
