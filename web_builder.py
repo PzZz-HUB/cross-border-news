@@ -168,7 +168,18 @@ def generate_html(archive_data):
             if not news_list:
                 continue
                 
-            tag_class = "tag-36kr" if "36氪" in source else "tag-hugo"
+            # 根据官方平台动态分配高级色彩
+            source_lower = source.lower()
+            if "amazon" in source_lower or "亚马逊" in source_lower:
+                tag_style = "background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;"
+            elif "tiktok" in source_lower:
+                tag_style = "background-color: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1;"
+            elif "shopee" in source_lower or "虾皮" in source_lower:
+                tag_style = "background-color: #fff1f2; color: #be123c; border: 1px solid #ffe4e6;"
+            elif "temu" in source_lower:
+                tag_style = "background-color: #fdf4ff; color: #a21caf; border: 1px solid #fae8ff;"
+            else:
+                tag_style = "background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;"
                 
             for item in news_list:
                 summary = item.get('summary', '点击查看原文了解详情')
@@ -183,7 +194,7 @@ def generate_html(archive_data):
                             <h2 class="card-title"><a href="{item.get('link', '#')}" target="_blank">{title}</a></h2>
                             <p class="card-summary">{summary}</p>
                             <div class="card-footer">
-                                <span class="source-tag {tag_class}">{source}</span>
+                                <span class="source-tag" style="{tag_style}">{source}</span>
                             </div>
                         </div>
                 """

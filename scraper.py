@@ -74,24 +74,27 @@ def fetch_cifnews():
     return news_list
 
 def fetch_daily_news():
-    all_news = {}
+    print("开始抓取全网最新鲜的跨境出海资讯 (即将交由 AI 剥离来源并提纯官方公告)...")
     
-    print("抓取 雨果跨境 (专业跨境电商资讯)...")
     cifnews_raw = fetch_cifnews()
-    all_news["雨果跨境 (最新干货)"] = filter_news_with_ai(cifnews_raw)
     
-    print("抓取 36氪 (出海精选)...")
     url_36kr = "https://36kr.com/feed"
-    # 白名单：必须包含这些词才抓取
     keywords = ["出海", "跨境", "亚马逊", "TikTok", "Shopee", "独立站", "速卖通", "海外"]
     kr_raw = get_feed_data(url_36kr, limit=6, keywords=keywords)
-    all_news["36氪 (商业出海)"] = filter_news_with_ai(kr_raw)
     
-    return all_news
+    # 将所有新闻合并成一个扁平的列表，彻底剥离“雨果网”和“36氪”的原始标签
+    combined_raw_news = cifnews_raw + kr_raw
+    
+    print(f"总共抓取到 {len(combined_raw_news)} 条待鉴定资讯，开始交给 AI 提取官方公告并分配平台归属...")
+    
+    # 统一扔给 AI 处理
+    categorized_news = filter_news_with_ai(combined_raw_news)
+    
+    return categorized_news
 
 if __name__ == "__main__":
     res = fetch_daily_news()
-    for k, v in res.items():
-        print(f"--- {k} ---")
-        for item in v:
-            print(item['title'])
+    for platform, news_list in res.items():
+        print(f"--- {platform} ---")
+        for item in news_list:
+            print(f"- {item['title']} ({item.get('summary', '')})")
