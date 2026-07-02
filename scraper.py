@@ -1,70 +1,23 @@
 import requests
-from bs4 import BeautifulSoup
-import re
 import feedparser
+import datetime
+import time
 
-def fetch_amazon_official():
-    print("正在抓取 Amazon 官方新闻间...")
-    news_list = []
-    try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8'
-        }
-        r = requests.get("https://www.aboutamazon.com/news/small-business", headers=headers, timeout=15)
-        soup = BeautifulSoup(r.text, 'html.parser')
-        
-        for a in soup.find_all('a'):
-            title = a.text.strip()
-            href = a.get('href', '')
-            
-            if '/news/small-business/' in href and len(title) > 10:
-                link = href if href.startswith('http') else "https://www.aboutamazon.com" + href
-                if link not in [n['link'] for n in news_list]:
-                    news_list.append({
-                        "title": title,
-                        "link": link,
-                        "summary": "Amazon 官方发布"
-                    })
-            if len(news_list) >= 8:
-                break
-    except Exception as e:
-        print(f"抓取 Amazon 官方新闻失败: {e}")
-    return news_list
-
-def fetch_tiktok_official():
-    print("正在抓取 TikTok 官方新闻间...")
-    news_list = []
-    try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        }
-        r = requests.get("https://newsroom.tiktok.com/en-us/", headers=headers, timeout=15)
-        
-        soup = BeautifulSoup(r.text, 'html.parser')
-        for a in soup.find_all('a'):
-            title = a.text.strip()
-            href = a.get('href', '')
-            
-            if href.startswith('/') and len(href) > 20 and not href.startswith('/?') and len(title) > 10:
-                if '/tag/' not in href and '/author/' not in href:
-                    if title.startswith('News'):
-                        title = title[4:].strip()
-                    elif title.startswith('Product'):
-                        title = title[7:].strip()
-                        
-                    link = "https://newsroom.tiktok.com" + href
-                    if link not in [n['link'] for n in news_list]:
-                        news_list.append({
-                            "title": title,
-                            "link": link,
-                            "summary": "TikTok 官方发布"
-                        })
-            if len(news_list) >= 8:
-                break
-    except Exception as e:
-        print(f"抓取 TikTok 官方新闻失败: {e}")
-    return news_list
+def is_today_utc8(parsed_time):
+    if not parsed_time:
+        return False
+    # 获取发布时间的 datetime 对象
+    dt = datetime.datetime.fromtimestamp(time.mktime(parsed_time))
+    # 转换为 UTC+8 (东八区时间)
+    utc_dt = datetime.datetime.utcfromtimestamp(time.mktime(parsed_time))
+    bj_dt = utc_dt + datetime.timedelta(hours=8)
+    
+    # 获取当前东八区时间
+    now_utc = datetime.datetime.utcnow()
+    now_bj = now_utc + datetime.timedelta(hours=8)
+    
+    # 比较日期是否是今天
+    return bj_dt.date() == now_bj.date()
 
 def fetch_federal_register():
     print("正在抓取 Federal Register 官方 API...")
@@ -72,12 +25,17 @@ def fetch_federal_register():
     try:
         r = requests.get("https://www.federalregister.gov/api/v1/documents.json?conditions[type][]=NOTICE&per_page=8", timeout=15)
         data = r.json()
+        now_bj = datetime.datetime.utcnow() + datetime.timedelta(hours=8)
+        today_str = now_bj.strftime('%Y-%m-%d')
+        
         for item in data.get('results', []):
-            news_list.append({
-                "title": item.get('title'),
-                "link": item.get('html_url'),
-                "summary": "Federal Register 官方通告"
-            })
+            pub_date = item.get('publication_date')
+            if pub_date == today_str:
+                news_list.append({
+                    "title": item.get('title'),
+                    "link": item.get('html_url'),
+                    "summary": "Federal Register 官方通告"
+                })
     except Exception as e:
         print(f"抓取 Federal Register 失败: {e}")
     return news_list
@@ -89,12 +47,14 @@ def fetch_shopify_changelog():
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
         r = requests.get("https://changelog.shopify.com/feed.xml", headers=headers, timeout=15)
         feed = feedparser.parse(r.text)
-        for entry in feed.entries[:8]:
-            news_list.append({
-                "title": entry.title,
-                "link": entry.link,
-                "summary": "Shopify 官方发布"
-            })
+        for entry in feed.entries:
+            if is_today_utc8(entry.published_parsed):
+                news_list.append({
+                    "title": entry.title,
+                    "link": entry.link,
+                    "summary": "Shopify 官方发布"
+                })
+                if len(news_list) >= 8: break
     except Exception as e:
         print(f"抓取 Shopify 失败: {e}")
     return news_list
@@ -105,12 +65,15 @@ def fetch_gov_uk():
     try:
         r = requests.get("https://www.gov.uk/search/news-and-communications.atom", timeout=15)
         feed = feedparser.parse(r.text)
-        for entry in feed.entries[:8]:
-            news_list.append({
-                "title": entry.title,
-                "link": entry.link,
-                "summary": "GOV.UK 官方通告"
-            })
+        for entry in feed.entries:
+            time_parsed = entry.get('published_parsed') or entry.get('updated_parsed')
+            if is_today_utc8(time_parsed):
+                news_list.append({
+                    "title": entry.title,
+                    "link": entry.link,
+                    "summary": "GOV.UK 官方通告"
+                })
+                if len(news_list) >= 8: break
     except Exception as e:
         print(f"抓取 GOV.UK 失败: {e}")
     return news_list
@@ -119,31 +82,33 @@ def fetch_google_news_rss(domain, source_name, lang="en-US", gl="US", ceid="US:e
     print(f"正在通过官方索引抓取 {source_name}...")
     news_list = []
     try:
-        url = f"https://news.google.com/rss/search?q=site:{domain}&hl={lang}&gl={gl}&ceid={ceid}"
+        url = f"https://news.google.com/rss/search?q=site:{domain}+when:1d&hl={lang}&gl={gl}&ceid={ceid}"
         r = requests.get(url, timeout=15)
         feed = feedparser.parse(r.text)
-        for entry in feed.entries[:8]:
-            title = entry.title
-            if title.endswith(f" - {source_name}") or title.endswith(" - Google News"):
-                title = title.rsplit(' - ', 1)[0]
-            news_list.append({
-                "title": title.strip(),
-                "link": entry.link,
-                "summary": f"{source_name} 官方发布"
-            })
+        for entry in feed.entries:
+            if is_today_utc8(entry.published_parsed):
+                title = entry.title
+                if title.endswith(f" - {source_name}") or title.endswith(" - Google News"):
+                    title = title.rsplit(' - ', 1)[0]
+                news_list.append({
+                    "title": title.strip(),
+                    "link": entry.link,
+                    "summary": f"{source_name} 官方发布"
+                })
+                if len(news_list) >= 8: break
     except Exception as e:
         print(f"抓取 {source_name} 失败: {e}")
     return news_list
 
 def fetch_daily_news():
-    print("启动直连官方数据源...")
+    print("启动直连官方数据源 (仅筛选今天当天的新闻)...")
     all_news = {}
     
     # === 平台源 ===
-    amazon_news = fetch_amazon_official()
+    amazon_news = fetch_google_news_rss("aboutamazon.com/news", "Amazon")
     if amazon_news: all_news["Amazon Seller News"] = amazon_news
         
-    tiktok_news = fetch_tiktok_official()
+    tiktok_news = fetch_google_news_rss("newsroom.tiktok.com", "TikTok")
     if tiktok_news: all_news["TikTok Shop Seller"] = tiktok_news
         
     shopify_news = fetch_shopify_changelog()
@@ -196,8 +161,8 @@ def fetch_daily_news():
     return all_news
 
 if __name__ == "__main__":
-    res = fetch_daily_news()
-    for platform, news_list in res.items():
-        print(f"--- {platform} ---")
-        for item in news_list:
-            print(f"- {item['title']}")
+    news = fetch_daily_news()
+    for source, articles in news.items():
+        print(f"\n{source}:")
+        for a in articles:
+            print(f"  - {a['title']}")
