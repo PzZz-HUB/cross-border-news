@@ -78,11 +78,19 @@ def fetch_gov_uk():
         print(f"抓取 GOV.UK 失败: {e}")
     return news_list
 
-def fetch_google_news_rss(domain, source_name, lang="en-US", gl="US", ceid="US:en"):
+def fetch_google_news_rss(domain, source_name, lang="en-US", gl="US", ceid="US:en", query=""):
     print(f"正在通过官方索引抓取 {source_name}...")
     news_list = []
     try:
-        url = f"https://news.google.com/rss/search?q=site:{domain}+when:1d&hl={lang}&gl={gl}&ceid={ceid}"
+        # 如果有额外的关键词过滤，则拼接到 search query 中
+        search_q = f"site:{domain}"
+        if query:
+            search_q += f" {query}"
+        
+        # URL 编码处理空格
+        search_q = search_q.replace(' ', '+')
+        
+        url = f"https://news.google.com/rss/search?q={search_q}+when:1d&hl={lang}&gl={gl}&ceid={ceid}"
         r = requests.get(url, timeout=15)
         feed = feedparser.parse(r.text)
         for entry in feed.entries:
@@ -105,19 +113,19 @@ def fetch_daily_news():
     all_news = {}
     
     # === 平台源 ===
-    amazon_news = fetch_google_news_rss("aboutamazon.com/news", "Amazon")
+    amazon_news = fetch_google_news_rss("aboutamazon.com/news", "Amazon", query="seller OR store OR marketplace OR FBA")
     if amazon_news: all_news["Amazon Seller News"] = amazon_news
         
-    tiktok_news = fetch_google_news_rss("newsroom.tiktok.com", "TikTok")
+    tiktok_news = fetch_google_news_rss("newsroom.tiktok.com", "TikTok", query="shop OR seller OR ecommerce")
     if tiktok_news: all_news["TikTok Shop Seller"] = tiktok_news
         
     shopify_news = fetch_shopify_changelog()
     if shopify_news: all_news["Shopify Changelog"] = shopify_news
         
-    ebay_news = fetch_google_news_rss("sellercenter.ebay.com", "eBay")
+    ebay_news = fetch_google_news_rss("sellercenter.ebay.com", "eBay") # eBay 卖家中心自带过滤
     if ebay_news: all_news["eBay Seller Updates"] = ebay_news
         
-    walmart_news = fetch_google_news_rss("corporate.walmart.com", "Walmart")
+    walmart_news = fetch_google_news_rss("corporate.walmart.com", "Walmart", query="seller OR marketplace OR fulfillment")
     if walmart_news: all_news["Walmart Release Notes"] = walmart_news
         
     # === 政策源 ===
@@ -127,35 +135,35 @@ def fetch_daily_news():
     gov_uk_news = fetch_gov_uk()
     if gov_uk_news: all_news["GOV.UK"] = gov_uk_news
         
-    cbp_news = fetch_google_news_rss("cbp.gov", "CBP")
+    cbp_news = fetch_google_news_rss("cbp.gov", "CBP", query="trade OR tariff OR import OR export OR customs")
     if cbp_news: all_news["CBP"] = cbp_news
         
-    ustr_news = fetch_google_news_rss("ustr.gov", "USTR")
+    ustr_news = fetch_google_news_rss("ustr.gov", "USTR", query="trade OR tariff OR section 301")
     if ustr_news: all_news["USTR"] = ustr_news
         
-    eu_tax_news = fetch_google_news_rss("taxation-customs.ec.europa.eu", "EU Taxation")
+    eu_tax_news = fetch_google_news_rss("taxation-customs.ec.europa.eu", "EU Taxation", query="customs OR vat OR tariff OR trade")
     if eu_tax_news: all_news["EU Taxation"] = eu_tax_news
         
-    gacc_news = fetch_google_news_rss("customs.gov.cn", "中国海关总署", "zh-CN", "CN", "CN:zh-Hans")
+    gacc_news = fetch_google_news_rss("customs.gov.cn", "中国海关总署", "zh-CN", "CN", "CN:zh-Hans", query="跨境电商 OR 进出口 OR 关税 OR 清关 OR 申报 OR 监管 OR 进境")
     if gacc_news: all_news["海关总署"] = gacc_news
         
-    mofcom_news = fetch_google_news_rss("mofcom.gov.cn", "中国商务部", "zh-CN", "CN", "CN:zh-Hans")
+    mofcom_news = fetch_google_news_rss("mofcom.gov.cn", "中国商务部", "zh-CN", "CN", "CN:zh-Hans", query="跨境电商 OR 贸易 OR 出口 OR 关税 OR 外贸")
     if mofcom_news: all_news["商务部"] = mofcom_news
         
-    sta_news = fetch_google_news_rss("chinatax.gov.cn", "中国税务总局", "zh-CN", "CN", "CN:zh-Hans")
+    sta_news = fetch_google_news_rss("chinatax.gov.cn", "中国税务总局", "zh-CN", "CN", "CN:zh-Hans", query="跨境电商 OR 出口退税 OR 税收优惠 OR 纳税人")
     if sta_news: all_news["税务总局"] = sta_news
         
     # === 物流源 ===
-    usps_news = fetch_google_news_rss("about.usps.com", "USPS")
+    usps_news = fetch_google_news_rss("about.usps.com", "USPS", query="service OR alert OR international OR rates OR shipping")
     if usps_news: all_news["USPS Service Alerts"] = usps_news
         
-    dhl_news = fetch_google_news_rss("dhl.com", "DHL")
+    dhl_news = fetch_google_news_rss("dhl.com", "DHL", query="ecommerce OR shipping OR rates OR global OR supply chain")
     if dhl_news: all_news["DHL"] = dhl_news
         
-    fedex_news = fetch_google_news_rss("newsroom.fedex.com", "FedEx")
+    fedex_news = fetch_google_news_rss("newsroom.fedex.com", "FedEx", query="ecommerce OR rates OR service OR tracking")
     if fedex_news: all_news["FedEx"] = fedex_news
         
-    ups_news = fetch_google_news_rss("about.ups.com", "UPS")
+    ups_news = fetch_google_news_rss("about.ups.com", "UPS", query="ecommerce OR rates OR service OR tracking")
     if ups_news: all_news["UPS"] = ups_news
         
     return all_news
