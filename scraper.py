@@ -99,6 +99,22 @@ def fetch_shopify_changelog():
         print(f"抓取 Shopify 失败: {e}")
     return news_list
 
+def fetch_gov_uk():
+    print("正在抓取 GOV.UK (英国政府) 通告...")
+    news_list = []
+    try:
+        r = requests.get("https://www.gov.uk/search/news-and-communications.atom", timeout=15)
+        feed = feedparser.parse(r.text)
+        for entry in feed.entries[:8]:
+            news_list.append({
+                "title": entry.title,
+                "link": entry.link,
+                "summary": "GOV.UK 官方通告"
+            })
+    except Exception as e:
+        print(f"抓取 GOV.UK 失败: {e}")
+    return news_list
+
 def fetch_daily_news():
     print("启动直连官方数据源...")
     all_news = {}
@@ -122,6 +138,11 @@ def fetch_daily_news():
     shopify_news = fetch_shopify_changelog()
     if shopify_news:
         all_news["Shopify Changelog"] = shopify_news
+        
+    # 5. GOV.UK
+    gov_uk_news = fetch_gov_uk()
+    if gov_uk_news:
+        all_news["GOV.UK"] = gov_uk_news
         
     return all_news
 
