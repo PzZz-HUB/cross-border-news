@@ -1,0 +1,417 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>跨境内参库 Dashboard</title>
+        <style>
+            :root {
+                --primary: #2563eb;
+                --bg-main: #f8fafc;
+                --text-main: #0f172a;
+                --text-muted: #64748b;
+                --card-bg: #ffffff;
+            }
+            body { 
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+                background-color: var(--bg-main); 
+                color: var(--text-main); 
+                margin: 0; 
+                padding: 0;
+            }
+            /* 悬浮顶部导航栏 */
+            .navbar {
+                position: fixed;
+                top: 0; left: 0; right: 0;
+                height: 70px;
+                background-color: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-bottom: 1px solid #e2e8f0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 5%;
+                z-index: 1000;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+            }
+            .logo { font-size: 22px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px;}
+            .search-wrapper { flex: 0 1 400px; position: relative; }
+            .search-box { 
+                width: 100%; padding: 10px 16px 10px 40px; 
+                border: 1px solid #cbd5e1; border-radius: 9999px; 
+                font-size: 15px; background-color: #f1f5f9;
+                transition: all 0.2s; outline: none;
+            }
+            .search-box:focus { background-color: #fff; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+            .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.5;}
+            
+            /* 主体内容区 */
+            .main-content {
+                max-width: 1400px;
+                margin: 100px auto 40px;
+                padding: 0 5%;
+            }
+            
+            /* 日期分组 */
+            .date-group { margin-bottom: 50px; }
+            .date-header { 
+                font-size: 24px; font-weight: 800; color: var(--text-main); 
+                margin-bottom: 24px; display: inline-block;
+                position: relative; padding-left: 16px;
+            }
+            .date-header::before {
+                content: ''; position: absolute; left: 0; top: 10%; height: 80%; width: 4px;
+                background-color: var(--primary); border-radius: 4px;
+            }
+            
+            /* 网格瀑布流排版 */
+            .news-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+                gap: 24px;
+            }
+            
+            /* 新闻卡片 */
+            .card { 
+                background-color: var(--card-bg); 
+                border: 1px solid #e2e8f0; border-radius: 16px; 
+                padding: 24px; 
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02); 
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                display: flex; flex-direction: column;
+                height: 100%; box-sizing: border-box;
+            }
+            .card:hover { 
+                transform: translateY(-4px); 
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04); 
+                border-color: #cbd5e1;
+            }
+            .card-title { font-size: 17px; font-weight: 700; color: var(--text-main); margin: 0 0 14px 0; line-height: 1.5; }
+            .card-title a { color: var(--text-main); text-decoration: none; }
+            .card-title a:hover { color: var(--primary); }
+            
+            .card-summary { 
+                font-size: 15px; color: var(--text-muted); line-height: 1.6; margin: 0 0 20px 0; 
+                flex-grow: 1; /* 让内容撑开，把底部标签推到底部 */
+            }
+            
+            .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 16px; }
+            .source-tag { font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; letter-spacing: 0.5px;}
+            
+            /* 标签颜色 */
+            .tag-36kr { background-color: #fffbeb; color: #b45309; border: 1px solid #fef3c7; }
+            .tag-hugo { background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe; }
+            
+            .footer { margin-top: 60px; padding: 30px; text-align: center; font-size: 0.9em; color: var(--text-muted); border-top: 1px solid #e2e8f0; }
+            .no-results { text-align: center; color: var(--text-muted); padding: 80px 0; font-size: 18px; display: none; }
+            
+            /* 手机端适配 */
+            @media (max-width: 768px) {
+                .navbar { padding: 0 20px; flex-direction: column; height: 120px; justify-content: center; gap: 15px; }
+                .search-wrapper { flex: none; width: 100%; }
+                .main-content { margin-top: 140px; padding: 0 20px; }
+                .news-grid { grid-template-columns: 1fr; }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 悬浮导航栏 -->
+        <nav class="navbar">
+            <div class="logo">🌐 跨境内参库</div>
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-box" placeholder="搜索资讯、平台或关键词..." onkeyup="searchNews()">
+            </div>
+        </nav>
+        
+        <div class="main-content">
+            <div id="noResults" class="no-results">
+                <h2>没有找到相关资讯 💡</h2>
+                <p>换个关键词试试吧，比如“亚马逊”或“政策”</p>
+            </div>
+            
+            <div id="newsContainer">
+    
+                <div class="date-group" data-date="2026-07-02">
+                    <div class="date-header">2026-07-02</div>
+                    <div class="news-grid">
+        
+                        <div class="card" data-search="a record number of independent sellers in amazon’s store surpassed $1 million in sales in 2025 amazon 官方发布 amazon 官方">
+                            <h2 class="card-title"><a href="https://www.aboutamazon.com/news/small-business/amazon-2025-small-business-empowerment-report" target="_blank">A record number of independent sellers in Amazon’s store surpassed $1 million in sales in 2025</a></h2>
+                            <p class="card-summary">Amazon 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;">Amazon 官方</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="it’s now easier for sellers to manage their money on amazon amazon 官方发布 amazon 官方">
+                            <h2 class="card-title"><a href="https://www.aboutamazon.com/news/small-business/its-now-easier-for-sellers-to-manage-their-money-on-amazon" target="_blank">It’s now easier for sellers to manage their money on Amazon</a></h2>
+                            <p class="card-summary">Amazon 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;">Amazon 官方</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="$2.5 trillion in sales and counting: celebrating 25 years of amazon’s partnership with independent sellers amazon 官方发布 amazon 官方">
+                            <h2 class="card-title"><a href="https://www.aboutamazon.com/news/small-business/amazon-independent-sellers-growth-sales" target="_blank">$2.5 trillion in sales and counting: Celebrating 25 years of Amazon’s partnership with independent sellers</a></h2>
+                            <p class="card-summary">Amazon 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;">Amazon 官方</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="independent sellers move 5 billion products annually through amazon’s network of global logistics, domestic freight, and bulk warehousing amazon 官方发布 amazon 官方">
+                            <h2 class="card-title"><a href="https://www.aboutamazon.com/news/small-business/selling-on-amazon-supply-chain-explain" target="_blank">Independent sellers move 5 billion products annually through Amazon’s network of global logistics, domestic freight, and bulk warehousing</a></h2>
+                            <p class="card-summary">Amazon 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;">Amazon 官方</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="how 3 farm daughters used amazon’s resources to scale their pasta business across north america amazon 官方发布 amazon 官方">
+                            <h2 class="card-title"><a href="https://www.aboutamazon.com/news/small-business/three-farm-daughters-small-business-amazon" target="_blank">How 3 Farm Daughters used Amazon’s resources to scale their pasta business across North America</a></h2>
+                            <p class="card-summary">Amazon 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;">Amazon 官方</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="new amazon report shows small businesses have created millions of us jobs and built thriving communities amazon 官方发布 amazon 官方">
+                            <h2 class="card-title"><a href="https://www.aboutamazon.com/news/small-business/amazon-2024-small-business-empowerment-report" target="_blank">New Amazon report shows small businesses have created millions of US jobs and built thriving communities</a></h2>
+                            <p class="card-summary">Amazon 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;">Amazon 官方</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="5 inspiring women-owned small businesses to shop in amazon’s store amazon 官方发布 amazon 官方">
+                            <h2 class="card-title"><a href="https://www.aboutamazon.com/news/small-business/how-to-support-women-owned-businesses-on-amazon" target="_blank">5 inspiring women-owned small businesses to shop in Amazon’s store</a></h2>
+                            <p class="card-summary">Amazon 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;">Amazon 官方</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="celebrate and shop from black-owned businesses in amazon’s store during black history month amazon 官方发布 amazon 官方">
+                            <h2 class="card-title"><a href="https://www.aboutamazon.com/news/small-business/how-to-support-black-owned-businesses" target="_blank">Celebrate and shop from Black-owned businesses in Amazon’s store during Black History Month</a></h2>
+                            <p class="card-summary">Amazon 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;">Amazon 官方</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="tiktok celebrates madonna’s confessions ii with multi-part global campaign tiktok 官方发布 tiktok 官方">
+                            <h2 class="card-title"><a href="https://newsroom.tiktok.com/tiktok-celebrates-madonnas-confessions-ii-with-multi-part-global-campaign?lang=en" target="_blank">TikTok Celebrates Madonna’s Confessions II with Multi-part Global Campaign</a></h2>
+                            <p class="card-summary">TikTok 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1;">TikTok 官方</span>
+                            </div>
+                        </div>
+                
+                    </div> <!-- end news-grid -->
+                </div> <!-- end date-group -->
+        
+                <div class="date-group" data-date="2026-07-01">
+                    <div class="date-header">2026-07-01</div>
+                    <div class="news-grid">
+        
+                        <div class="card" data-search="迷雾中的分水岭：2026中国出海半年盘点与下半年展望 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/187167" target="_blank">迷雾中的分水岭：2026中国出海半年盘点与下半年展望</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="卖家连夜改图！欧美严查ai，最高罚5000美元 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/186969" target="_blank">卖家连夜改图！欧美严查AI，最高罚5000美元</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="世界杯赛场之外：一台国产投影仪，如何在拉美踢赢出海跨境生意？丨“新”卖家故事① 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/186962" target="_blank">世界杯赛场之外：一台国产投影仪，如何在拉美踢赢出海跨境生意？丨“新”卖家故事①</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="一封联名信，捅破了墨西哥税务合规的“窗户纸”|雨果独家 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/186756" target="_blank">一封联名信，捅破了墨西哥税务合规的“窗户纸”|雨果独家</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="千锁大战中活下来，出海战场上拿第一！解码凯迪仕kaadas的全球征途 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/187175" target="_blank">千锁大战中活下来，出海战场上拿第一！解码凯迪仕Kaadas的全球征途</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="销量暴涨5倍、退货率仅6%！盖世小鸡拉美市场实战方法论丨“新”卖家故事② 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/187171" target="_blank">销量暴涨5倍、退货率仅6%！盖世小鸡拉美市场实战方法论丨“新”卖家故事②</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="亚马逊企业购卖家注意了！这个配送效率指标9月30日起会影响你的业绩 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/187174" target="_blank">亚马逊企业购卖家注意了！这个配送效率指标9月30日起会影响你的业绩</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="备货倒计时！两大黄金类目撑起9月非洲销量|2026《next爆品指南》⑦ 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/187173" target="_blank">备货倒计时！两大黄金类目撑起9月非洲销量|2026《Next爆品指南》⑦</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="告别硬件出海上一个十年，前安克cmo做了款ai时代的memory产品｜硬氪专访 点击查看原文了解详情 36氪 (商业出海)">
+                            <h2 class="card-title"><a href="https://36kr.com/p/3867992509125636?f=rss" target="_blank">告别硬件出海上一个十年，前安克CMO做了款AI时代的Memory产品｜硬氪专访</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">36氪 (商业出海)</span>
+                            </div>
+                        </div>
+                
+                    </div> <!-- end news-grid -->
+                </div> <!-- end date-group -->
+        
+                <div class="date-group" data-date="2026-06-30">
+                    <div class="date-header">2026-06-30</div>
+                    <div class="news-grid">
+        
+                        <div class="card" data-search="迷雾中的分水岭：2026中国出海半年盘点与下半年展望 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/187167" target="_blank">迷雾中的分水岭：2026中国出海半年盘点与下半年展望</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="卖家连夜改图！欧美严查ai，最高罚5000美元 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/186969" target="_blank">卖家连夜改图！欧美严查AI，最高罚5000美元</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="世界杯赛场之外：一台国产投影仪，如何在拉美踢赢出海跨境生意？丨“新”卖家故事① 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/186962" target="_blank">世界杯赛场之外：一台国产投影仪，如何在拉美踢赢出海跨境生意？丨“新”卖家故事①</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="一封联名信，捅破了墨西哥税务合规的“窗户纸”|雨果独家 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/186756" target="_blank">一封联名信，捅破了墨西哥税务合规的“窗户纸”|雨果独家</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="亚马逊全球开店与福布斯中国发布“2026福布斯中国新生代跨境电商30人评选”结果 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/187170" target="_blank">亚马逊全球开店与福布斯中国发布“2026福布斯中国新生代跨境电商30人评选”结果</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="亚马逊又有新变化！有卖家反馈：这个按钮不见了 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/187169" target="_blank">亚马逊又有新变化！有卖家反馈：这个按钮不见了</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="防晒帽出口旺季拓客，海关数据精准预判市场需求 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/187053" target="_blank">防晒帽出口旺季拓客，海关数据精准预判市场需求</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="新手村玩法介绍丨tiktok shop美国跨境新商冷启指南① 点击查看原文了解详情 雨果跨境 (最新干货)">
+                            <h2 class="card-title"><a href="https://www.cifnews.com/article/187165" target="_blank">新手村玩法介绍丨TikTok Shop美国跨境新商冷启指南①</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">雨果跨境 (最新干货)</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="智能血糖管理需求旺盛，微泰医疗海外营收大增227.2% 点击查看原文了解详情 36氪 (商业出海)">
+                            <h2 class="card-title"><a href="https://36kr.com/p/3873902389794053?f=rss" target="_blank">智能血糖管理需求旺盛，微泰医疗海外营收大增227.2%</a></h2>
+                            <p class="card-summary">点击查看原文了解详情</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background-color: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe;">36氪 (商业出海)</span>
+                            </div>
+                        </div>
+                
+                    </div> <!-- end news-grid -->
+                </div> <!-- end date-group -->
+        
+            </div>
+        </div>
+        
+        <div class="footer">
+            本仪表盘数据直接抓取自跨境平台官方官网（Newsroom）。<br>100% 官方原汁原味，无第三方加工，数据安全持久。
+        </div>
+        
+        <script>
+            function searchNews() {
+                var input = document.getElementById('searchInput').value.toLowerCase();
+                var groups = document.getElementsByClassName('date-group');
+                var hasAnyVisibleCard = false;
+                
+                for (var i = 0; i < groups.length; i++) {
+                    var group = groups[i];
+                    var cards = group.getElementsByClassName('card');
+                    var hasVisibleCardInGroup = false;
+                    
+                    for (var j = 0; j < cards.length; j++) {
+                        var card = cards[j];
+                        var searchText = card.getAttribute('data-search');
+                        
+                        if (searchText.indexOf(input) > -1) {
+                            card.style.display = "flex";
+                            hasVisibleCardInGroup = true;
+                            hasAnyVisibleCard = true;
+                        } else {
+                            card.style.display = "none";
+                        }
+                    }
+                    
+                    if (hasVisibleCardInGroup) {
+                        group.style.display = "block";
+                    } else {
+                        group.style.display = "none";
+                    }
+                }
+                
+                document.getElementById('noResults').style.display = hasAnyVisibleCard ? "none" : "block";
+            }
+        </script>
+    </body>
+    </html>
+    
