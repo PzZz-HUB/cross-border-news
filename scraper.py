@@ -1,90 +1,79 @@
-from playwright.sync_api import sync_playwright
-import time
+import requests
+from bs4 import BeautifulSoup
+import re
 
-def fetch_amazon_official(page):
+def fetch_amazon_official():
     print("正在抓取 Amazon 官方新闻间...")
     news_list = []
     try:
-        # Amazon Small Business News
-        page.goto("https://www.aboutamazon.com/news/small-business", timeout=30000)
-        # 等待主要内容加载
-        page.wait_for_selector(".Promo-title", timeout=10000)
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8'
+        }
+        r = requests.get("https://www.aboutamazon.com/news/small-business", headers=headers, timeout=15)
+        soup = BeautifulSoup(r.text, 'html.parser')
         
-        # 查找带有 Promo-title 的链接
-        elements = page.query_selector_all(".Promo-title a")
-        for el in elements[:6]:
-            title = el.inner_text().strip()
-            link = el.get_attribute("href")
-            if not link.startswith("http"):
-                link = "https://www.aboutamazon.com" + link
-            if title and link:
-                news_list.append({
-                    "title": title,
-                    "link": link,
-                    "summary": "Amazon 官方发布"
-                })
+        # 查找包含 Promo-title 或类的链接
+        for a in soup.find_all('a'):
+            title = a.text.strip()
+            href = a.get('href', '')
+            
+            # 过滤短标题，确保是新闻链接
+            if '/news/small-business/' in href and len(title) > 10:
+                link = href if href.startswith('http') else "https://www.aboutamazon.com" + href
+                if link not in [n['link'] for n in news_list]:
+                    news_list.append({
+                        "title": title,
+                        "link": link,
+                        "summary": "Amazon 官方发布"
+                    })
+            if len(news_list) >= 8:
+                break
     except Exception as e:
         print(f"抓取 Amazon 官方新闻失败: {e}")
     return news_list
 
-def fetch_tiktok_official(page):
+def fetch_tiktok_official():
     print("正在抓取 TikTok 官方新闻间...")
     news_list = []
     try:
-        # TikTok Global Newsroom
-        page.goto("https://newsroom.tiktok.com/en-us/", timeout=30000)
-        # 等待文章卡片加载
-        page.wait_for_selector("article, .card", timeout=10000)
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+        r = requests.get("https://newsroom.tiktok.com/en-us/", headers=headers, timeout=15)
+        soup = BeautifulSoup(r.text, 'html.parser')
         
-        # 提取链接和标题 (新闻间的常规 a 标签带有标题内容)
-        elements = page.query_selector_all("a")
-        for el in elements:
-            title = el.inner_text().strip()
-            link = el.get_attribute("href")
-            # 过滤掉过短的无意义链接（如 Nav, Read More等）
-            if len(title) > 20 and link and "/en-us/article/" in link:
-                if not link.startswith("http"):
-                    link = "https://newsroom.tiktok.com" + link
-                    
-                # 去重
+        for a in soup.find_all('a'):
+            title = a.text.strip()
+            href = a.get('href', '')
+            
+            if '/en-us/article/' in href and len(title) > 15:
+                link = href if href.startswith('http') else "https://newsroom.tiktok.com" + href
                 if link not in [n['link'] for n in news_list]:
                     news_list.append({
                         "title": title,
                         "link": link,
                         "summary": "TikTok 官方发布"
                     })
-                
-            if len(news_list) >= 6:
+            if len(news_list) >= 8:
                 break
     except Exception as e:
         print(f"抓取 TikTok 官方新闻失败: {e}")
     return news_list
 
 def fetch_daily_news():
-    print("启动浏览器直连官方数据源 (不再使用 AI)...")
+    print("启动直连官方数据源 (极致轻量级爬虫，无需 AI 与浏览器引擎)...")
     all_news = {}
     
-    try:
-        with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
-            context = browser.new_context(
-                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-            )
-            page = context.new_page()
-            
-            # 1. Amazon 官方
-            amazon_news = fetch_amazon_official(page)
-            if amazon_news:
-                all_news["Amazon 官方"] = amazon_news
-                
-            # 2. TikTok 官方
-            tiktok_news = fetch_tiktok_official(page)
-            if tiktok_news:
-                all_news["TikTok 官方"] = tiktok_news
-                
-            browser.close()
-    except Exception as e:
-        print(f"Playwright 抓取异常: {e}")
+    # 1. Amazon 官方
+    amazon_news = fetch_amazon_official()
+    if amazon_news:
+        all_news["Amazon 官方"] = amazon_news
+        
+    # 2. TikTok 官方
+    tiktok_news = fetch_tiktok_official()
+    if tiktok_news:
+        all_news["TikTok 官方"] = tiktok_news
         
     return all_news
 
