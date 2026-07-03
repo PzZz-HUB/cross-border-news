@@ -12,10 +12,13 @@
                 --text-main: #0f172a;
                 --text-muted: #64748b;
                 --card-bg: #ffffff;
-                --success: #10b981;
-                --error: #ef4444;
-                --warning: #f59e0b;
-                --neutral: #94a3b8;
+                
+                /* Node Status Colors */
+                --status-green: #10b981;
+                --status-bluegray: #64748b;
+                --status-orange: #f59e0b;
+                --status-red: #ef4444;
+                --status-gray: #9ca3af;
             }
             body { 
                 font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
@@ -43,19 +46,29 @@
 
             /* Dashboard 面板 */
             .dashboard-panel { background: white; border-radius: 12px; padding: 24px; margin-bottom: 40px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); }
-            .dashboard-title { font-size: 18px; font-weight: 700; margin-top: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+            .dashboard-title { font-size: 18px; font-weight: 700; margin-top: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+            .legend { font-size: 13px; color: var(--text-muted); display: flex; gap: 12px; margin-left: 16px; font-weight: 400; }
+            .legend-item { display: flex; align-items: center; gap: 4px; }
+            .legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+            
             .status-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
             .status-item { padding: 12px 16px; border-radius: 8px; background: #f8fafc; font-size: 14px; border: 1px solid #e2e8f0; }
             .status-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px;}
             .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; }
             
-            .dot-ok_with_confirmed { background-color: var(--success); }
-            .dot-ok_all_quarantined { background-color: var(--warning); }
-            .dot-ok_no_candidates { background-color: var(--neutral); }
-            .dot-error { background-color: var(--error); }
+            .dot-success_with_core { background-color: var(--status-green); }
+            .dot-success_no_data { background-color: var(--status-bluegray); }
+            .dot-all_quarantined, .dot-partial_quarantined { background-color: var(--status-orange); }
+            .dot-failed { background-color: var(--status-red); }
+            .dot-disabled { background-color: var(--status-gray); }
             
-            .funnel-stats { font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; line-height: 1.6;}
-            .funnel-error { color: var(--error); font-size: 12px; margin-top: 4px; word-break: break-all;}
+            .funnel-stats { font-size: 12px; display: flex; justify-content: space-between; line-height: 1.6;}
+            .stat-candidates { color: var(--status-bluegray); }
+            .stat-dropped { color: var(--status-gray); }
+            .stat-quarantined { color: var(--status-orange); }
+            .stat-stored { color: var(--status-green); font-weight: 600; }
+            
+            .funnel-error { color: var(--status-red); font-size: 12px; margin-top: 4px; word-break: break-all;}
 
             /* 日期分组 */
             .date-group { margin-bottom: 50px; }
@@ -111,215 +124,223 @@
             
             <div id="newsContainer">
     
-                <div class="date-group" data-date="2026-07-02">
-                    <div class="date-header">2026-07-02</div>
+                <div class="date-group" data-date="2026-07-03">
+                    <div class="date-header">2026-07-03</div>
         
                     <div class="dashboard-panel">
-                        <h3 class="dashboard-title">📡 系统运行大盘 (节点全景监控)</h3>
+                        <h3 class="dashboard-title">
+                            📡 系统运行大盘 (节点全景监控)
+                            <div class="legend">
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-green)"></span>有入库</div>
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-bluegray)"></span>无数据</div>
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-orange)"></span>已隔离</div>
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-red)"></span>失败</div>
+                            </div>
+                        </h3>
                         <div class="status-grid">
             
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>Amazon Seller News</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>Amazon Seller News</strong></div>
+                                    <span>成功（含核心）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 2</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 2</span>
+                                    <span class="stat-candidates">初筛: 2</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 2</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_no_candidates"></span><strong>TikTok Shop Seller</strong></div>
-                                    <span>⚪ 成功 (无数据)</span>
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>TikTok Shop Seller</strong></div>
+                                    <span>成功（无数据）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 0</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 0</span>
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_no_candidates"></span><strong>Shopify Changelog</strong></div>
-                                    <span>⚪ 成功 (无数据)</span>
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>Shopify Changelog</strong></div>
+                                    <span>成功（无数据）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 0</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 0</span>
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_no_candidates"></span><strong>eBay Seller Updates</strong></div>
-                                    <span>⚪ 成功 (无数据)</span>
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>eBay Seller Updates</strong></div>
+                                    <span>成功（无数据）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 0</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 0</span>
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>Walmart Release Notes</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>Walmart Release Notes</strong></div>
+                                    <span>成功（含核心）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 2</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 2</span>
+                                    <span class="stat-candidates">初筛: 1</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 1</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>Federal Register</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>Federal Register</strong></div>
+                                    <span>成功（无数据）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 8</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 7</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 1</span>
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_all_quarantined"></span><strong>GOV.UK</strong></div>
-                                    <span>🟡 成功 (全隔离)</span>
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>GOV.UK</strong></div>
+                                    <span>成功（含核心）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 3</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 3</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 0</span>
+                                    <span class="stat-candidates">初筛: 8</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 6</span>
+                                    <span class="stat-stored">入库: 2</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>CBP</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>CBP</strong></div>
+                                    <span>成功（含核心）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 6</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 6</span>
+                                    <span class="stat-candidates">初筛: 6</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 6</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>USTR</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>USTR</strong></div>
+                                    <span>成功（含核心）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 2</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 2</span>
+                                    <span class="stat-candidates">初筛: 7</span>
+                                    <span class="stat-dropped">丢弃: 1</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 6</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>EU Taxation</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>EU Taxation</strong></div>
+                                    <span>成功（无数据）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 1</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 1</span>
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>海关总署</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>海关总署</strong></div>
+                                    <span>成功（含核心）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 8</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 1</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 7</span>
+                                    <span class="stat-candidates">初筛: 8</span>
+                                    <span class="stat-dropped">丢弃: 2</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 6</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>商务部</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>商务部</strong></div>
+                                    <span>成功（含核心）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 8</span>
-                                    <span>丢弃: 1</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 7</span>
+                                    <span class="stat-candidates">初筛: 7</span>
+                                    <span class="stat-dropped">丢弃: 3</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 4</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>税务总局</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>税务总局</strong></div>
+                                    <span>成功（含核心）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 8</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 8</span>
+                                    <span class="stat-candidates">初筛: 1</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 1</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>USPS Service Alerts</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>USPS Service Alerts</strong></div>
+                                    <span>成功（无数据）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 3</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 3</span>
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>DHL</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>DHL</strong></div>
+                                    <span>成功（含核心）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 8</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 8</span>
+                                    <span class="stat-candidates">初筛: 8</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 8</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>FedEx</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>FedEx</strong></div>
+                                    <span>成功（无数据）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 1</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 1</span>
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
                                 </div>
                 </div>
                             <div class="status-item">
                                 <div class="status-header">
-                                    <div><span class="status-dot dot-ok_with_confirmed"></span><strong>UPS</strong></div>
-                                    <span>✅ 成功 (含核心)</span>
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>UPS</strong></div>
+                                    <span>成功（无数据）</span>
                                 </div>
                                 <div class="funnel-stats">
-                                    <span>初筛: 1</span>
-                                    <span>丢弃: 0</span>
-                                    <span style="color:var(--warning)">隔离: 0</span>
-                                    <span style="color:var(--success); font-weight:600;">入库: 1</span>
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
                                 </div>
                 </div>
                         </div>
@@ -327,96 +348,128 @@
             
                     <div class="news-grid">
         
-                        <div class="card" data-search="anthropic's claude fable 5 model back on amazon bedrock - about amazon amazon seller news">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxNandjN0EwRGllQVdWUFFTR3ItWUJYWkJMQjV0NEZnUE5OTEM4TERPRkxtWTJ6bFZMcmJYRjZkYjFTRmRBV2lQWVBsUzlXUFBWTG9JOG1BVDBVTzA2WV9TZzdXQTVUTHEyd3p4UXdtbkZVazEwazBXb2dqVDIzNllGTmRB?oc=5" target="_blank">Anthropic's Claude Fable 5 model back on Amazon Bedrock - About Amazon</a></h2>
+                        <div class="card" data-search="6 ways amazon is investing in louisiana - about amazon amazon seller news">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxQNGxSZVdNZDJkQjByTzM1cm5fcERSUEV3U3NjMEM4czd5ZHRSZlQ0YVZmR0k3VzMzd2JUMXM4cERsSkMzNklBbkdOMDlJWU9tTEJzYnBDUGRTNUZQSzNENGh5VjNQQ1Y1Vm9lR29TRlVNd2dNaDdtNVdTWk5UdVZOclM4X2FhUmxUZHJpWG5mRzZNaUtRS2xMTndTdHI3bUlfbjBfUlpFUlI?oc=5" target="_blank">6 Ways Amazon is investing in Louisiana - About Amazon</a></h2>
                             <p class="card-summary">Amazon 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Amazon Seller News</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="4 ways amazon is investing in ohio - about amazon amazon seller news">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxQbFpuaEkxd1R2a1JjRFdDYUxfYWFibHFmUEhBTHo0WVNkajA3Q19CRXdRdDVhZlV6TVB4YWtxYmJJcmREb1BmOTdlQnNFWlBCMVZ0Uk5HVndZNEdmRF9UaV8tN2tLY00temo5TVFFa0JGWUtyUy1KaTYyM3d4MHhuYUZsaTVDXzkzdUZaZ0VOMG05LTZ4NS1NSDB3QUFnbEpIU2c?oc=5" target="_blank">4 ways Amazon is investing in Ohio - About Amazon</a></h2>
+                        <div class="card" data-search="5 ways amazon is investing in florida - about amazon amazon seller news">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNS0U1QTY3LWF6YVNFUDdUdGRJTzA0dDA0TWxuanlHTGtaMnpUMlpEcDhETk5SV2tqMFZBT2M4ZDRLU1k1ODRNcnlHR1dnaHZ4LXZtSVRoVG1iOWF2MmpmZHJydVYtUEVhMm42UFJ3eGdqTXZjNHRPSGdDT0FoTjR6VHZEVTNSc3lOSEZCT1JLRXhEWXhMb3UxcEdITzZ3ektvaHZKLUp3?oc=5" target="_blank">5 ways Amazon is investing in Florida - About Amazon</a></h2>
                             <p class="card-summary">Amazon 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Amazon Seller News</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="sam’s club reveals its most popular meats for the fourth of july walmart release notes">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxNR2laOTFrb0NUSTV6NHIyMUcwMk9VVnVlaEd1UF84ZXMtNmhOSlhDcnJBanJ6V2ktRUxwLUNwMXJOUHdYM1pmbkt6Q1FEMmlfX2lQRHhFNVhsME5lcGh5OVprSWlLVTBtU2VLYVJsbUh4OERjeWpwQnBTYVRERlhvZEU5Y0NlM05yZF92V2ljOHNsVy1tTUVMQWk3Mnlfd2pORVpJZXZfYVBxTGZwRlh3Yzd0aTNKRjEyOTB6OHhNNWFGZw?oc=5" target="_blank">Sam’s Club Reveals Its Most Popular Meats for the Fourth Of July</a></h2>
+                        <div class="card" data-search="tools walmart release notes">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTFA4VDUxUWFURGVaMm1GYXVaMlZkQ1RjV1pWNGJZZGVfTlZWU0hjNHY2cXZFTkdEN0NpNW1QSEpQSjcwYUtnU3pVQUItRk43dGI1MHktRno1V0hxeDdZNUlMa1ZEc0g5UHM?oc=5" target="_blank">Tools</a></h2>
                             <p class="card-summary">Walmart 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Walmart Release Notes</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="wellness is personal. walmart is helping make it more accessible. walmart release notes">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxPN3hpSUt6OGhvd1YxeEMwaUN0UnFCZVpxNmFKeVEwcXg0UVBaTmVhTE5JZ21IZjgxVGdfZ25WdVVpYnkwWDdzRlROaDE0LUhNT1ZFZkdZOURVRzVJdThIS2stRVdTZGIyRGx6V3BKUWZxTnZvMlBMT1AtRDJrWmxNeUNGYjUzSjNrQTBZb1NwWkNocURoSzUxbjBiQzhnMEVoRmZHbUlGS2RPT1J1RlE?oc=5" target="_blank">Wellness Is Personal. Walmart Is Helping Make It More Accessible.</a></h2>
-                            <p class="card-summary">Walmart 官方发布</p>
+                        <div class="card" data-search="fastest infrastructure building in a generation as planning rules overhauled gov.uk">
+                            <h2 class="card-title"><a href="https://www.gov.uk/government/news/fastest-infrastructure-building-in-a-generation-as-planning-rules-overhauled" target="_blank">Fastest infrastructure building in a generation as planning rules overhauled</a></h2>
+                            <p class="card-summary">GOV.UK 官方通告</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Walmart Release Notes</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">GOV.UK</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="agency information collection activities; proposed collection; comment request; regulation agency protests federal register">
-                            <h2 class="card-title"><a href="https://www.federalregister.gov/documents/2026/07/02/2026-13468/agency-information-collection-activities-proposed-collection-comment-request-regulation-agency" target="_blank">Agency Information Collection Activities; Proposed Collection; Comment Request; Regulation Agency Protests</a></h2>
-                            <p class="card-summary">Federal Register 官方通告</p>
+                        <div class="card" data-search="attorney general launches free rule of law lesson plans for every school in england and wales gov.uk">
+                            <h2 class="card-title"><a href="https://www.gov.uk/government/news/attorney-general-launches-free-rule-of-law-lesson-plans-for-every-school-in-england-and-wales" target="_blank">Attorney General launches free Rule of Law lesson plans for every school in England and Wales</a></h2>
+                            <p class="card-summary">GOV.UK 官方通告</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Federal Register</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">GOV.UK</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="customs bulletin weekly vol 60, july 1, 2026, no. 17 - u.s. customs and border protection (.gov) cbp">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQd3ktVjRzMXN5RmpncW5WQ3FBS1YxclJRRUsyMF9aYkZvdFRqLTJUWVNvSm1wUVVFNmV5ODhNNjhFc1ptUzRMVDFYTlo0SWFDd3VIemR4RXhvRjFHR01xTG56ejhYalJoZDVDcVRlU2xWWEI4b2ROTzlWa2VIRXN5MGR0NnUwaWJFR1lPbjhfdEc?oc=5" target="_blank">Customs Bulletin Weekly Vol 60, July 1, 2026, No. 17 - U.S. Customs and Border Protection (.gov)</a></h2>
+                        <div class="card" data-search="freedom 250: cbp celebrates legacy of protecting america’s borders and economy - u.s. customs and border protection (.gov) cbp">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxOcktJam1yUFlyZkRjYnlhY1A3U3B5emtPYVpiUTA5N3U4cXg5QnVzejRhWTlqcDNnZl80N3pmQmxwWVJGX3JNcEdfTm1tVUhBM3hLcHhKY0lmUHRuVVVya0l0c1owMUQ5XzdXNVIxT05vVUk3REtmZDlRczNFeTBMWFVOQVlZT0pxUEVOcE1Qd00xU0I3cllpd0s0anp6VDVLSUtpX040eXBia1VfT0paR0hONnJLSUUzb2c?oc=5" target="_blank">Freedom 250: CBP celebrates legacy of protecting America’s borders and economy - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="cbp officers seize more than 57 pounds of methamphetamine at the paso del norte port of entry - u.s. customs and border protection (.gov) cbp">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxOWkQyUzRqbmk3aTNxQWxDMzV5OEk2SUY3SHd0MXhUcGtTZW4ybDBLUFN3LWRvS0tjTUZoaUtYRldXQzV6YlJoOFkyZUVsb3YzQ0U1LXFDVHhZbjUzcVRBdTdYRnlsVXNYVlJHR2VVeGp3TGZoX0ItMVB3ck9TLVdFcy1jSUVXWTU0VDV2RUdTLVRUWjlkRm02SDYtLUtDUlhWTG1leWFoam05eVNabGJhemVlMVQ2cFJZNmc?oc=5" target="_blank">CBP officers seize more than 57 pounds of methamphetamine at the Paso Del Norte Port of Entry - U.S. Customs and Border Protection (.gov)</a></h2>
+                        <div class="card" data-search="automated ace portal account application for exporters - u.s. customs and border protection (.gov) cbp">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxOVkVyRDFSaUV5RUdvcHBjRWN1cXJFaGszc3d3NUZuX3hkRkM2aHU2LU54ZzdjNFFoZDRldjc5ZmNWWFY5SE80SzVWSTFwQzVpSU5EY0J4SVJkVTA3eDlZSEtTd3ZkS2JiYkpXMWgxejVSTm1FczNZSS1XbGxjSVJaTXlZenVKdXRMbmRxX3ZBRmphdw?oc=5" target="_blank">Automated ACE Portal Account Application for Exporters - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="strengthening customs enforcement - u.s. customs and border protection (.gov) cbp">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFBjaTNwN093Vk95aExzUkhvX2VBal9tWWc4T3I2NWVYNVhSREVxaDNOOEtQd3hSeVRsdVlUYXkzbGdVSGpKTXBkbkhaUTNxMXhlZDNhbzByWlF2NFBBMHR0aWVrbUJwZTBCNlFF?oc=5" target="_blank">Strengthening Customs Enforcement - U.S. Customs and Border Protection (.gov)</a></h2>
+                        <div class="card" data-search="cbp officers seize over $3.7m in cocaine at hidalgo port of entry - u.s. customs and border protection (.gov) cbp">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxOSXV3aGRFdXZaSFV6S1ptVVVtdHY1cXhxdk96OC11NnNnMUlONlhST01LVGJrQ2dGQ0xFWExRM1FHN2p3dGxlRUR5OXRrSTh4S0VRN0RNeGFLS0pjbG9MM21LeXpvcVhxRG5nemgxeXA5SzhsQVJWNUhGUjJ1c0Fzb1hmS1NveW1nRDA4cUhrbzAxOFlQMHJ3NTBqS3VtRHg1YmkwSXJ3?oc=5" target="_blank">CBP officers seize over $3.7M in cocaine at Hidalgo Port of Entry - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="error - cbp careers (.gov) cbp">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMixgJBVV95cUxONHlkNVJrYWxDTU94TzBON2l6a0V4Y1pxdHFMNEVRUl8wcE5ubS1fblFRcWlhdUhmOHhvSnI1NnI3NUJjMUlPYnRWTG9kN1l6Um92ek5kdTBta0sybk1iYmpKRlhLd3BDd3NmUTZUZmphX1lpdWFTMXpKRzdXSzRFTFFiRUxFTUo0VTVNWmQtME9aTmdaTDRkUmMtRjkzRHZGSGdlZEVkNTFYWnU4amlhbW8zdXNKbkdoclRwTW1vTnBkZHRiVUI4MWM1cDM1T2NnV1R5S1VxT1pGWTktYzNjZmx1N1FyUFJ4TG5KU25ra0xnYjRwRy1qeGxxOXQzaFoxTFU0ZjdEWDlpWVA1MEV6SEtyN1FGTTNYN3hRN2xiSmtmeGRWandJdjRDcnlvdXloZWhXRjBacTVkMUlFWHVhS3NTMnRiUQ?oc=5" target="_blank">Error - CBP Careers (.gov)</a></h2>
+                        <div class="card" data-search="cbp to host career expo in colorado springs - u.s. customs and border protection (.gov) cbp">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxOR0o2ZUxqZHBkekdZZ2RqOGdYSndmYi1Ld2FXenF2a1FxcVhJZTU1dEIwbzBMRmhDMklHblN0QmFvRGdESU1CbFNXTUdDVG5GaDJCazFITzRRenZRWDVtX2haSWluZUVqWVIxT1BaaDByWHE1Y1FJYkV0bzZoc3JDbS1uSG16cXJPZ3ZfbkZ6cUt3Ymc?oc=5" target="_blank">CBP to host career expo in Colorado Springs - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="cross ruling - u.s. customs and border protection (.gov) cbp">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiT0FVX3lxTE1Fa2JIaU95N1IzYmlrOG5yZE9vWlZHczB2WmgtcVpKVDhMYXRNYktFWGV4bGphZThHZ21QRUJnOE5JWFpVR3A2RmViekN6dTQ?oc=5" target="_blank">CROSS Ruling - U.S. Customs and Border Protection (.gov)</a></h2>
+                        <div class="card" data-search="automated ace portal account application for protest filers - u.s. customs and border protection (.gov) cbp">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNVldjMkliY3hVcW52RnQtYUlmZjdWczh6MXlfeDhuejZ2T0pvaVZ6OTA3SGFmUENkMzEya3NQQWJ6RDYtX0p4cTlPUVp6WnQyaUVLckRaY253c3FxMThIM0pvaE5sal85R0NlVWFCaG5yMGdpWjZrVTJGak56NGoySnFWMVZuTVRsNXFrVDg2ZkFaeXYxV2hmbw?oc=5" target="_blank">Automated ACE Portal Account Application for Protest Filers - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="canadian border ports of entry - u.s. customs and border protection (.gov) cbp">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiR0FVX3lxTE5HS0RsWHBsVUdqSDlXOERzQVRwN3B4S2U1V3FlbWh1VVRlSkxrbUEwVmZuNVhxNjRTOExVaUFxQjdkSkxaNGo0?oc=5" target="_blank">Canadian Border Ports of Entry - U.S. Customs and Border Protection (.gov)</a></h2>
+                        <div class="card" data-search="automated ace portal protest filer account application - u.s. customs and border protection (.gov) cbp">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxPSkppYU8zZzZpd0RPc2xCWThnUVdBODhpVzhzbFg5NlBtR2xjZHdSZVl4dTFyVGlnMzNQc2xLZkJITUo1bllpTDI2cnJ6UWdOaGFiSWNiQmlUQmlteUZVTE1QNXB1WjJMWkE3ZHZDcFlFWFJwWUpmZk1idWtjRUQtRU5fLTVIa2NYeHNmMTJzWWJ6X2JCRGJabnh5dTNCRHBTWWNBVDVjVFRNRV9PMHFFSVVVNWhGUUt2aWJ3?oc=5" target="_blank">Automated ACE Portal Protest Filer Account Application - U.S. Customs and Border Protection (.gov)</a></h2>
                             <p class="card-summary">CBP 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">CBP</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="ambassador greer issues statement on the usmca joint review - ustr.gov ustr">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMixwFBVV95cUxQOFMtYkdYelBuTnBBam02VWtrTnFsSnhQV0p5RElmZ0lWT19IRDdYZzhuLWF2VUMtcTU1T1JIYUVvdlptXzRVZkxycmFOMVkwUEs3djRQcVBZUnBDdVJMWFIzZmFkVlVld1hhcldRRnI5eGs4bXlUN3c4enZIc1RHUThpUHViN2Ffc2dTbFpGNkdQNWp6Zm14WTBHeWNwSURSRHVabjFOLXExMzk2V1VpZERWQTBiNVZob3hFWGVmODFiRlBPVWJn?oc=5" target="_blank">Ambassador Greer Issues Statement on the USMCA Joint Review - ustr.gov</a></h2>
+                        <div class="card" data-search="docket ustr–2026–0265 - ustr portal - ustr comment portal (.gov) ustr">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMib0FVX3lxTE9vZHJOeklRc1c2a05CbEl4NU1UX3RrSmpSNXprNGZtbEU4NVlDZUtSRkRhcnlPcFd1dXlZZ0g0WkN0OFBmU1dkaWxMZk94dFBfeHlHaFB1S2ZoZk5zUnVHbVNHYks2TDJwTmlEZVloRQ?oc=5" target="_blank">Docket USTR–2026–0265 - USTR portal - USTR comment portal (.gov)</a></h2>
+                            <p class="card-summary">USTR 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USTR</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="- ustr comment portal (.gov) ustr">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTFBPZU83bWVaS2xNclFtREhqZTZyNXU5Ri1FWG1tM1BvSU9nUFFYcTlaaWo0QTFOYmVlR1dtN1R4aWE4N3R6UG5QQVpZWkdZOWx2RUJRSXo4RGVXQ2V0NG85MkFKdnBUT0o2?oc=5" target="_blank">- USTR comment portal (.gov)</a></h2>
+                            <p class="card-summary">USTR 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USTR</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="public hearings on proposed responsive action in the section 301 investigations relating to failures to take action on trade in forced labor goods - ustr.gov ustr">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMihgJBVV95cUxQSGlRTWdIbmZfQmtkS1I5RDhYdUdBa2Q0a21TTDM5dlIzdk1fZmM3UWdfVkxDYmx4Y1NPSlFDUGt0d2dZeWl3V3NuLWFoTUlGQlRtQW0yeWsxcUZ6aHYxQUExUHNiSXVva2RTT25LZjRQMkVFR1R4Y2NGQy1HZU5jTHhCS21haGRmalJTcXdMNDZkcVdkQk5ncUtRVVVKdU5pR1g1dkRYZlBnS1F4NUxvYWpLdjhBeDNEZHZaU1ptX0ljMjFtdDRGbFZsb0VxYUVQZ2Qxd3FCMnQydFZxY2dxX1Z5dVFGYlBlZllKaEdJVTh3clhrSUxfX240NzNiZ1hxcHpMNUJn?oc=5" target="_blank">Public Hearings on Proposed Responsive Action in the Section 301 Investigations Relating to Failures to Take Action on Trade in Forced Labor Goods - ustr.gov</a></h2>
+                            <p class="card-summary">USTR 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USTR</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="public hearing on proposed responsive action in the section 301 investigation of certain acts, policies, and practices of brazil - ustr.gov ustr">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMi_gFBVV95cUxONk5oeWZGLTNLS05tQ3hjYUw5Qms3SnNfREwxeEk1OVA4ZU5Ra3RxbEtyOHRSUzRxeXBRX243blhwM2FYYV9aNHFGa3ZjNTRTU3pDR2haVGlDR3NNZnVubXFrUVExNkdoUHFSVlp6Qk91NjZLWkhOejZWaUJXQU1WX1RNMWZiWXBGZjdlUmdkcWxmN2FjTUc1WnpsbVc0ZVV1WW1ELXo2bC0wWDZVVjlvR01NUmotcFdmR29NVVdMUGU1bWFFZ2tnMjBkY01GUHFPOUhXUDczUlZGaUlxYXFJN2pXUFc3VmpXVWlGU1YwZEd2RnYwQS1pbEY0UnBFQQ?oc=5" target="_blank">Public Hearing on Proposed Responsive Action in the Section 301 Investigation of Certain Acts, Policies, and Practices of Brazil - ustr.gov</a></h2>
+                            <p class="card-summary">USTR 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USTR</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="america first trade is fast-tracking our industrial resurgence: ambassador greer joins fireside chat with blue-collar manufacturing workers at the great american state fair - ustr.gov ustr">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggJBVV95cUxOVmhYTGVPYWJwRzgwMW10QnNSaDNLOVNLdDJ3TVBpTUh5bm5TbjJ5YVJvWGdDOUtfekVNblZqbGcxUnZncmpHOGwxbUI3Ny1FeG11ZnEtTU0taFNYSWgwWG5yRV9zS2JmTGplVWhJYVRFQUNzZlRwWGRIU0pxdlJIdnBXMi1OdlVqTUgtNnZQcnBpM2J0b1VnUlZaUFhodks5cWZDalh0WEFXRC1lN1ozWmoyckd1TVVGME1sdkFic2otTDl6NU90Y0ZuQXdzWFI1eDVjRTRteGthek4ybm82alRyMGp2YVZkYmNxMGFyMGxqRXFGT1g2QWwydVV6b0VPOUE?oc=5" target="_blank">America First Trade is Fast-Tracking Our Industrial Resurgence: Ambassador Greer Joins Fireside Chat with Blue-Collar Manufacturing Workers at the Great American State Fair - ustr.gov</a></h2>
                             <p class="card-summary">USTR 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USTR</span>
@@ -431,11 +484,460 @@
                             </div>
                         </div>
                 
-                        <div class="card" data-search="state-of-play cbam accreditation - taxation and customs union eu taxation">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMi3gFBVV95cUxOclM5OHFOd2FlZ250b3U5WjZuV2lQalVvUEpsZEpEMlZtNmJJNlBWN2hoZGNTRkFvQU40cHFTSUE3X3d2enlOMTlpejdwdE1QT3UtdEdGWjdTWHViR1dMMUxQejJURGcyNW5TU051TEE4SnlSQ3BTeW91SXRCSXpIMldVSXliUnpFZEc3Tmw5c2hoTUtaOGt6cEVxMlNxSEFrX2c2UWZiTHEyeFBtQ3BHd0ZhM0F5SC1KTlp1aDl3U0RGYlNLWTcySVppU3ZQbHF1a2R3SEpMckdoRmhMV3c?oc=5" target="_blank">State-of-play CBAM accreditation - Taxation and Customs Union</a></h2>
-                            <p class="card-summary">EU Taxation 官方发布</p>
+                        <div class="card" data-search="“一企一策”送红利 海关便利化举措赋能进口轮胎降本增效 - 中华人民共和国海关总署广东分署 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQaHZWN3VleUFwZXlaNHZvNHpydnVQS2RmLTg1cm5WSUNyU2pMSVFiUDVqTDh5aGlVWnNIR284QjRMcEpuSmNEMl9vTl8yYU1FQjRFQ3RRS0F6VGFncWE0X19uaU05STZJbmt5c2didTVtdUpBcUtnQW5WX2kwVDBKeQ?oc=5" target="_blank">“一企一策”送红利 海关便利化举措赋能进口轮胎降本增效 - 中华人民共和国海关总署广东分署</a></h2>
+                            <p class="card-summary">中国海关总署 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">EU Taxation</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="新闻发布 - customs.gov.cn 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMi2wFBVV95cUxObGJsRFNPN1ZYMTM5XzZIclo3S2NiSlFZTHRDcDFBNzNILWw0NFE1eFQ4aVV2RG1YNVpENUtzUmhybkktLUM2dE50cXAxS25hWTI4RlU0NDM1NXFjbGZvcjZOYk40R3JsUE5kU29icVBIYmE2TnRRb0VWU2VCcFhMRmtDb3gzb21wcURoc2NHSzBBRXdjZDlPd1AwV0hIVjVraXVGTENZcV80OVVXM0s1SkxXLXM3NmVNY3paY25HV2lXZTNZTks4djB4d1RLb01hRFV0d1pkWkpYaEU?oc=5" target="_blank">新闻发布 - customs.gov.cn</a></h2>
+                            <p class="card-summary">中国海关总署 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="枣庄海关开展“大手牵小手”研学活动（图） - 中华人民共和国海关总署广东分署 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxPS3NPSjFZeXI3UnJCbnVaTGg5ak1OZTkzdHZUSTRtN2ZVVVA3N284Smc0dXJVaWNxWUlsLWhIOXhEbVNoZkxoZzloMkkwRjhOb0JkSU1EdmZDYVY4eHJrR3pHcWkzTUIwMnRDYzFaV1RVaWp6Qlh0MEpYMlpweHZ6RQ?oc=5" target="_blank">枣庄海关开展“大手牵小手”研学活动（图） - 中华人民共和国海关总署广东分署</a></h2>
+                            <p class="card-summary">中国海关总署 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="关区统计 - customs.gov.cn 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMixAFBVV95cUxPcXdMSVBFSUNtYy1jZ0tZbHlNM2FPdlBSNWJ2VEJxTFhCTzlTRW5OamNFS2lIV01jNUlJWUNzY2xKQ0dyWWNNRjdPOWZGdGlWRWVJS1JYa1d3b016R1VHRXdjMHgyYWxjeWlOV21HaXE2V0NMZGp2Qko1OWI2ckxkNHhIRzNpUnB6bmVCa2QwaFNLX0NDQjU1Y2xNQlVLZHV4RVJYN21MN1BfY2pfbjRLVDY2eTYtbEtSeHlaSGc5elpsMFJ4?oc=5" target="_blank">关区统计 - customs.gov.cn</a></h2>
+                            <p class="card-summary">中国海关总署 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="临沂首趟工程机械定制中欧班列发运（图） - 中华人民共和国海关总署广东分署 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxPZFNCYm5QUnNTaWItME9xVTJlYjQ2dEVhRWxOUXJUZFpsdEVWdk5DU21HZVVhTldacnN4bWVQc0wybU5oUVpjZjZZZGZFWXJMSWdSMGlEdm90WFphdGstNmQ1LVQ3Q2lObnRLeXF2Wnc5dUtPYzNNTnIxUGtQNnBxcA?oc=5" target="_blank">临沂首趟工程机械定制中欧班列发运（图） - 中华人民共和国海关总署广东分署</a></h2>
+                            <p class="card-summary">中国海关总署 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="青岛海关“双免”口岸检查模式升级提醒功能 - 中华人民共和国海关总署广东分署 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQdC0zNmFzOFcxb09MNU1NMzZCcVFRSE8wVXRvSlBJaWYxc2dTaDZHV1phbkF1ZmktWG1xYkJoeXVYQTRTWU9FSFJmQVdRQmtGVjVDR1VUX3hWQXdzNEFCTTZMaUg5bURLMDZrU3Byc28xMlBIM0FScjYwYjhud2Q1SA?oc=5" target="_blank">青岛海关“双免”口岸检查模式升级提醒功能 - 中华人民共和国海关总署广东分署</a></h2>
+                            <p class="card-summary">中国海关总署 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="- mofcom.gov.cn 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxNZktpWWVxSjYzUU82U09DLTVYQzFHV1ZZTFhZUXR4NHZpb2dlMXhuZjEtRFNOT0toaUdfai1LOVk1T2c2cWFnbkhjcG5teEh1emd5bkFIS0pvcWYtaDB3QkFpRmhTT01LR3VBWGdxLUZ3bFBFQURtc0ZQdTNSWkN4R3piY0h2cTZ2al9zN1BWRQ?oc=5" target="_blank">- mofcom.gov.cn</a></h2>
+                            <p class="card-summary">中国商务部 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="境外法规检索 - 全球法规网 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxQbDd5aHhOMmR3TUZPT2YtcGMxakFlTzlWemtnbUtaQzFLUEJEbTZTVGt3V2xZLVFTdnNHVzFDYjVTOHJWbll4c21vZW1kaklHaGVOcVRvV29JV2xOdlQxRHNGOFMyVlR5SC0xSEtwcFFSSmY1UEF3RXQxNVM0Um44enhhMHBJRDRjZUE?oc=5" target="_blank">境外法规检索 - 全球法规网</a></h2>
+                            <p class="card-summary">中国商务部 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="氯化钾价格行情（2026年6月29日） - 商务部 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE43TzFxeWlTeHRfV0NZcDMyNWJSeHVYV3RQNF9qUVhvbDFLNXFSZzdRV2hxYXhUN05FRXNYWFZwQVRya1lveGd3N1hON3M2WFRYcUZTMXVRdzNpRjFoYlg0QTJSVTZnQnlqWlJmS2xTcXRIbWZlcU4w?oc=5" target="_blank">氯化钾价格行情（2026年6月29日） - 商务部</a></h2>
+                            <p class="card-summary">中国商务部 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="中国保护知识产权网 - 中国保护知识产权网 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE95OEFtcjJXNHNJc1poWUQxTFB1R3duZm9fUTdNYmNTRTNlb0VGUFdMdlVka2lLODlUcTVDNDUyREJ1T1kwX25WLWVnaUFSYkxkT2d6cFVWUHl5NnI4RDVpbFJINmlOVDk3TEtmcE5yeks?oc=5" target="_blank">中国保护知识产权网 - 中国保护知识产权网</a></h2>
+                            <p class="card-summary">中国商务部 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="海南 - etax.hainan.chinatax.gov.cn 税务总局">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE5lVWZXOFBSSW84VXlLSnVja2FvNjhKUXFyR29oYTNscHhITzdkR1FYaXNjbGNkalA4V0tzYnhEYWNldnBPZzVEZF9jNXB3b3VKMTNN?oc=5" target="_blank">海南 - etax.hainan.chinatax.gov.cn</a></h2>
+                            <p class="card-summary">中国税务总局 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="- gcpt.dhl.com dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE5ZTjFKV0d6MFVaV1pnLVlxYkdvMUhEVjExMXFYYnZMUlp1U2NNcWx3V0tpWUxIbWlnckVGdXVBanBuN21LVk1lSg?oc=5" target="_blank">- gcpt.dhl.com</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="- dhl dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiSkFVX3lxTE5SanYtYWlfWERwRlNDYU80NDhWcHRBQXRWSEV0R2tzaTZERmlmN0tFZldudEl2SVgtNVBVaDhpNFZjQllpUFhOZWNR?oc=5" target="_blank">- DHL</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="tasker job | administration jobs at dhl dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOODBCR3ZINGgxWFZPdHFVQllzSkd4V01meFpkeXRoOTlTMG16dmhxV0RzcU5KZXVzZnYtTXYwLUhzTDZGLVVKWmlhc04wSzRvM1l1QllxRXFyTi1JNkcxSFJOSE9Fd1VCM1JfZ2RJZk1IRXdqbjkyVXlnX19pQ3hJeXcyckppOFg4UThxNHpR?oc=5" target="_blank">Tasker job | Administration jobs at DHL</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="work for supply chain dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxONmZEUFhZRVc0VGlIcm1CTlM3Z0tzUEV2T3JacUtPcWM1WEFGNmZlOFAyNUk3bjYtcW5KU1lDaFA0ZGJiYlR3X2E2YXU3R1d6dUhLaVNaZjlJSEZpdmdITDFCUzBXM2hLbnJhNU95UXBGMDZFN2hRSGpUajB4MTZkQy1uUllCaldPb1NRSGg3T0NzOWlMQkZF?oc=5" target="_blank">Work for Supply Chain</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="network control group agent (transportation) job | jobs at dhl group dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxNUnU1azF6WGNKRXRzSU1XaXl3bEdxTm1lbWVYZ3NnMG5kakVxUTJEQzNmQWljRUxOQndvWDJPRmZ1dVEwS3NyUkVXbGRsUUluZEtHdEFhOW1FR3BDUy1NUnlLamRDTGpGVU1tV0p6a21WM1h2UFhwdFA4MmpyN29kZnpmT1FCSURQYzF4SE1Kai1ZWkNzMU5XXzdZUlp5S2U5a0FhMlRRN0JvU1VZeTE2TWJPZUNUUQ?oc=5" target="_blank">Network Control Group Agent (Transportation) job | jobs at DHL Group</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="group coordinator lead job | תפעול jobs at dhl dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxQZkxxSk1LWHJaLWdEZUNLeXFMaHI5SkdPay12UFhEMl9PNTF3ODd0TTBMZUw2aXlsMWJYaDBxWW83UjJFYmxRSjlXMnZjaWdJa1VUMk83VjZOUm9IVVFYQUxQWVRSNVNvSGxhWGNRbXpNRlU4Vk1TYnFidWJNalhOZTZkdTlORzJvYUlycEJzNzZXcGdOejl3UmlmMmVieVFwSXJwazB6Rl8?oc=5" target="_blank">Group Coordinator Lead job | תפעול jobs at DHL</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="storeperson administrator job | 指定なし jobs at dhl dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxPVEx5bmxNbEJyVTQ5MWJoMGdoQWdnd3pxUXJHOWRfQjI5d2hJUm9EbUJCRlFfZkQ1YWQtdjNzbmdVeU5sQ3E4azVjZ3dfVHEtLTg1YjJCWC1Ma0otVHFFMTBYSFItd1lsaE1pRHl1U3poS0Z0bFhteE9DWXVZaWMyX2N1Rkd2di04aEJOLWkwcG9EVnpXSXhXX1ZRTkVwUjBoUm16QVg4VQ?oc=5" target="_blank">Storeperson Administrator job | 指定なし jobs at DHL</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="lvs analyst job | jobs at dhl dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQZUFHdjI5OWk5YjFqd1VxWmx1cmFqaWVTanlCMmdXSU5CbGpjRTNvREZNY2I5anRqSnlxc242eVR0dlpzei1vaGJjbUpGdkJCakhrbk5pU1pnNVBIYjJIUDQ2WWczcnk0QTVyVUx2Nk5LNks3TGNWU25MZUVkWlhmU3lXSHNJRDg?oc=5" target="_blank">LVS Analyst job | jobs at DHL</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
+                    </div> <!-- end news-grid -->
+        
+                    <div class="review-section">
+                        <div class="review-header" onclick="toggleReview(this)">
+                            <h3 class="review-title">🗑️ 隔离审查区 (6 条候选资讯未通过最终规则)</h3>
+                            <span>▼ 点击展开/收起</span>
+                        </div>
+                        <div class="review-content">
+            
+                            <div class="review-source-group">
+                                <div class="review-source-title">GOV.UK (6 条)</div>
+                
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.gov.uk/government/news/keep-britain-working-continues-drive-to-stop-people-falling-out-of-the-workforce" target="_blank">Keep Britain Working continues drive to stop people falling out of the workforce</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-03 01:23:14</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.gov.uk/government/publications/keep-britain-working-review-update-march-2026" target="_blank">Keep Britain Working review update: March 2026</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-03 01:23:14</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.gov.uk/government/news/bright-horizons-regulatory-action" target="_blank">Bright Horizons regulatory action</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-03 01:23:14</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.gov.uk/government/publications/keep-britain-working-review-update-june-2026" target="_blank">Keep Britain Working review update: June 2026</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-03 01:23:14</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.gov.uk/government/news/nhs-patients-get-faster-access-to-medicines-under-new-pilots" target="_blank">NHS patients get faster access to medicines under new pilots</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-03 01:23:14</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" style="display:none;" class="hidden-review-item">
+                                    <div><a class="review-link" href="https://www.gov.uk/government/news/almost-20000-new-homes-unlocked-after-breakthrough-by-government-water-delivery-taskforce" target="_blank">Almost 20,000 new homes unlocked after breakthrough by government Water Delivery Taskforce</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-03 01:23:14</span>
+                                    </div>
+                                </div>
+                    
+                                <button class="show-more-btn" onclick="showMore(this)">展开全部 6 条 ▾</button>
+                    </div>
+                        </div>
+                    </div>
+            
+                </div> <!-- end date-group -->
+        
+                <div class="date-group" data-date="2026-07-02">
+                    <div class="date-header">2026-07-02</div>
+        
+                    <div class="dashboard-panel">
+                        <h3 class="dashboard-title">
+                            📡 系统运行大盘 (节点全景监控)
+                            <div class="legend">
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-green)"></span>有入库</div>
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-bluegray)"></span>无数据</div>
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-orange)"></span>已隔离</div>
+                                <div class="legend-item"><span class="legend-dot" style="background:var(--status-red)"></span>失败</div>
+                            </div>
+                        </h3>
+                        <div class="status-grid">
+            
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>Amazon Seller News</strong></div>
+                                    <span>成功（无数据）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>TikTok Shop Seller</strong></div>
+                                    <span>成功（无数据）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>Shopify Changelog</strong></div>
+                                    <span>成功（无数据）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>eBay Seller Updates</strong></div>
+                                    <span>成功（无数据）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>Walmart Release Notes</strong></div>
+                                    <span>成功（无数据）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>Federal Register</strong></div>
+                                    <span>成功（含核心）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 8</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 7</span>
+                                    <span class="stat-stored">入库: 1</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-all_quarantined"></span><strong>GOV.UK</strong></div>
+                                    <span>成功（全隔离）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 4</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 4</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>CBP</strong></div>
+                                    <span>成功（无数据）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>USTR</strong></div>
+                                    <span>成功（无数据）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>EU Taxation</strong></div>
+                                    <span>成功（无数据）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>海关总署</strong></div>
+                                    <span>成功（含核心）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 8</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 1</span>
+                                    <span class="stat-stored">入库: 7</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>商务部</strong></div>
+                                    <span>成功（含核心）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 8</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 8</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>税务总局</strong></div>
+                                    <span>成功（含核心）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 8</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 8</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>USPS Service Alerts</strong></div>
+                                    <span>成功（含核心）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 1</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 1</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_with_core"></span><strong>DHL</strong></div>
+                                    <span>成功（含核心）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 8</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 8</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>FedEx</strong></div>
+                                    <span>成功（无数据）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                            <div class="status-item">
+                                <div class="status-header">
+                                    <div><span class="status-dot dot-success_no_data"></span><strong>UPS</strong></div>
+                                    <span>成功（无数据）</span>
+                                </div>
+                                <div class="funnel-stats">
+                                    <span class="stat-candidates">初筛: 0</span>
+                                    <span class="stat-dropped">丢弃: 0</span>
+                                    <span class="stat-quarantined">隔离: 0</span>
+                                    <span class="stat-stored">入库: 0</span>
+                                </div>
+                </div>
+                        </div>
+                    </div>
+            
+                    <div class="news-grid">
+        
+                        <div class="card" data-search="agency information collection activities; proposed collection; comment request; regulation agency protests federal register">
+                            <h2 class="card-title"><a href="https://www.federalregister.gov/documents/2026/07/02/2026-13468/agency-information-collection-activities-proposed-collection-comment-request-regulation-agency" target="_blank">Agency Information Collection Activities; Proposed Collection; Comment Request; Regulation Agency Protests</a></h2>
+                            <p class="card-summary">Federal Register 官方通告</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">Federal Register</span>
                             </div>
                         </div>
                 
@@ -471,14 +973,6 @@
                             </div>
                         </div>
                 
-                        <div class="card" data-search="业务咨询问题 - 中华人民共和国海关总署广东分署 海关总署">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNVnJOODVNcmpNbkxBR0pwYkJaZXBENWF4YmVtM2dEU0tQdktBREhmZVA5OEYyelJWWnJkQnNBcmI3VmQ4VkpUSVR5WXFUZlJ3akZBaXNVUTNjb1gwTGd3LVBKVWgxSjZFSFJ4bGF0aEFwNkpoeGRTMF9DRUlPNmNrMHpLSF9xbmRmRUlPUW5kREp3MmhtbXFiSDFB?oc=5" target="_blank">业务咨询问题 - 中华人民共和国海关总署广东分署</a></h2>
-                            <p class="card-summary">中国海关总署 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
-                            </div>
-                        </div>
-                
                         <div class="card" data-search="《光明日报》客户端：深圳小家电乘“风”出海送“清凉” - 中华人民共和国海关总署广东分署 海关总署">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOX1NYZzVISUJpYXVRSmpGbTlFZl9Xa1pJRmVjRmtyd1piOXZYT0xCQTBlTU5QRWI0Z1VmNlh2V0FiOG5TQXRVYlYyclJ4MVNXdy12Z012UndFRnlQV3pFaGVzS1RiUmtwb3VwYkFtUUV2WGNyQUtpT0U0WWZzNUp3YWFR?oc=5" target="_blank">《光明日报》客户端：深圳小家电乘“风”出海送“清凉” - 中华人民共和国海关总署广东分署</a></h2>
                             <p class="card-summary">中国海关总署 官方发布</p>
@@ -495,11 +989,11 @@
                             </div>
                         </div>
                 
-                        <div class="card" data-search="- mofcom.gov.cn 商务部">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxPdDg4ZGJqb3lHd1dCYngwSXdBUjVjal85Qk9nX2dmT000N3BORzlDbXh3TmdlMnJFLUxEWVVrZzlFYkJmRmMySF9taDFtWmpaeThzemVMRUtMQkh0WlV5SHF4ZVVwNl9PU3B6YlF5U3dKanBPcGRyemJBVllzSHU0VjZidzhTQ3AydW1jbmNSMA?oc=5" target="_blank">- mofcom.gov.cn</a></h2>
-                            <p class="card-summary">中国商务部 官方发布</p>
+                        <div class="card" data-search="﻿《中国国门时报》：以法治底色绘就国门安全新画卷 “党旗红”引领“海关蓝” - 宁波海关 海关总署">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOZDFoVzNsWlNvakF1ZFZqbmhHaEluSllRLXhsclFhOHJFdmhqQnBvSGRqelVrMTR2M28yaUdWVjVQWmZLZG1QZzJXck1vd1BWRHhVZUh4WHp1eXFWenFBWnl4Z1pQVlFKcEZnSTNBV2NnSDBONmFBcnV6MEt1YWloMkJB?oc=5" target="_blank">﻿《中国国门时报》：以法治底色绘就国门安全新画卷 “党旗红”引领“海关蓝” - 宁波海关</a></h2>
+                            <p class="card-summary">中国海关总署 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">海关总署</span>
                             </div>
                         </div>
                 
@@ -551,6 +1045,22 @@
                             </div>
                         </div>
                 
+                        <div class="card" data-search="商品价格网 - 商务部 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE5ybEdQZDhBOUdkTDJBOVc4dE9JVHljOHRCWlZiWlZQTmFFNzRXcFIzQVpnTEpaQTlZZ3dIVzdvNTlSY2ZvdEFaZ0xBZGEzdXVSWFQwU3lpN2IyejBWbE8zaGtxZmxYWU5iVlppSG9iT1UwZHkx?oc=5" target="_blank">商品价格网 - 商务部</a></h2>
+                            <p class="card-summary">中国商务部 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="内外盘玉米价格走势分化 - 商务部 商务部">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE9RRjFyUFBfOVJxQm5QcGZqU3pwVGdfSGFycWcwSjhndWJCN1RrWWQ3XzRZbnlZUFh2a3VtcVg2NEdEa3RhVWRqRUJfSXk2ekdEU2lwNzNIMTd2VUk1TnVPSDVSODdjT0w1NkJYSVJvV29pYmpiQ3FV?oc=5" target="_blank">内外盘玉米价格走势分化 - 商务部</a></h2>
+                            <p class="card-summary">中国商务部 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">商务部</span>
+                            </div>
+                        </div>
+                
                         <div class="card" data-search="- 国家税务总局 税务总局">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiUkFVX3lxTFBidnJBRl9VSUI5MGlVajZCNm00RTVPaHBqUkV1bDh1UHp4bnQweElObUloVVgwVFlKX2ZwbG1KaC1ZdmJWLXk2OGVEV19xYmJ6TlE?oc=5" target="_blank">- 国家税务总局</a></h2>
                             <p class="card-summary">中国税务总局 官方发布</p>
@@ -569,6 +1079,14 @@
                 
                         <div class="card" data-search="- tpass.hubei.chinatax.gov.cn 税务总局">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE1icktwYl84ZXF3Zzk4cU41N1ktTEZQcEs2WEoyT18wTGFpMS1MTGNRaDd0VVRGV0wyWWZxR3RZRkZEaEh1UnF3SDJFRkpvOWl1NWZV?oc=5" target="_blank">- tpass.hubei.chinatax.gov.cn</a></h2>
+                            <p class="card-summary">中国税务总局 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
+                            </div>
+                        </div>
+                
+                        <div class="card" data-search="国家税务总局台州市税务局第一稽查局税务文书送达公告（台州成麟汽车销售有限公司） - 国家税务总局浙江省税务局 税务总局">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE5FZmhiMnp6VWtaMkNqRm9VcWF0djlha1ZTQkxPMGdPenp2ZG9XNV82UFF2VGJQUHQxRlZrbWF3VDB6akxCejBpQm5qM01DaU5PMUxUZ0pvUU5CbkhkRUdTRXNCUlJqRjUtclI2OWtkM2NuYnpQZGc?oc=5" target="_blank">国家税务总局台州市税务局第一稽查局税务文书送达公告（台州成麟汽车销售有限公司） - 国家税务总局浙江省税务局</a></h2>
                             <p class="card-summary">中国税务总局 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
@@ -607,14 +1125,6 @@
                             </div>
                         </div>
                 
-                        <div class="card" data-search="2020-10-30 国家税务总局辽宁省税务局2020年10至12月政府采购意向 - 国家税务总局 税务总局">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE9DZzZySDctcHNjMEhVenk2ZWtoNGRBSW5rOHVDVmZRaEVCenBWc1JucnduSnlMREdYTWh3b24zWHpEVkl1Z2x6US14eDBCVTYxSjdGT01sUU1iMEttT2M0RThObldneXVrbHh6RlRtOWVmdXoxWlAzalEwS2VGWTQ?oc=5" target="_blank">2020-10-30 国家税务总局辽宁省税务局2020年10至12月政府采购意向 - 国家税务总局</a></h2>
-                            <p class="card-summary">中国税务总局 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">税务总局</span>
-                            </div>
-                        </div>
-                
                         <div class="card" data-search="usps to dedicate the figures of the american revolution stamps usps service alerts">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMixAFBVV95cUxPX3ZUNGtTV0ptenlGc25SVzExTXhibkRVaGpWcVFUQkktSlhabFp2eE1fa05GUnpqbEdKUWgwTnU0dmJSNEtXTXFoMmJPQTR3N0VFWlJJVHo0YUlBc3lrSnRmRV9SclFISnRvRXE1VjA5MmF4VkVlOXFxbkFFLVdwTG0xZENfbER0SG41VEk0Qy1ZYnVNa0dfV01RNjJBLTBhWGZ1QjU1aXI1NTBpRE9RTEd5QnVINjJ1VWYtblZxTTVmb3Ja?oc=5" target="_blank">USPS to Dedicate the Figures of the American Revolution Stamps</a></h2>
                             <p class="card-summary">USPS 官方发布</p>
@@ -623,48 +1133,8 @@
                             </div>
                         </div>
                 
-                        <div class="card" data-search="massillon post office is hiring usps service alerts">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQaTdUNUlJX1JBZ2t3cjI1amdpcHFMWFpwQUhha1NiX2xIS3RQclJuanpLWXFadXgwN3pxVkFWazNDdVlkcnJjR09XUnl1YlB5dkFGUndBQjIyUklYejZsb3Z3eWdiTmhQRmtWYmE4bU8wUHpYMTM0QXQ0MG5LS0VEUTdVUXNickNjOWFyR0ZJU0UxUVUtQ3dRdGZldw?oc=5" target="_blank">Massillon Post Office is Hiring</a></h2>
-                            <p class="card-summary">USPS 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USPS Service Alerts</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="historic pa post offices to offer “250 years of delivering” pictorial postmark in honor of 250 anniversary of america usps service alerts">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOb0g2NkF0QVNnODFWN09rX01xS3lncy0tdGk3QkQybkdSZUIxWWlTWkd6MDhfbkY0TGZaR0ZVWl9ucUc2aFFTWFI5UHBhOTBXOUthUGIweVJQaU1pd3ZCV1ZmTTBzRXdEZVVONzNPcXVEQVp3T3dFRE1faTZGV2liWGw5UndueVhCb19SYUt5Ynd1eFBqMUc5N3dUazNJQ1JhcjZiX2M1ZUpPa1dFMFpScUhiQWFvdWs2NVNmT00zaWJtaW9Tc1phRjRHektaZnp0SXpWYjZqa2xCUQ?oc=5" target="_blank">Historic PA Post Offices to Offer “250 Years of Delivering” Pictorial Postmark in honor of 250 Anniversary of America</a></h2>
-                            <p class="card-summary">USPS 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">USPS Service Alerts</span>
-                            </div>
-                        </div>
-                
                         <div class="card" data-search="- gcpt.dhl.com dhl">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE5ZTjFKV0d6MFVaV1pnLVlxYkdvMUhEVjExMXFYYnZMUlp1U2NNcWx3V0tpWUxIbWlnckVGdXVBanBuN21LVk1lSg?oc=5" target="_blank">- gcpt.dhl.com</a></h2>
-                            <p class="card-summary">DHL 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="- dhl dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiSkFVX3lxTE5SanYtYWlfWERwRlNDYU80NDhWcHRBQXRWSEV0R2tzaTZERmlmN0tFZldudEl2SVgtNVBVaDhpNFZjQllpUFhOZWNR?oc=5" target="_blank">- DHL</a></h2>
-                            <p class="card-summary">DHL 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="query handling administrator job | jobs at dhl group dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxOeVVqNzZ1bGVaTWlRNFQ1WTV1UTZtWDduOWMxZmM3NV9lQi16blAxejkwYXRDZFZULTUxcXdHelJhN091VG1reV9iN0lGOWVybkRtSTRtV2o2YlE5YWwzN3FKdkZCNGZWdzh3MlZWbUUtYkEzaWRPVXBTWndZUGtjZVBHbjdhZzN2YnY1QTRqdGFidnZzRUJKeFJ1YjZuU0FBSUdv?oc=5" target="_blank">Query Handling Administrator job | jobs at DHL Group</a></h2>
-                            <p class="card-summary">DHL 官方发布</p>
-                            <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
-                            </div>
-                        </div>
-                
-                        <div class="card" data-search="dce flight agent (monday-friday 8am-4:30pm) job | jobs at dhl dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxQcnZfdm9QMGFrbWJWc180Q3VqRlYxenhoeWxWX0NkbE1nUjlVUDhqaUVEelUwZlZidHhNZ3JFXzd0M2ZRWlJFc0JyS0lfSzZRUXlHZUU2TDJ2anp4Yjh4OHhqMWhHaXV0U1JQMFVzbFZNME80TE5qd0M0dUV1VGVsN1BqbWVmenJ5cVN3SmNxMGNSal9BYnczMmUwTlFkc1pIaWY0QnpOSlRFd1k2bWlz?oc=5" target="_blank">DCE Flight Agent (Monday-Friday 8AM-4:30PM) job | jobs at DHL</a></h2>
                             <p class="card-summary">DHL 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
@@ -687,6 +1157,14 @@
                             </div>
                         </div>
                 
+                        <div class="card" data-search="expert - supplier risk management in thane, mahārāshtra, india | at dhl group dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxQSkx3YVhUZXM4RUFmeHZfVTUxejJJa1JkZTVXYjFWTmdEa1dzT0MtMGc0WUhfcjdydmlQeWZqenlPU0t0SHUwUEgyZWJwaTA0M2JMb3ctV1pGaXNfMkdPNU84OXNEUnprSHIyVFl6TVJFMkwxZmoyRkFGeE1zZUZWOXo0NFNSZFFremVET0l3dWpTR285Wl9FNEIwNFc?oc=5" target="_blank">Expert - Supplier Risk Management in THANE, Mahārāshtra, India | at DHL Group</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
+                            <div class="card-footer">
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
+                            </div>
+                        </div>
+                
                         <div class="card" data-search="work for supply chain dhl">
                             <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQUF9JWVFleEVmbGhSTzZkWGVDVzRuRlk1T3lWTWxFdkpRV05yN0lxU0s3QjdOSXJIN0ptMm5zMjRUTWZOTHhlbm1IR2pzbndIQUxmNDFpOEw4NjBHYVltZ3U1a3BuUEJzX2prX2pWaXBITTFQdWU4NC11N09meHhmZFoyNklrdTdDUjZfa2ZyckFkYlRBUlpF?oc=5" target="_blank">Work for Supply Chain</a></h2>
                             <p class="card-summary">DHL 官方发布</p>
@@ -695,27 +1173,27 @@
                             </div>
                         </div>
                 
-                        <div class="card" data-search="senior specialist, global operations & pmo (d/f/m) in troisdorf, nordrhein-westfalen, germany | at dhl group dhl">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxPSzdGZlhLMmZRaGFIaHBSLUhnUWhfQ3ZmMDNJUVk0M0l3cGRzdlVXSGhjUnVqUVdka1YxTTRmNTlWN1QwUXFCbHgwZHc5a01YMHZ2cW95MlNvX040ZlBKOFhpR3pnbEt0c0puWl9jQVhFTlVnVzVwZlpRaXNxZEJPV3cxQ1lHdlpzdERWMl9UTXBRNENoZUNyeldBWjU4WG1XZVZtaFQtY3BYUk4tUkRn?oc=5" target="_blank">Senior Specialist, Global Operations & PMO (d/f/m) in Troisdorf, Nordrhein-Westfalen, Germany | at DHL Group</a></h2>
+                        <div class="card" data-search="senior operations manager (operations manager i) job | operations jobs at dhl group dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxOYVF3WTlaRExUcGt3dmw3Z3ZVZUlpRlZFRDhya2p3QVRJck0tQ18wYmQzWnNUWVh5eExEU2ZjX1N6aG5kYzFGd283V3lqeGpobThMbGFsRnctb1N0ckN0VXAydjNHdHNlQjZBeUE3RFB5anlUQmtySkh6NGRzVkNpVTZXNjdBN3RlT05oX0gwYU05MXlLVlpRWUJQU2ZMT2xxZEJpZEM0WWhfOF9ta3VhUWNQeGNNNk1teHMwQkln?oc=5" target="_blank">Senior Operations Manager (Operations Manager I) job | Operations jobs at DHL Group</a></h2>
                             <p class="card-summary">DHL 官方发布</p>
                             <div class="card-footer">
                                 <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="fedex earns top spot for logistics and shipping on newsweek’s america’s best online platforms - fedex newsroom fedex">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPM3FsMEI0SXJPT1JCeWR1Y2I5ZVVfQTdDZUlYRGVtNFJPOUt1YWNwcHI3aUxjRERGWklkdGpYY3dqa044QXB2Y0NxcWw4S3lSYXVmWjdjUVpPaWgyU3R3dU02VmpqU1V0ZnpGdFJmLUl2aDJHejJjVUhRQ2RKakpOSTFRV3NSdjg4Y0xnNXJZYldfT2VyNWRSdHlUcVZKQjF3YjVhX2NURE1oZk1vcHNqRzg1elE0T3FybUE?oc=5" target="_blank">FedEx Earns Top Spot for Logistics and Shipping on Newsweek’s America’s Best Online Platforms - FedEx newsroom</a></h2>
-                            <p class="card-summary">FedEx 官方发布</p>
+                        <div class="card" data-search="dgf future forward job | jobs at dhl group dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxPSDgtS0hONmgwdnBqM2tVQ05DSThZeUYzejRweXpsa08wRnBLSkRPZU4wUmdSR2k4YkN4bFpQVXBZT01VcDAxSS1mZjloVG5fN09teXJ3NkpoWExHc2NVN1FJbFU2UmMxSWxSRTE2Ym1UUkNUZmZIVklBbmhTLXZ1akpBZ2VFNEdhSmdOQkpoMmNNU1BsT1E?oc=5" target="_blank">DGF Future Forward job | jobs at DHL Group</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">FedEx</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
                             </div>
                         </div>
                 
-                        <div class="card" data-search="ups helps singapore exporter deliver nearly 10,000 orders under pressure ups">
-                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxNMzFCMjdmYjFxQzRjTEs3OFAxSDRscFRmaEpqc3c5elpBQkFxejFUZFF2Q2g5Y2RDSTJ3ZDJIaHJDQk9yNmhjeHZOTmdWSUtzbDdYZGVjaEdmTDF0RnZjejhtY1FOc0RwUmhwTWtrWjZBczNncjJIYmdmOHdiN1JQN3ZfQ1BWal9MdjBCcFVCWDZ5MzR1b2F3WWNNeTZmY1pCSzljd2hSODRhaXltb3RQLTZ6b2FfUWtsbzcxVg?oc=5" target="_blank">UPS helps Singapore exporter deliver nearly 10,000 orders under pressure</a></h2>
-                            <p class="card-summary">UPS 官方发布</p>
+                        <div class="card" data-search="sr recruiter job | recursos humanos jobs at dhl dhl">
+                            <h2 class="card-title"><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPY2hXU0JPdkhDOVo5WlY3YTZ6WkhUZzBBbVlYa1JQWHdFcEZ6dHdIbmFkMW4yUE1GeXRrS0JSQ254NFZScExmR2w5MnpRbk9QUGpieVBGT3NyT0g5N2xFSkZoSGgxbUp6TEp3S1cwM0xrbXU4aG10bWpLN0xSWVJTOFlrUEZvNElOeHB0Z2s3NTE?oc=5" target="_blank">Sr Recruiter job | Recursos humanos jobs at DHL</a></h2>
+                            <p class="card-summary">DHL 官方发布</p>
                             <div class="card-footer">
-                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">UPS</span>
+                                <span class="source-tag" style="background:#eff6ff; color:#1d4ed8;">DHL</span>
                             </div>
                         </div>
                 
@@ -723,7 +1201,7 @@
         
                     <div class="review-section">
                         <div class="review-header" onclick="toggleReview(this)">
-                            <h3 class="review-title">🗑️ 隔离审查区 (11 条候选资讯未通过最终规则)</h3>
+                            <h3 class="review-title">🗑️ 隔离审查区 (12 条候选资讯未通过最终规则)</h3>
                             <span>▼ 点击展开/收起</span>
                         </div>
                         <div class="review-content">
@@ -736,7 +1214,7 @@
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
                                         <span class="review-rule">触发规则: non_seller_news</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     
@@ -745,7 +1223,7 @@
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
                                         <span class="review-rule">触发规则: non_seller_news</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     
@@ -754,7 +1232,7 @@
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
                                         <span class="review-rule">触发规则: non_seller_news</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     
@@ -763,7 +1241,7 @@
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
                                         <span class="review-rule">触发规则: non_seller_news</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     
@@ -772,7 +1250,7 @@
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
                                         <span class="review-rule">触发规则: non_seller_news</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     
@@ -781,7 +1259,7 @@
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
                                         <span class="review-rule">触发规则: non_seller_news</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     
@@ -790,39 +1268,48 @@
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
                                         <span class="review-rule">触发规则: non_seller_news</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     
                                 <button class="show-more-btn" onclick="showMore(this)">展开全部 7 条 ▾</button>
                     </div>
                             <div class="review-source-group">
-                                <div class="review-source-title">GOV.UK (3 条)</div>
+                                <div class="review-source-title">GOV.UK (4 条)</div>
                 
                                 <div class="review-item" >
-                                    <div><a class="review-link" href="https://www.gov.uk/government/news/councils-supported-to-identify-and-support-vulnerable-teenagers" target="_blank">Councils supported to identify and support vulnerable teenagers</a></div>
+                                    <div><a class="review-link" href="https://www.gov.uk/government/news/early-evidence-suggests-the-lap-is-steering-children-away-from-custody" target="_blank">Early evidence suggests the LAP is steering children away from custody</a></div>
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
                                         <span class="review-rule">触发规则: non_seller_news</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     
                                 <div class="review-item" >
-                                    <div><a class="review-link" href="https://www.gov.uk/government/speeches/remaking-the-state" target="_blank">Remaking the state</a></div>
+                                    <div><a class="review-link" href="https://www.gov.uk/government/news/dame-vera-baird-dbe-kc-further-appointed-as-interim-chair-of-the-ccrc" target="_blank">Dame Vera Baird DBE KC further appointed as Interim Chair of the CCRC</a></div>
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
                                         <span class="review-rule">触发规则: non_seller_news</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     
                                 <div class="review-item" >
-                                    <div><a class="review-link" href="https://www.gov.uk/government/speeches/remaking-the-state-annual-conference-2026" target="_blank">Remaking the State Annual Conference 2026</a></div>
+                                    <div><a class="review-link" href="https://www.gov.uk/government/news/ofqual-issues-chief-regulators-rebuke-to-pearson-for-2025-a-level-maths-failures" target="_blank">Ofqual issues Chief Regulator's Rebuke to Pearson for 2025 A Level maths failures</a></div>
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
                                         <span class="review-rule">触发规则: non_seller_news</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
+                                    </div>
+                                </div>
+                    
+                                <div class="review-item" >
+                                    <div><a class="review-link" href="https://www.gov.uk/government/news/derby-builder-who-wrecked-victims-homes-jailed-for-fraudulent-trading" target="_blank">Derby builder who wrecked victims’ homes jailed for fraudulent trading</a></div>
+                                    <div class="review-meta">
+                                        <span class="review-reason">判定理由: 未命中任何跨境业务关键词</span>
+                                        <span class="review-rule">触发规则: non_seller_news</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     </div>
@@ -834,7 +1321,7 @@
                                     <div class="review-meta">
                                         <span class="review-reason">判定理由: 触发关键词: 周年</span>
                                         <span class="review-rule">触发规则: blacklist</span>
-                                        <span style="color:#64748b; font-size:12px;">2026-07-02 08:32:28</span>
+                                        <span style="color:#64748b; font-size:12px;">2026-07-02 16:41:47</span>
                                     </div>
                                 </div>
                     </div>
