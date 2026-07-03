@@ -1,0 +1,179 @@
+{
+  "run_at": "2026-07-03T09:05:36.697642",
+  "source_statuses": {
+    "Amazon Seller News": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "TikTok Shop Seller": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "Shopify Changelog": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "eBay Seller Updates": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "Walmart Release Notes": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "Federal Register": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "GOV.UK": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "CBP": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "USTR": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "EU Taxation": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "海关总署": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "商务部": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "税务总局": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "USPS Service Alerts": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "DHL": {
+      "candidates_found": 1,
+      "confirmed_count": 1,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_with_confirmed"
+    },
+    "FedEx": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    },
+    "UPS": {
+      "candidates_found": 0,
+      "confirmed_count": 0,
+      "quarantined_count": 0,
+      "dropped_count": 0,
+      "error_message": null,
+      "last_run_at": "2026-07-03T09:05:36.697642",
+      "status": "ok_no_candidates"
+    }
+  },
+  "raw_candidates": 1,
+  "confirmed_news": {
+    "DHL": [
+      {
+        "title": "Manager – E-Tail Hub & CPU Operations | (Pataudi Hub) job | jobs at DHL",
+        "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxONjhCaFNBcHhUX0xOZnlnVnhNU1hoSkZNMUg3ZmlTeGVKd0lJSVlqVHFwYVlpSmVJMFNGU1BZZGtQSTJGcE5ETVM4MXpzcjk1X0JSakRWaTdTLWEzbVh0UnhNZG5RWEJGeFR4bUZfYXNsRkJPRURDYXlvU0Ezbld4UVllLTRXUXFiOFhIWGpNNFpWUFhpVUl3c04tbGk3MWMtQmdIdTBKREw5dENWRDN4VF9IdGY?oc=5",
+        "summary": "DHL 官方发布",
+        "reject_reason": "API Key Missing, Default Pass",
+        "rule_triggered": "ai_bypass",
+        "source": "DHL",
+        "pub_time": "2026-07-03 09:05:36"
+      }
+    ]
+  },
+  "quarantined_news": {},
+  "dropped_items": 0,
+  "summary": {
+    "total_confirmed": 1,
+    "total_quarantined": 0,
+    "total_dropped": 0
+  }
+}
