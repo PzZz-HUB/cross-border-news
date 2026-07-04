@@ -134,6 +134,37 @@ def fetch_daily_news():
     add_result("Shopify Changelog", fetch_shopify_changelog())
     add_result("eBay Seller Updates", fetch_google_news_rss("sellercenter.ebay.com", "eBay"))
     add_result("Walmart Release Notes", fetch_google_news_rss("corporate.walmart.com", "Walmart"))
+    
+    # 东南亚平台
+    add_result("Shopee", fetch_google_news_rss("shopee.com", "Shopee"))
+    add_result("Lazada", fetch_google_news_rss("lazada.com", "Lazada"))
+    
+    # 中国出海型平台
+    add_result("AliExpress", fetch_google_news_rss("seller.aliexpress.com", "AliExpress"))
+    add_result("Temu", fetch_google_news_rss("seller.temu.com", "Temu"))
+    add_result("SHEIN", fetch_google_news_rss("shein.com", "SHEIN"))
+    
+    # 拉美平台
+    add_result("Mercado Libre", fetch_google_news_rss("mercadolibre.com", "Mercado Libre"))
+    
+    # 日韩平台
+    add_result("Coupang", fetch_google_news_rss("sellers.coupang.com", "Coupang"))
+    add_result("Rakuten", fetch_google_news_rss("rakuten.co.jp", "Rakuten"))
+    add_result("Qoo10", fetch_google_news_rss("qoo10.sg", "Qoo10"))
+    
+    # 欧洲区域平台
+    add_result("Allegro", fetch_google_news_rss("allegro.pl", "Allegro"))
+    add_result("Kaufland Global", fetch_google_news_rss("kaufland.de", "Kaufland Global"))
+    
+    # B2B 外贸平台
+    add_result("Alibaba.com", fetch_google_news_rss("seller.alibaba.com", "Alibaba.com"))
+    add_result("Global Sources", fetch_google_news_rss("globalsources.com", "Global Sources"))
+    add_result("Made-in-China", fetch_google_news_rss("made-in-china.com", "Made-in-China"))
+    
+    # 独立站 / SaaS 补充源
+    add_result("BigCommerce", fetch_google_news_rss("bigcommerce.com", "BigCommerce"))
+    add_result("WooCommerce", fetch_google_news_rss("woocommerce.com", "WooCommerce"))
+    add_result("SHOPLINE", fetch_google_news_rss("shoplineapp.com", "SHOPLINE"))
         
     # === 政策源 ===
     add_result("Federal Register", fetch_federal_register())

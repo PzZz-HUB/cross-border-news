@@ -9,7 +9,14 @@ from web_builder import build_webpage
 if sys.stdout.encoding != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
 
-AUTO_KEEP = ["Shopify Changelog", "eBay Seller Updates", "CBP", "USTR"]
+AUTO_KEEP = [
+    "Shopify Changelog", "eBay Seller Updates", "CBP", "USTR",
+    "Amazon Seller News", "TikTok Shop Seller", "Walmart Release Notes",
+    "Shopee", "Lazada", "AliExpress", "Temu", "SHEIN", "Mercado Libre",
+    "Coupang", "Rakuten", "Qoo10", "Allegro", "Kaufland Global",
+    "Alibaba.com", "Global Sources", "Made-in-China",
+    "BigCommerce", "WooCommerce", "SHOPLINE"
+]
 TRUSTED_RULE = ["Federal Register", "GOV.UK", "EU Taxation"]
 TRUSTED_KEYWORDS = ["tariff", "tax", "trade", "custom", "import", "export", "ecommerce", "seller", "shipping", "freight", "logistic", "border", "duty", "rule", "amendment", "regulation"]
 
