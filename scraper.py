@@ -135,36 +135,38 @@ def fetch_daily_news():
     add_result("eBay Seller Updates", fetch_google_news_rss("sellercenter.ebay.com", "eBay"))
     add_result("Walmart Release Notes", fetch_google_news_rss("corporate.walmart.com", "Walmart"))
     
+    q_str = "news OR policy OR seller OR update OR notice"
+    
     # 东南亚平台
-    add_result("Shopee", fetch_google_news_rss("shopee.com", "Shopee"))
-    add_result("Lazada", fetch_google_news_rss("lazada.com", "Lazada"))
+    add_result("Shopee", fetch_google_news_rss("seller.shopee.cn", "Shopee", query=q_str))
+    add_result("Lazada", fetch_google_news_rss("sellercenter.lazada.com.my", "Lazada", query=q_str))
     
     # 中国出海型平台
-    add_result("AliExpress", fetch_google_news_rss("seller.aliexpress.com", "AliExpress"))
-    add_result("Temu", fetch_google_news_rss("seller.temu.com", "Temu"))
-    add_result("SHEIN", fetch_google_news_rss("shein.com", "SHEIN"))
+    add_result("AliExpress", fetch_google_news_rss("seller.aliexpress.com", "AliExpress", query=q_str))
+    add_result("Temu", fetch_google_news_rss("seller.temu.com", "Temu", query=q_str))
+    add_result("SHEIN", fetch_google_news_rss("sheingroup.com", "SHEIN", query=q_str))
     
     # 拉美平台
-    add_result("Mercado Libre", fetch_google_news_rss("mercadolibre.com", "Mercado Libre"))
+    add_result("Mercado Libre", fetch_google_news_rss("vendedores.mercadolibre.com", "Mercado Libre", query=q_str))
     
     # 日韩平台
-    add_result("Coupang", fetch_google_news_rss("sellers.coupang.com", "Coupang"))
-    add_result("Rakuten", fetch_google_news_rss("rakuten.co.jp", "Rakuten"))
-    add_result("Qoo10", fetch_google_news_rss("qoo10.sg", "Qoo10"))
+    add_result("Coupang", fetch_google_news_rss("sellers.coupang.com", "Coupang", query=q_str))
+    add_result("Rakuten", fetch_google_news_rss("rakuten.co.jp", "Rakuten", query=q_str))
+    add_result("Qoo10", fetch_google_news_rss("qoo10.sg", "Qoo10", query=q_str))
     
     # 欧洲区域平台
-    add_result("Allegro", fetch_google_news_rss("allegro.pl", "Allegro"))
-    add_result("Kaufland Global", fetch_google_news_rss("kaufland.de", "Kaufland Global"))
+    add_result("Allegro", fetch_google_news_rss("allegro.pl", "Allegro", query=q_str))
+    add_result("Kaufland Global", fetch_google_news_rss("kaufland.de", "Kaufland Global", query=q_str))
     
     # B2B 外贸平台
-    add_result("Alibaba.com", fetch_google_news_rss("seller.alibaba.com", "Alibaba.com"))
-    add_result("Global Sources", fetch_google_news_rss("globalsources.com", "Global Sources"))
-    add_result("Made-in-China", fetch_google_news_rss("made-in-china.com", "Made-in-China"))
+    add_result("Alibaba.com", fetch_google_news_rss("seller.alibaba.com", "Alibaba.com", query=q_str))
+    add_result("Global Sources", fetch_google_news_rss("corporate.globalsources.com", "Global Sources", query=q_str))
+    add_result("Made-in-China", fetch_google_news_rss("focus.made-in-china.com", "Made-in-China", query=q_str))
     
     # 独立站 / SaaS 补充源
-    add_result("BigCommerce", fetch_google_news_rss("bigcommerce.com", "BigCommerce"))
-    add_result("WooCommerce", fetch_google_news_rss("woocommerce.com", "WooCommerce"))
-    add_result("SHOPLINE", fetch_google_news_rss("shoplineapp.com", "SHOPLINE"))
+    add_result("BigCommerce", fetch_google_news_rss("bigcommerce.com/blog", "BigCommerce", query=q_str))
+    add_result("WooCommerce", fetch_google_news_rss("woocommerce.com/blog", "WooCommerce", query=q_str))
+    add_result("SHOPLINE", fetch_google_news_rss("shoplineapp.com/blog", "SHOPLINE", query=q_str))
         
     # === 政策源 ===
     add_result("Federal Register", fetch_federal_register())
