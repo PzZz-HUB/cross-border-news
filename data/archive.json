@@ -1,5 +1,422 @@
 [
   {
+    "date": "2026-07-26",
+    "news": {
+      "USTR": [
+        {
+          "title": "docket for public comments - USTR portal - United States Trade Representative (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMiQkFVX3lxTE5WTDd2UjgxRWtvbS0tX0hfUFRmMG9xSkFiSUh6MUFsWGh0MTJwWXZ5bTdYc1paeEZ6TGE0N2JjMUdPZw?oc=5",
+          "summary": "USTR 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "USTR",
+          "pub_time": "2026-07-26 01:58:30"
+        }
+      ],
+      "海关总署": [
+        {
+          "title": "政府信息公开 - customs.gov.cn",
+          "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPekJUSEVzaW42VjNWNnoxeWdBeFFldTAxTmIxcjhSMFFSOTMyZ1JkalpVcUw1TnZ0OWhRd0FoSjhBeXRvd1lvLUthdmFLVVJJYUQ1VTAxbmROX1h3ZFNZZnBldXE4bGhEQ0R3MjdzS1I2YWJRb1RhZk1CS1JMZktEQmJwUGFBQTQxOWFkdHU4OFl3YnBCYWZWOFFRdTdDNnlxaFU3SHBNWnhWMWlueTlHOEd0UmVfazVjR2E3V0I0VGNBWFpJanJ3Vk5qRHdkeWRuNWFlQ0pjdkR6dw?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-07-26 01:58:30"
+        },
+        {
+          "title": "2025年度海关总署部门决算 - customs.gov.cn",
+          "link": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPUFNEQ1pHSzJ1aG1uMlFFODJNY29MbnhCTWNOZ0RMaDRqcEdrUGxCMXhTU0NRNmhkdUxBYzZkYkFmd0lIazY5bmhwVUJEVzVaaEdTYVlFTnRKZFRKZEl3a0s5dlJZUzRNQkJXU1JGVnF2MkFXUllzMDdTSjFFaVF4M1pVUlNudDBselZGT09SQTc1a2ZvTGdReGpULUU5WkxRaTBDaUYwcEdkMkU3eWMyZDUzZHBuVWkzLUwxbzB3R3puU2dxVGlSMGZ3bXZBU2l3ampfYWhsNlQ5OFlFRkxPY19QUUI?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-07-26 01:58:31"
+        },
+        {
+          "title": "新闻发布 - customs.gov.cn",
+          "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNRV9lZWwzTVhheURJcTJEM3RvRkdqcXBCd0hPa2RSMDk2TkNiZzdFMGhmQTZxSUktTVB3ZS04TTJVSEhVeW9nOEc5aHVxaVQ2Ym0yelFHTEl3U0xnYnhMaUNlQWYtS2U0blp6ZURUckJVYi05WlExY2FLUnJ3dHdDWnlDYjBCWWUtT2xZRkpIcGVZNExQMXA0SFd4NW1zSGR4QW9VbW1XS2kxWmpCR2c?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-07-26 01:58:31"
+        },
+        {
+          "title": "双随机、一公开 - 汕头海关",
+          "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQSlplUUlFLXBGTzZwZjVsZ1drZVFzUENWS0pzUzViajlaWUpXWWZXWncxYnlsclgyRm5NSlI2Y1FRZE5KUkRRMVgwVGVSeG5aaHlJdFRDMUZGTllFN0JHZHRwM2JPY1d0U2U1b0RHdHd2cHlVZVBGQ0o2R1lhaHd1ZUM1WEZQNmJiaWllMi1pdlFyZTZDYzh5RDljNTJuLWZ5cUVhQVVQbEtMbHFjbXphZmd6VmN4NzZqZVl2bE43ckcxcXo5YWtUeHdQSQ?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-07-26 01:58:31"
+        }
+      ],
+      "税务总局": [
+        {
+          "title": "海南 - etax.hainan.chinatax.gov.cn",
+          "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5lVWZXOFBSSW84VXlLSnVja2FvNjhKUXFyR29oYTNscHhITzdkR1FYaXNjbGNkalA4V0tzYnhEYWNldnBPZzVEZF9jNXB3b3VKMTNN?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-07-26 01:58:31"
+        },
+        {
+          "title": "国家税务总局内蒙古自治区税务局检索 - 国家税务总局内蒙古自治区税务局",
+          "link": "https://news.google.com/rss/articles/CBMihgNBVV95cUxPdDJuTC11YTIwYk45YXVLS3Rhc2F3STFpODdxZFl0NEtXV1BUOElZRk1janRwakdQV1diX2VOQ0dmeVVKVXRld3NDWFl4d2N3UmpBZnRHMFdraGtsTEJlWmxFMFdWVmJ1T0M1UE1DOHhvSExUMTB6cWxpUVRMR0phYXpfZ3BNSUZDS0RDU2xVM3ZRRlpOZ3M2eEt2SXZ3Um9WLWVrcW5lMjJEclhWbWhNOUFWbHdDSzhaZXRWa0J2cmM1eXA0dUJscy03VzV2SGZlRFBpN2FtdG4yUmRGaGZEMUIyVE1QYVBPbFhYZXNfN1dQc0tOeE9tREhUQmJMNS1PWFI3b3RyYzNVSEpPOGo0VzJCN1ZseUNDMFFTUllOVTIwcVdrMkJtYVZrYkRGTTJGc2M2RWFNTnNhRzltLVBZaEJSQ1lGRHJlOTQ4elYzQklfR2J0MkNXRk4xVVBtRnk3T0VzTlBfUjF1QmZzeXF6OEtTdmR0SWtnS1phdFVjcGxRM1pTQnc?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-07-26 01:58:31"
+        }
+      ],
+      "DHL": [
+        {
+          "title": "Debrief Coordinator - 12 Month Contract job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOaVg1Z0RoeEVUOHI3dmxXUVVteGhKNUZRNkRIY3BSSnpJY3pmd3RCRGQteHpIWXpIaEpPRWloU3BaUndxdjZkVDRQcEtheTRzUjZtbFJuYnFDWVNNd21tbVJBcHJicFJmeWVibjROUWFwTDRIRXJvOV9Yd2JEa19ydVNOSGE2ODNCWnN3bUdfR3hoZTNSb2JOSnV5bEt5Q1hNZlJ5Zmk1M3l5UQ?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 28.573180599s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 28\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-07-26 01:58:31"
+        },
+        {
+          "title": "Operation Staff - BOB job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNdllWQXNfMWQ4UmJjZ2JVLVlNelhwb1pZS24wME9JOWpFZHZETldaNldKNFpDWmhybkJzc2xLVTlBQ012cm5QN0xtVHVKTU1PVGo2dmpaUjJZYnp5RDl3WHZ4M1NsU2I0SUlwNG51S2hKNTdGdjNNU1BwMVZmT2dfaDRMd2tVTzUwRmZZNUlMMm5CZw?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 28.486821584s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 28\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-07-26 01:58:31"
+        },
+        {
+          "title": "Class 2 Driver job | Operations jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNNFA1Q0xfeWJyUUFLSnliMXU4UDA1X1RhazVVVlJLOExvVnhyaEdjWnYtUUFNazJ2Sy1vTHpFWGFPWGNhUnVFSks3QTZ2ZFdLSFdEZmZYSGg4dWJyV0lKSThfODBKZHdaYzlEemVkVFdTX0l4RHNsZHk2Q1hNcUJYTHhQRVJHQVY5?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 28.410097987s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 28\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-07-26 01:58:31"
+        }
+      ]
+    },
+    "quarantined": {},
+    "statuses": {
+      "Amazon Seller News": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "TikTok Shop Seller": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Shopify Changelog": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "eBay Seller Updates": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Walmart Release Notes": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Shopee": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Lazada": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "AliExpress": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Temu": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "SHEIN": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Mercado Libre": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Coupang": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Rakuten": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Qoo10": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Allegro": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Kaufland Global": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Alibaba.com": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Global Sources": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Made-in-China": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "BigCommerce": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "WooCommerce": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "SHOPLINE": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "Federal Register": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "GOV.UK": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "CBP": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "USTR": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_with_confirmed"
+      },
+      "EU Taxation": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "海关总署": {
+        "candidates_found": 4,
+        "confirmed_count": 4,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_with_confirmed"
+      },
+      "商务部": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "税务总局": {
+        "candidates_found": 2,
+        "confirmed_count": 2,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_with_confirmed"
+      },
+      "USPS Service Alerts": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "DHL": {
+        "candidates_found": 3,
+        "confirmed_count": 3,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_with_confirmed"
+      },
+      "FedEx": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      },
+      "UPS": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-07-26T01:58:30.748076",
+        "status": "ok_no_candidates"
+      }
+    },
+    "summary": {
+      "total_confirmed": 10,
+      "total_quarantined": 0,
+      "total_dropped": 0
+    }
+  },
+  {
     "date": "2026-07-25",
     "news": {
       "Shopify Changelog": [
