@@ -1,5 +1,548 @@
 [
   {
+    "date": "2026-08-04",
+    "news": {
+      "Walmart Release Notes": [
+        {
+          "title": "- Walmart",
+          "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQSHJnM2FBeVRYX0ppWl9sWDdidC13UGhHYUQ4U2ZDaGdLNWJFM1JyMHoxMDRCaWNQTVVfWUNsbkJpQjFUVUJUTFNhU1Z1ZWNlNzlGTjFqUFpmX2p3SFRQeU1IMXlIV1lsRFZpQThqN0JqenpsSXRjTEpBblZmTm5VOUlpWlRXbk9WOTYycXdWQ0pTUHRwUC1wY1Z1WUZDUWxrOW43YTl4UlhzUGNfeDFZUzgxOWpyTkdiQ3ZrdWJ3RlRJMUxBOWVCNFFsdFl4Q0xmX1FvRWZ5OEVXOVZvMEhj?oc=5",
+          "summary": "Walmart 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Walmart Release Notes",
+          "pub_time": "2026-08-04 01:46:17"
+        }
+      ],
+      "Alibaba.com": [
+        {
+          "title": "- Alibaba.com",
+          "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9LZE93VkZYbEU3WjY4ZHRjaUFnc2pxX2h2aExxR1paSC1OeU01S19Qc0N2bXc1cVBacURVT1JIUUdyY1k1aUxXc3F0VF9uUkRreDZlclBISzl3cGlhZ1E?oc=5",
+          "summary": "Alibaba.com 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Alibaba.com",
+          "pub_time": "2026-08-04 01:46:17"
+        }
+      ],
+      "CBP": [
+        {
+          "title": "CBP opens Global Entry Enrollment Center in Tampa - U.S. Customs and Border Protection (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNZXBTaW94ZVhIMUR3OGpVZHo3Rkg1UWl2U2N0M3U1ZU9HeDNBd3FNS2UzMmc3djBldmU5S1NSY2pKNlV3dXlWcFFyU0ltd21La3l5S0c0bVhjb3RUVjd1UWo0dVB6S3dDTkZXd1VHdkFzem10ZFpoUkZyZTQ3emVkX0lEQm5jVHMyZVY1TzJmVkNtOGRuc1VlejM4Zw?oc=5",
+          "summary": "CBP 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "CBP",
+          "pub_time": "2026-08-04 01:46:17"
+        },
+        {
+          "title": "CBP Field Operations to host 15th annual ‘Trade Day’ in Detroit - U.S. Customs and Border Protection (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQdUZaekFub3hPTXRXQ0RlcnRYU2FWMHJuU29xc0xPOGM0aXpybWt0VWZ6ZWMyMjB2akxVV0pVdlA3QnlkQVN2b0w2LUdWc2ZFa0VKM0pVMUFCVjdWRW5pTmFlc1pJLVFXYWFYYXdDbmJrVDllc296OW5SZ09VdUNvOUdpMDJlSEl5T1NEM1FDTi1JR3Q2dXVFOXhnRXFGSkV3U09EeFpJZw?oc=5",
+          "summary": "CBP 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "CBP",
+          "pub_time": "2026-08-04 01:46:17"
+        }
+      ],
+      "海关总署": [
+        {
+          "title": "政府信息公开 - 中华人民共和国海关总署",
+          "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOTGpYSnZlTWVXMXhJeWZRVVZKSUVfT1hVOHNMV1dUaUNvckxwU2l1NWF0OXp1MDdrNGtQU005OEMzeVlCeU5HZk1zd3J0eVFuMUhLMURNOC1ZRm1oUWpxMWtNT0lhV19US1ZRUGhOc0pEaGtZWnpJaHc4RXJYa21yenp3eUpMWVE5SDdNR3RLaUdHOTFObVFLQURwc2FMT1B4S2E3NWRkREpmQkp0WWV2eFlLaXZZWGR3akJNQWRNZERsN240VmxyV1AxelR0NWVBVUY3TWlqWDF5QQ?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-08-04 01:46:18"
+        },
+        {
+          "title": "中华人民共和国黄岛海关行政处罚决定书 - 中华人民共和国海关总署广东分署",
+          "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOcVpSQ1ZwTlJTdnBPOVJYUjhvc0Mtd3VwM2lYekRleUVVV0NCOWdOQnAwcXRPQnN4dTRxZVpWLVFNa3JzTVVuaUZ6YVl5cUFCZGljTk4tQ3lxQ3gzOHo2TVZYek4zNTIyZkJSOUxoTDE1bjF1NE9hMklVeXlXWEJOSWpjWExHMWhwWElQdWdUNGVWSFM1UGNDeFVGZF9qZmZwSVlGLUlJT3RIM3ZKdUc3T2VXYnFSZzAtYVNnaQ?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-08-04 01:46:18"
+        },
+        {
+          "title": "各关新闻 - 中华人民共和国海关总署",
+          "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNTW5HU0M3dWdaN1FRbDBBWm5CYnJVMDFoVjIxRkswUWZHY1dfRlFOSXNSQ1hyUzV1XzFEdHNLZEYxbnl0X0FYX1F5OXRLeFlCMFFuY09pNG95Z0xnSnB6UjF2T3JLd0ZaaHdGWG1LS1NyYzJzS2YtYmh4OVVVZjBMTEk5MU9tcnVnRXpJWENkemFWVzFGTEZKSDkySllkMVRlS0ZqVjVFRjNOUm5vQ2ZoX0RuQzVVTUFSRzJZVkl4STFEUjFj?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-08-04 01:46:18"
+        }
+      ],
+      "商务部": [
+        {
+          "title": "培训课程 - 商务部",
+          "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNYU9ObnNhVVRrSGFqNXp1Zmt0UWlaajFyZTh2WmxWcy1WbFBybkZJWS1qSUFXNkRCdklQdEFkX2RsbDNxTks4YmZhYU9iNG1TOEpCc243ZEI2dnl2a1M3OTQ4N3YzVXJQVGZrRHN5LURvMTFKZVN6aklVeUlCRjQwR2JiLVZ0RXhmWW5CVjM2VVRJNU92MWxWTGJmaTMyWTZ0eW1DWUw4Y1FHU2lxTFdtTUhqaDF4ckRqQW9FN3g2OXBZZUZiV243QzlPNlFkQUpzS1ZWQnNFSWVxbU5LSUE?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-08-04 01:46:18"
+        },
+        {
+          "title": "巴西就美国对进口自巴西某些产品的附加关税向WTO提出磋商请求 - 中国贸易救济信息网",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOdW9lajFpeHhnYkJKZEhheUdGVlJOZTRlZzNlMFBDdGZZWGpPRE9yLUZya3otT25TREdlUmJzT0VsaTNfZmpZMXkzRHJIR3BpSG9rMHBRNW5GLS1fYXVCNlN2N1A3eXVWN09PaV91NEtpR09KcU9QOTdUM3J1OUxwVkJ0QTdJbE9XVkc2ag?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-08-04 01:46:18"
+        },
+        {
+          "title": "上半年我国规上电子信息制造业营业收入9.41万亿元 同比增长18.5% - 中国服务贸易指南网",
+          "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1jd3p2WmZGSk9LVkhNWW1UQXd4eHVOY2poVE5lWGQxQzVSeWo3SVZFMEY5Z29jNGg0NlBFdGNadTlkWTBuYkxoakRqeFp0ZmdXWmRWdFcycEdrRlpZXzFtbVZyNmp2ZkljZERWbVVGM3kwYi1kbjN2MDlQS2Q?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-08-04 01:46:19"
+        }
+      ],
+      "税务总局": [
+        {
+          "title": "海南 - etax.hainan.chinatax.gov.cn",
+          "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5lVWZXOFBSSW84VXlLSnVja2FvNjhKUXFyR29oYTNscHhITzdkR1FYaXNjbGNkalA4V0tzYnhEYWNldnBPZzVEZF9jNXB3b3VKMTNN?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 40.808872767s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 40\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-08-04 01:46:19"
+        },
+        {
+          "title": "隰县 - 山西省税务局",
+          "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5UbHAtRjQtZTZkTnBoVFBlNlFRTmFJZXlTSGhDLXRva3lBeDBUZkdiWTQwUk1qcU1oa2tuclNwUTNaWnc0ajgzelFpSl9aQ2NIbGtJempTLVRzc0dJdFRjckZDMnZQMFE?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 40.590752562s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 40\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-08-04 01:46:19"
+        },
+        {
+          "title": "开发区税务局：春风润企 精准送策赋能外贸发展 - 青岛市税务局",
+          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQcnRWQkNvbGJTMFl1NUhVMkw4Tklmb2VWRXJpLV9OZzlyUXBkcENmdEtkRVVwX2VpTFFhU3I0cmJkWFY1Nzk3aHJ0Ymp1dkVJSlQ2NlFMaXQ0Q0drd01tVHVYTVN6Z0hyYm1sYjRDY1c4eW1fQ2hkRzg3SU1qQzFfc0wtR0xBVXZhYjcxcGdhQQ?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 40.443750914s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 40\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-08-04 01:46:19"
+        },
+        {
+          "title": "国家税务总局天津市税务局调整存量住房交易计税基准价格项目（项目编号：TGPC-2026-D-0834）公开招标公告 - 天津市税务局",
+          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNZFJodXB5LVJqTkxVM09GYVN4NnE4dElMSnJwZmRtVnVCanFCX1BRdmpSVE9wOFVucFBiZnlGRmNoUzlFSmZEWld0X0NTand2cTdBbWxvX1VfZkFOTFdpdzIzeVY3d0Q5emlGOUV3c0lmS05NUXVSRExMVFc4VVpQVUFudDJhdE1qZHRqWGFDMFVYZw?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 403 Your project has been denied access. Please contact support.",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-08-04 01:46:19"
+        }
+      ],
+      "DHL": [
+        {
+          "title": "- gcpt.dhl.com",
+          "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5ZTjFKV0d6MFVaV1pnLVlxYkdvMUhEVjExMXFYYnZMUlp1U2NNcWx3V0tpWUxIbWlnckVGdXVBanBuN21LVk1lSg?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 40.088157824s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 40\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-04 01:46:19"
+        },
+        {
+          "title": "Tax Accountant job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOTWwwYmtXN3E0Q19TQ2tzM0pwR0p6TzF6bURsWUxZOHdMZmJRRUg1ZF9CUnBQRlhkSURFVzBJSzFpbm5YMW9oSUtGY0ZLV2ItTVg4Qi1uc3E4ZU5nLUxhZS1QRl9JemlENWU0dlF6RmFiMFNMbHJVWGNXM1VyaU56ZTZRbVVVdw?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 39.941614885s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 39\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-04 01:46:20"
+        },
+        {
+          "title": "Head of Road Freight and CDZ job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPaDlRWGdvTkVuMklreWhyMl9aYmV0SFJLcVFnYlp3TjY0a0llcUxLOEx1Ty1Pd2lBYURwR21KVWpFNWhZVXUtTVBzQnJNZENWQlhDb1BJZ3VManp2dEo1NmszcU1VaHRESF9zZXBnTTdJSk1XLTl2Ry1paHRpNmJpWHUtQzhkdFNOTnNDWEwxNE5hMzZlUWZwZA?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 39.808908511s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 39\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-04 01:46:20"
+        },
+        {
+          "title": "Human Resources Intern job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQc0ZROUhLemRQYWJYOUJiVGc5SzRyeWg3ck4wd3VYQmhxdWtFMlVyX1VJTzNnU2YtaVF5cHotX25ZQzZhczB1NmE2Tlh6Z0Y0bjJQNTNNVnpSNUYtRkc4Uks0akJ1RFFPTXZ3ZmQtTlhJekJndzVPcWxrLS1BdkYwUUxsaC1JakEzV25Td0lnajQ?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 39.642878085s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 39\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-04 01:46:20"
+        },
+        {
+          "title": "Class 1 HGV Driver - PM Shift job | Operations jobs at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxORTdtdlBSLUdtR2k4UkRUSzJiNEV0ZEp6R0Q3M2RTNjNlV2VIb0Z3Sld1RXh6Qlh0ejFvclluUUhpZXlSclhicllGeUxMQVV6OWpEMFJFSjlYcThXdGJVbXA3S0hrRWt0ZXA2OVo1OWw4RC1EaGt5cW1nemJ3S296QzZ0RExzR2ZhcTRMZVVCZHlxQzd0TUVRNXEyQTZoTG5jQ0ZlOA?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 39.50966458s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 39\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-04 01:46:20"
+        },
+        {
+          "title": "AI Intern job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPcmNISHAtWHJwX3Q3WGFWcXBZYnVVZEthUFplMWVFcG8ySVIyX1dRVnhsdm9LRzJoLXEwWUVwajhmbXJzOWE5QnB0aVhOTEZ2dVpVajZ5TzZ0LUpQX2hQcVFsNzdDMmMyS3JocUJMeUtNRHB6RG9iS3p4d2hmeXM1Sm5wX3k?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 39.364148472s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 39\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-04 01:46:20"
+        },
+        {
+          "title": "Principal IT Solutions Consultant job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOSURlY04xQzU1ZzRNTHB2a3NmZ1h3UDBKMXpMRS1ucVJJdXcwQmJ3Zm9EQjNkaVF4dVo0TFduYlNMN0xjdmYzT014WmE3YVY1MWlBUjAxcVdUZGYzTUtCQXo2SXNRaUJhQmdxTXJDQVdTc0Z1aDRGLVBlbEd1bUhteVR2WklEM3VlbTJVSlJaMDJrTURNcUVxVlhicXBiZFY3N2hUbg?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 39.160644104s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 39\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-04 01:46:20"
+        },
+        {
+          "title": "TSR - NVM job | jobs at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTk9GTEhMY3VfaGMyNWdnMWJyTkdPVTFobjl3cHNRRnVzOThvbF9EZkFmbXZoVnpzU2hRcEdiZnpyNXZLcURqekdoWmFXVWppZFpLMWlVQWNHVlhSUU9nTzRTaDh3T3hnSC1xaWZFMEhjUFFXbDhmeVVMbDlCajZKNFF2ZUpTVjg?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 39.025372394s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.5-flash\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 5\n}\n, retry_delay {\n  seconds: 39\n}\n]",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-04 01:46:20"
+        }
+      ]
+    },
+    "quarantined": {
+      "GOV.UK": [
+        {
+          "title": "More students to save from September as changes to 16-17 Saver railcard come in",
+          "link": "https://www.gov.uk/government/news/more-students-to-save-from-september-as-changes-to-16-17-saver-railcard-come-in",
+          "summary": "GOV.UK 官方通告",
+          "reject_reason": "未命中任何跨境业务关键词",
+          "rule_triggered": "non_seller_news",
+          "source": "GOV.UK",
+          "pub_time": "2026-08-04 01:46:17"
+        }
+      ]
+    },
+    "statuses": {
+      "Amazon Seller News": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "TikTok Shop Seller": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Shopify Changelog": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "eBay Seller Updates": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Walmart Release Notes": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_with_confirmed"
+      },
+      "Shopee": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Lazada": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "AliExpress": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Temu": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "SHEIN": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Mercado Libre": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Coupang": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Rakuten": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Qoo10": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Allegro": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Kaufland Global": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Alibaba.com": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_with_confirmed"
+      },
+      "Global Sources": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Made-in-China": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "BigCommerce": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "WooCommerce": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "SHOPLINE": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "Federal Register": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "GOV.UK": {
+        "candidates_found": 1,
+        "confirmed_count": 0,
+        "quarantined_count": 1,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_all_quarantined"
+      },
+      "CBP": {
+        "candidates_found": 2,
+        "confirmed_count": 2,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_with_confirmed"
+      },
+      "USTR": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "EU Taxation": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "海关总署": {
+        "candidates_found": 4,
+        "confirmed_count": 3,
+        "quarantined_count": 0,
+        "dropped_count": 1,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_with_confirmed"
+      },
+      "商务部": {
+        "candidates_found": 4,
+        "confirmed_count": 3,
+        "quarantined_count": 0,
+        "dropped_count": 1,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_with_confirmed"
+      },
+      "税务总局": {
+        "candidates_found": 4,
+        "confirmed_count": 4,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_with_confirmed"
+      },
+      "USPS Service Alerts": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "DHL": {
+        "candidates_found": 8,
+        "confirmed_count": 8,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_with_confirmed"
+      },
+      "FedEx": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      },
+      "UPS": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-04T01:46:17.774939",
+        "status": "ok_no_candidates"
+      }
+    },
+    "summary": {
+      "total_confirmed": 22,
+      "total_quarantined": 1,
+      "total_dropped": 2
+    }
+  },
+  {
     "date": "2026-08-03",
     "news": {
       "Walmart Release Notes": [
