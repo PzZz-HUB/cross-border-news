@@ -1,5 +1,483 @@
 [
   {
+    "date": "2026-08-22",
+    "news": {
+      "Amazon Seller News": [
+        {
+          "title": "5 ways Amazon is investing in Colorado - About Amazon",
+          "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQSGRmWV9BbWwwQjVWaGpFbkxIaEx4LVZkR1k0aURwZnF2WEFOcUFXWlFLZ1M1cFlTU2Yycl8xZlBhUHgwemxYeUx0bm80SmtVczMycmV5bng1d041eUF5SlZ0Z3ZJb2FLWF8taWdYR2NZZXV1UUhxck9VWUhTVjdncFFjSDQzVXhXNC1idS1RYjdMMGF1d2dNWG1qOHlRWVh0clVUemxXdw?oc=5",
+          "summary": "Amazon 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Amazon Seller News",
+          "pub_time": "2026-08-22 00:44:07"
+        }
+      ],
+      "Walmart Release Notes": [
+        {
+          "title": "Walmart Energizes 100th Store with EV Fast Charging in Monument, CO",
+          "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOVW9kVW5qZHpRbktYQ05xNjM4ZklFNWhjXzQxZ0UwU2J1QkswWW55NTM5SHItVGFVVWRGR2QxMUJuR2xLdTdQcGc2SVZ1ZDd4UnZUMzRQNUlqanRhdmotSFVwU05EZXB5dFVaU3VPMVp6a2FWQmY5bGJKVE1LbjNsS2RhRnVNZE81NlMyV20zTmpVTkxjMUNySWdMZGVuTGYteWZGS0NyZjJ3WHBGUXItTjBn?oc=5",
+          "summary": "Walmart 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Walmart Release Notes",
+          "pub_time": "2026-08-22 00:44:07"
+        }
+      ],
+      "CBP": [
+        {
+          "title": "Dulles CBP officers seize over 2,000 cartons of counterfeit Camel cigarettes from Singapore - U.S. Customs and Border Protection (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQWFZrdGlrNUE2bklKNWlYbHZJUTlTY3ZMaDZQYUNuUWVxX0xFMjFfYmtaSGwyWFBhcW5hMVlmSGhpbUxIVmJtODJjUDlzaEhrb2VhYkJ3WHNlTi0tVXVaWjFtVjI1QTRra0pVeEZhczkzLVFTbGFSTVo1amt1YmxYMzVVd09xOFlhNUVhakRoN0QwSEdvTncxNTNsYUR4Mk9wM211OGlUWThIdkIzSExN?oc=5",
+          "summary": "CBP 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "CBP",
+          "pub_time": "2026-08-22 00:44:07"
+        },
+        {
+          "title": "CBP hosts Jacksonville enrollment event for conditionally approved Global Entry applicants - U.S. Customs and Border Protection (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNeHA1dEZRMjhjcHRubDFQdDUydGROZXNOZVh4YmJlVlpQUzFfczAxUzNIRFBlNk8xUWNINGlTQkM3aEZVTHVnMUpyb0pRSTRVcTA1U25Ld05wQTVhSmIzZHJvQ01yQ29PcWRGSU9xUXZBOGxuMlpuUnp2M2tXbi14aEgzR2ZZSWo3NGlkOVN2c1ZlYm9oMVluOWpPSDhtZE1DVGxlRXBXMHVBcWswWUpKOU9uVQ?oc=5",
+          "summary": "CBP 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "CBP",
+          "pub_time": "2026-08-22 00:44:07"
+        }
+      ],
+      "USPS Service Alerts": [
+        {
+          "title": "U.S. Postal Service Continues Its Tradition of Celebrating Kwanzaa",
+          "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNd2h1VERRY0psTDBXVW50ZExSSUNHTVk5TkFJWmdrZjVjcG5lTHlYSGxYeDdxUG8wVzZlOXNtOVg4VEhqMFR4RE5zNHliSE9MZHB5ODhFTHNBMUI0YWVBNE5RdWlTYnVQTHI5OGYzbloxWTJoLUJNWl9oSDk0ck9sdUlNWm5DUFYtbUFUWG13REo4TF9VU1Ewdk01bGp4VEZGTTYyTS0tdi1BQlY0Z0tBcGN4UUo3V3R1?oc=5",
+          "summary": "USPS 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "USPS Service Alerts",
+          "pub_time": "2026-08-22 00:44:07"
+        },
+        {
+          "title": "Postal Service Honors Sarah Orne Jewett",
+          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQUDlTWVE1N1hJM1pEMEVLQmVRUVlvRVVCeHhUUGl0OGVkSGRqcUtiOEQzcmNfR1hVT3d0X2RpdmRkbERjb3l1cnZ2TzlRejNfVG9XcV9ScW96TnRuLVdBYXI5X3BzcE90ek92SnhtaTNHMGNZUXhZV3JYbE5wdE50V0h6SExkVlhHRVBGVlRJRGR3X2o0S3ZYU1ktRkRZd3lOSjd4WXVn?oc=5",
+          "summary": "USPS 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "USPS Service Alerts",
+          "pub_time": "2026-08-22 00:44:08"
+        }
+      ],
+      "DHL": [
+        {
+          "title": "- gcpt.dhl.com",
+          "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5ZTjFKV0d6MFVaV1pnLVlxYkdvMUhEVjExMXFYYnZMUlp1U2NNcWx3V0tpWUxIbWlnckVGdXVBanBuN21LVk1lSg?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-22 00:44:08"
+        },
+        {
+          "title": "Digital Account Opening Specialist - Tempe, AZ job | jobs at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPQW5qMU9wRUNMeGNUemtNN01Zc0REeld0Wk9LWnJwQk55cDRjVGtIME1BMzBIWHltYVZQQmM3eUNWZDlqQ2Y2VEVzYldkLVNJcG5oa2xpTjFsdWVzc2dTU0Z1S1lhY2pCalNOb2RKUXltZzBvaHpPMGJ6SGF1aXNXX3Ixa2ZLVkxPOERYUXYyUGJoWDkySmFXZ2dQQmNDNng0TFptN3JVS21vbGFXNGQ5RVBQVTNjTTQ?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-22 00:44:08"
+        },
+        {
+          "title": "Data Analytics and Data Catalog Intern job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOUFRGMmgtcGF5WDhzNU1uNkNCQXpqbGRjYUZCc1ZCaWdJeXpISG8zMXBxTXo3RXhndk94S1dVYkk5S1EzMERFZi1GWWZydlB0X3pKdjVQR0FKSXdfYURmSHJ0VmgxMC0tSXdLT1pydUhzc1VEVXUzQkVsNGl6Yi1BMmhTeldScFh5M21uLUYxM21HZllvMTkxU3V4YWdEUGxtOHlXQ2thYWg5Yzg?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-22 00:44:08"
+        },
+        {
+          "title": "Branch Operations Manager - BUP job | jobs at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQdDZkd1JmOXdGeFR2QjdSNDlTLU8tc1ZGTUtQRmZEZGdHRGl0djZ6UkdNb1UtM0I1Q0pfc2ZIcVJtMDVTZ3hYZkRxcjZzMTVYdWl2VjZYc1NkNXo3WmdaUDNtZ1d1cWtLVFY4aElJVFY5aGd1dzR3Z0x6VE1wQi1DdVJrQlRYTnlpdVNIUktSNGozdE42Q3l0dVp1Um1zeHc?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-22 00:44:08"
+        },
+        {
+          "title": "STSR - MIR job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9FTUFaTVJDTk1ndXNtRnM1Uk1pVjVOUkF5RTIzbk5mZFNzSTViSWM3SjgyQWJ5bzNoaVM2ZW1Cb3MtLWF0bi1PLUpJWGJnSEU5Z0RFci1HZ005dWdiQWl2M0ZOTTRTOVpJQVlqWmZDaTRYZk9FLU9mYkhBRFB6QQ?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-22 00:44:08"
+        },
+        {
+          "title": "Export Filing Agents - PM (Monday - Friday, 6:00 p.m. - 2:30 a.m.) job | jobs at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQSTNzYzBaNmpwdmZJb1hEYmlGMUdNYkNzVGFEb3FXaS1mM1NLZ3FlV2YxQU9jWHR6S2ZWOV9lcWlfOE5fT2NvUzc2ek8ta19wN21yYzQ0NUVrSW0tc3hnSGtkVGNKbDRHaGFxcUM5RUJ6Y05YU2JwTXdRSlRkSmlNRWpCQll6bVNNZWgyZjNfTElkaGFEYXJWZlprR1lCUmhrdUZLOS11bjFMdUdDSjBoUkJUbTBIa2NGejItZ3NFODlzS2ktM2Y4?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-22 00:44:08"
+        },
+        {
+          "title": "Stock Control Clerk job | Operations jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOY29OQ3pXQjBNczNBZGMydkNhOWlvS1VKY3ZORGZKRnNFSWRlb19uWktMYV9CdTZQVmNsRW55cG1XOU15YXl6VmRWNzNneVByZXpGTUtxaGhTazV5TW5JWDVTcTVtWGVsMDVYWWVvbkNhN3I5SE9UcHZQQWRjZEVGazh2aDdxamVWWmw1Ti1yYm1xVklZ?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-22 00:44:08"
+        },
+        {
+          "title": "Sales Admin Support job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQTEUxYjNsdk5KQ3pQX1M5Z0otdmlSZ3BUR2hZY2g2clhCQVdsQW9lNGlvam81V0szSHNkSktGUHhRblV3Yk0ya3lPN3hXR293Q3R0ZnVXRFl5emZtSDRCcmdtWHNET01TY1hhdnFuT1hsaEVLc24xOTBFckNxNUtIa0FvRmQzR2ljd3BfNQ?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-08-22 00:44:09"
+        }
+      ],
+      "UPS": [
+        {
+          "title": "- UPS",
+          "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPZi1BYjhINjFyUURLMHRoQ1J0WTFON0RBR2V1c091d0hVZ2wwXzNfSVdleVdzNkhVRjdCbVpZcW1KRUdBd1Y3Nm9pcDBvNnNYZDY1RTFLemNyN1lBZ3Jwd1FpQzM0VlZLQ0lhNUZYTk53ZEF3dC13Ukk5MkhZelVhRTE3eTdzMGZsSU9nNjAzMGEwOTh1SjJzRVd4Sk5DSWw0Zk5TZzJUa3puN0kwZlBGVHRwdkVkXzZMVnFIN19oMWVPdw?oc=5",
+          "summary": "UPS 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements.",
+          "rule_triggered": "ai_error",
+          "source": "UPS",
+          "pub_time": "2026-08-22 00:44:09"
+        }
+      ]
+    },
+    "quarantined": {
+      "GOV.UK": [
+        {
+          "title": "Joint Leaders' Statement on the E1 West Bank Settlement Plan: 20 August 2026",
+          "link": "https://www.gov.uk/government/news/joint-statement-from-the-leaders-of-the-united-kingdom-france-germany-italy-the-netherlands-canada-and-norway-on-the-e1-west-bank-settlement-plan",
+          "summary": "GOV.UK 官方通告",
+          "reject_reason": "未命中任何跨境业务关键词",
+          "rule_triggered": "non_seller_news",
+          "source": "GOV.UK",
+          "pub_time": "2026-08-22 00:44:07"
+        }
+      ]
+    },
+    "statuses": {
+      "Amazon Seller News": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_with_confirmed"
+      },
+      "TikTok Shop Seller": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Shopify Changelog": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "eBay Seller Updates": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Walmart Release Notes": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_with_confirmed"
+      },
+      "Shopee": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Lazada": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "AliExpress": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Temu": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "SHEIN": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Mercado Libre": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Coupang": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Rakuten": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Qoo10": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Allegro": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Kaufland Global": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Alibaba.com": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Global Sources": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Made-in-China": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "BigCommerce": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "WooCommerce": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "SHOPLINE": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "Federal Register": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "GOV.UK": {
+        "candidates_found": 1,
+        "confirmed_count": 0,
+        "quarantined_count": 1,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_all_quarantined"
+      },
+      "CBP": {
+        "candidates_found": 2,
+        "confirmed_count": 2,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_with_confirmed"
+      },
+      "USTR": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "EU Taxation": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "海关总署": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "商务部": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "税务总局": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "USPS Service Alerts": {
+        "candidates_found": 4,
+        "confirmed_count": 2,
+        "quarantined_count": 0,
+        "dropped_count": 2,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_with_confirmed"
+      },
+      "DHL": {
+        "candidates_found": 8,
+        "confirmed_count": 8,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_with_confirmed"
+      },
+      "FedEx": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_no_candidates"
+      },
+      "UPS": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-08-22T00:44:07.816255",
+        "status": "ok_with_confirmed"
+      }
+    },
+    "summary": {
+      "total_confirmed": 15,
+      "total_quarantined": 1,
+      "total_dropped": 2
+    }
+  },
+  {
     "date": "2026-08-21",
     "news": {
       "Amazon Seller News": [
