@@ -1,5 +1,727 @@
 [
   {
+    "date": "2026-11-07",
+    "news": {
+      "TikTok Shop Seller": [
+        {
+          "title": "Supporting climate literacy, solutions and community engagement on the road to COP31 - Newsroom | TikTok",
+          "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQXzF4OVE0MDh3clA2S3p4ZTF6akl3SW9VcWRLV1Zmd3ljNm5xdHBHSUE1NGEwSkNmTjZZMlVIdnluWmswVWZCS0YtRXZLQW9HTFJTdWtYSmRxMjNON1c0S01pakZWNWI5MHY5R3RvVGVwN2FZRVhlS0hFVEktTlVveXkwa2dQbTNxUWZvQ0JUZE04S090bHZCVEtfenZEa3VfNlpvX3Z5U2h3ZnpsSGs0TEE3MTE1N2pEdFVyRWFzaw?oc=5",
+          "summary": "TikTok 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "TikTok Shop Seller",
+          "pub_time": "2026-11-07 03:52:48"
+        }
+      ],
+      "Shopify Changelog": [
+        {
+          "title": "Accept Cartes Bancaires debit payments in store in France",
+          "link": "https://changelog.shopify.com/posts/accept-cartes-bancaires-debit-payments-in-store-in-france",
+          "summary": "Shopify 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Shopify Changelog",
+          "pub_time": "2026-11-07 03:52:48"
+        },
+        {
+          "title": "Faster POS checkout",
+          "link": "https://changelog.shopify.com/posts/faster-pos-checkout",
+          "summary": "Shopify 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Shopify Changelog",
+          "pub_time": "2026-11-07 03:52:48"
+        },
+        {
+          "title": "Accept five new local payment methods in store with Shopify Payments",
+          "link": "https://changelog.shopify.com/posts/accept-five-new-local-payment-methods-in-store-with-shopify-payments",
+          "summary": "Shopify 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Shopify Changelog",
+          "pub_time": "2026-11-07 03:52:48"
+        }
+      ],
+      "Walmart Release Notes": [
+        {
+          "title": "- Walmart",
+          "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNb2hzbnVXUUFSNTRPYUdkUVpfNFRRamU5VUhnckdPM3o5Q0xpQkw0aDVrWHl6akVtTEVLbnFlZVV4TE40YjZUYi1QdFhyQ2JhcXUxREFEVGtzZDgwRDI4QWZpU2hYZVN0Y2ZwWlUxNVhwV3ZsTmhNOWJQWGdDS0VyeQ?oc=5",
+          "summary": "Walmart 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Walmart Release Notes",
+          "pub_time": "2026-11-07 03:52:48"
+        }
+      ],
+      "Rakuten": [
+        {
+          "title": "Top 22 Sites to Buy Old Yahoo Accounts in Bulk (PVA & ... | lubakerのブログ - 楽天ブログ - 楽天ブログ",
+          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTFAyZ050ZVg1NjZiT0dvVlZaLWQ1OEk3dm80QUJzMkM2U2oxOGo0SjFhV0o2Y1B5clUzVXRORFRlcTFjVGFJZUdHT05aXzJWSE1CS0plNGtYOFl4OWNyazdaTm9vNy14akdhb1Rn0gFrQVVfeXFMUDJnTnRlWDU2NmJPR29WVlotZDU4STd2bzRBQnMyQzZTajE4ajRKMWFXSjZjUHlyVTNVdE5EVGVxMWNUYUllR0dPTlpfMlZITUJLSmU0a1g4WXg5Y3JrN1pOb283LXhqR2FvVGc?oc=5",
+          "summary": "Rakuten 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Rakuten",
+          "pub_time": "2026-11-07 03:52:48"
+        },
+        {
+          "title": "How Robots Are Changing Everyday Life and Society | The Modern Observer - 楽天ブログ - 楽天ブログ",
+          "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9IamZVd2hiWEpQZkQ3U1lLcHpyMmRHT3lQZ0RMTE54ejI1T2k4RUlFZXhJS2ctOTRjZW9LYzdLTkhnQ1Y3ZHRKZXY3WmVWRm9abjlwM1puU2hZSnNEd3d1OGVQSGbSAWpBVV95cUxPcmVnSl8tM1lua3FhSTEtLTcwNF9SQ0pOZmlZMDJnT2hrU0tpNnhWbWhHbGJxX0RwbjZaVXVWU3ItdjdhalhJVEs5VVFjaWp1TXgxNXdMYzRMdXJFdGJzbGhkWG1tMzZTcUp3?oc=5",
+          "summary": "Rakuten 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Rakuten",
+          "pub_time": "2026-11-07 03:52:48"
+        },
+        {
+          "title": "100 Best Ways to Buy Old Yahoo Accounts in the USA.. | lubakerのブログ - 楽天ブログ - 楽天ブログ",
+          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBlUlBsNzJmNGQzSU0zQ3J2RnpfbW1zUnRBN1BaZTExM1BHQ24yNF9RX0FSWHBTc0hPQm44a1FLTHNZRXh0RUxMYkUtVGRxR181aUF4VkhRNmc2aWMwN2hweTVJcGV3Z9IBa0FVX3lxTE5oZ3pOZnBIc3VDU1c5RDAweUpCUUY0ZHN0OVFNV2cyX3ByZGNneVVrNHdUUnFiT28zdjJRUS1pMFJ2WVpkY3FISkcyS3FlcC13dnFZbGhLeWttWDI3ZGs0LXdfc1dEVWNJdEJN?oc=5",
+          "summary": "Rakuten 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Rakuten",
+          "pub_time": "2026-11-07 03:52:48"
+        },
+        {
+          "title": "58 Easy Ways to Buy old Yahoo Accounts Smartly | hakim0804のブログ - 楽天ブログ - 楽天ブログ",
+          "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5OTm9rdzZXbXlwSnFCZXA1VGQ1OERRX3ROQWhEc2Y0U2FWOEhIWjRJN3ZaekxhWnh3ZWhkNE5kbkFHeS05TkFKTXJFWnZLMmNPc1F4dm96c3pEWTU0dWxTWGV2dEVSOEZR0gFuQVVfeXFMUDdpMDFRSEc4ZE5hejBVYVFidnl3X0ZiVlFUcFdiQ0g5NVRNTUhyT1N1clladlQtWGw3djhyUm8tZ1BvQXFaR0ZqaS0wbGxQWVpxbk5iemdnR1BfbnR2eGRJY2V0YUhBcXloeU42T3c?oc=5",
+          "summary": "Rakuten 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Rakuten",
+          "pub_time": "2026-11-07 03:52:48"
+        },
+        {
+          "title": "Staying Healthy in Today's World: What Really Makes a Difference? | The Modern Observer - 楽天ブログ - 楽天ブログ",
+          "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9vbFdwYlM2MEYzUTdwbU1UOVlrRXdnYWd6enRmalJwZktsQ1ZpcERqV25aSU5TY2FxZG1zVmxVUWJ6aXo4dmZvX0N3Y3JBbVlLN0hPZk51WndfcHdZa3VuSE5zUjLSAWpBVV95cUxOQ2MyRGFoODhtMzZHQ2VKdkxQbUtHRzMzRmtZZGNkbTc0dlVLRWpOU240VzFUSnZEMERyUDh0cVBqNnkxYlJveHhSbl81Y3JqZG5BLW9McUJOY0NKUmJvZkoyVzFMdkVrSklR?oc=5",
+          "summary": "Rakuten 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Rakuten",
+          "pub_time": "2026-11-07 03:52:48"
+        },
+        {
+          "title": "Japan's Technology Revolution - The Modern Observer - 楽天ブログ",
+          "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBpa0kwel9nRjBGTXBIMVg5N2JWdURvUkhuT3pDWDdGSGRCaW9maUFranZMSXJ3b2NHMXNzb3lkcU1JdGdhM3lzR0xNQjFQQklmT1lyTkY5Y1ZkeW9uVHdFN3A0ajY?oc=5",
+          "summary": "Rakuten 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Rakuten",
+          "pub_time": "2026-11-07 03:52:48"
+        }
+      ],
+      "CBP": [
+        {
+          "title": "CROSS Ruling - U.S. Customs and Border Protection (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBrcjN4eEFFV201SUR6ZVFLZi1CcWwzTnlUbm4zZUFRYnYxZ0J0WXlrRWJ4dzQwUUF1WFF2R2JBX3N1ZEFsRWFzaTJza21IQQ?oc=5",
+          "summary": "CBP 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "CBP",
+          "pub_time": "2026-11-07 03:52:48"
+        }
+      ],
+      "USTR": [
+        {
+          "title": "Readout of Ambassador Greer’s Call with China’s Vice Premier He Lifeng - United States Trade Representative (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNSmU2aHROS2ZPZW9UQXZkdGxhdTR6aUxlQTBNeUo0ZHMwN0UxZ2I3eWlTRXZXXzQ1VHZhVE95R3gyUFMtRTEzbmgteVJyeGRMczBCX0ZkTFJmQzBjdWJWNEpHU2NtMmpDT3NIOEp6OV9fV1dZcG5OLVZSbzhfVXZPR2pKN0l0cVpjSlFxLXV3ZHJMWnhtTWxjT1AzQXdLVEZQTWdxby1KZEFCRkdkSFFzVEFqSEF0NThVem9PN3V2UVFkR3lQQU9LdGhjNG15b2xzRXJmNjBjTQ?oc=5",
+          "summary": "USTR 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "USTR",
+          "pub_time": "2026-11-07 03:52:48"
+        }
+      ],
+      "海关总署": [
+        {
+          "title": "原产地证书格式.doc - 海关总署 - 中华人民共和国海关总署",
+          "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPRGlLYzNZRjJKYzZYc2VyMlVNWF9udmczUzFMQTc3eHFNNWR3aTBDTGppWEFUUnR3T2pXQ0dRTk0wWDJzdDBwY1lmQml4aGtscENPTXdqUjBEb090OWVKelRDcnI2Z2ljeHVBREpfS1RpZzJ3NDZoaU9MSGR5NkNLd250Xzc3cDlrTkc0akxVYXd3cGlIeTMyRHVqS3lreE83N2tVa3hhWUlqcFI2Y3J3OThmRThYYlhhTUU0?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-11-07 03:52:48"
+        },
+        {
+          "title": "- 哈尔滨海关",
+          "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQZml5QmVzQ3JyMDVIY0JHbjRacmE3WV9BcXB3NHlDR1VnVkNEaEp0ZnhDYnFUMFZnanJ1VEQwM1ZGMW1kRVV1cU9JaEQ1b0w3U29DUENySGF0U1hQYmh5TWtGUU1TdzRjY0s2c0lYM3FickhPMkZxVEx0b3VBOXV3cVpSTmN4WGJOSmp0U19uQnN1c2w1RS1RQXNUdkQ?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-11-07 03:52:49"
+        },
+        {
+          "title": "- 中华人民共和国上海海关",
+          "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOelh1Q3VkdUl1dFVqV2hGWk1SOUZXcTQ2cHAzNEkwdV9PREhEQmxWRUNINUFWbkd2alU3YmNXa3pyV1QtMVJ4U2NDazdGU1Nyb1NIdWlHZl9McHBNQTVrclhUOXpXTV9oTXFmQjh5UENlN3dELVpTTjNhYmZjbTdIcDRoVnQ5YnRoNE1hQ0NmeU5mN3plNWRhQW9KeGJBWnc?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-11-07 03:52:49"
+        },
+        {
+          "title": "- 青岛海关",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNczBfNUVRRkN2Y3VURVJUd3VyTkVMV1NrOWdjUWFuMU45OUVJc0I1Z3UzNFJ3T1RxRHVvREFpUmY2QkdTVHVmWUhqRU1PYnp5bVJjWWRzRE02dV81eTAtejJzQVJVNmZlVnAwYVVodU1SV2xIeUJRSlloOEFSX29SanZ2bTROVWozbHNodG5mNEY2UUZ3dkRZdmNSZ3dfQQ?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-11-07 03:52:49"
+        },
+        {
+          "title": "- 中华人民共和国海关总署",
+          "link": "https://news.google.com/rss/articles/CBMimAJBVV95cUxPSDY3Y09DeUdLMVVZYU54OVpkQUtIbklVM3ZHNmFHWGVjTVpOMzVMbmVGUDJKNTNsV2drTk5XZEtrMFZQVVJNclJ6SFc5MFcwTEE0d3ZyMFJReW5JWEhTTUtPX2huWVFiZGdQUm9sQkNkLUxGV2s0SDM5XzQ2LXhkemFaY3g1eHh1c3BOLUt4a2hvajVOdExZLW9LYXFib2dXQ3o3ZGJFVHpSWTJYc3RZemJzbFYwOGhMNWprcHdnb1hCX2otdlRNWWU5UkIzTDNJTUhkQnpwR01sMlpleFNaY004enljcmswWFFqZnUxVTRRUVNuRXZVNVJnWVltQ1dMa3hmb2hqM0VuNUlfNWtaWTRSSkhhaHJU?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-11-07 03:52:49"
+        }
+      ],
+      "商务部": [
+        {
+          "title": "各方平台 - 中华人民共和国商务部",
+          "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5YQXhzYXNIMjNQRUgzUkYzYkEzM3JSU1FrUXZscXJUa0luWVd2cGtXeFB0ZklxME9NaXJCaklzV1Z0VjJLZExlNlZzR0hRVGlvYW0yTG1zZzNORml4SmJYR2lwNHpkeWE5WHo5ck5kdW8wN2tSZWZVeFI3WTk?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-07 03:52:49"
+        },
+        {
+          "title": "山西省安泽县市场监管局开展知识产权入企帮扶 - 中国保护知识产权网",
+          "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5heUY3Wmk3TjJ4SGs4MmQ0VFlmR01rZjQ0aVdDZXdQcVpsQWFNQW0yb2VxMEdGVFl5TVNUcGU2eWVTVlQ0WV9yLU1FOFhlTnFYYnVjM292V09RUmFzaTJmaWZqTGtFT2FvU0pXai1iVVNQdEtuQ3Rjb0pXTUlsdw?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-07 03:52:49"
+        },
+        {
+          "title": "何立峰与美国财政部长贝森特、贸易代表格里尔举行视频通话 - 商务部",
+          "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQY2YwY3AzdjhqTjRGRHpXSHFfUy1lYy05amlNblFkSV9UOElkMnF6T0RSNVVWWkE5c3dzbUhXc09WMDFWd3h2a1A3bnpHekFBSm00Qkt3TnhCZEV3c18zT1pmT0tIYkQxMFN5UGZtU00xS1hQTXhXSXVuU21rTVhtT2lCYXlfMFhIOGVLRkpXRjU?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-07 03:52:50"
+        },
+        {
+          "title": "李强主持召开国务院常务会议 - 商务部",
+          "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOQnpVY01jN0NsWlg0WW5ySHF5R0dKNmVGRExDRnlPU2xHU3hJNlJscndfaFNSRHhXeTNyd0Jfb0pBeW41c19MdkZSRHg2eFBsd3VfYzBXcWdENkhmR1VudWJGSXd5LUVLcDZEcENJTFNETjBCd1N1cThlX1RVOEVpNXZ0d2dyamRTMXc?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-07 03:52:50"
+        },
+        {
+          "title": "国家知识产权局党组书记与世界知识产权组织总干事举行会谈 - 中国保护知识产权网",
+          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAxQW5FRkctQkFvT0V2VUZQcVU2RWVGV1lwRWs0b0YtcVpJZTVaMWk5YV9iemoxMzJHRmNZOU40QjBxcnJPZ1FKNjZDWkxFX1NNRzhfT2p6X2hkMzE0U3NVRndyWmdPdkVWVDJxNi1ITFlxTENWd2Q4Tw?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-07 03:52:50"
+        },
+        {
+          "title": "- Mofcom",
+          "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNc2ZadDVMOWMzY1ZfVk1ZSTBlYnlURGZoTzJ5YUFIVEdMVjdoSVI4U3hTUFlvQk9hSjNBNXZ6Z00tNjl2S1VoVmlGd044RXF6Znc0SHk1aTlxUjNZaHhrbUN5THhMeFJpNVZuVnBsOTJKeUg2T2hsVktDbFRjblpIS0pMdWJCMVoxOFlwcVNQNmxQV1dRVmxjMmZMR21NM21sUi1V?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-07 03:52:50"
+        },
+        {
+          "title": "安徽庐江开展秋季地理标志保护专项行动 - 中国保护知识产权网",
+          "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1aT1BXZWZFV1pJbHVCbExqWjRvWkdBMy1mNVhyQzkwWkJhQ1h0SkxjRG1qTzIwRFg2MTFCUkxkdDBJaVp5cFpkdGYxZG1pWFhyWUJwc2xmTGN3SWc3WFNHUlNIbUNMOEcwVXd3RGhKZm8?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-07 03:52:50"
+        }
+      ],
+      "税务总局": [
+        {
+          "title": "海南 - 中国国家税务总局",
+          "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5lVWZXOFBSSW84VXlLSnVja2FvNjhKUXFyR29oYTNscHhITzdkR1FYaXNjbGNkalA4V0tzYnhEYWNldnBPZzVEZF9jNXB3b3VKMTNN?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-11-07 03:52:50"
+        },
+        {
+          "title": "银发映税徽初心传久远 - 国家税务总局 - 中国国家税务总局",
+          "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBTVGpPQ1FhdFlpaVozSHpKTXNGNWI4eTdBazZnMWZ4ZjBFcDd0Q0IyMnh3M01oTUxZS1ZDYjR6MVR1UGNXTjRrUTlNRlRQUTRTa0NidVVGbVlBYjA5SVhoTnlQX3lNRjlieHA4ZE02X1hya0l5LS1KVTdzVUNIOXc?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-11-07 03:52:51"
+        },
+        {
+          "title": "青税智播：支持居民换购住房个人所得税政策与住房交易环节税收优惠政策解读 - 青岛市税务局",
+          "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE4wYTVUXzcyS2QwMWVta0lwNFRySE82V2VuUDhMYVo2a0dNZ1ZpRkxhZ0NUZVBmOHl1ckhsRTNmN3hQbDZnbU1PRGVPSkZpNGdGOEE4RzkycHdoZndSZTQzamJ4RXlnd0JvSWRsczVMRVFHRXdqYXdlYmJlN1ZVU2c?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-11-07 03:52:51"
+        }
+      ],
+      "USPS Service Alerts": [
+        {
+          "title": "USPS Hosts Job Fair in Fredericksburg on Nov. 13",
+          "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOMkV1ZFhvQmtiRjV2ZWo4WjdmWGVfc3pnUFhkT0U3T1c4OWpxalR5dWtPSU9xdUROaERSaUtSNWhNYk9KNnFKTGl0c2xLTDczYUpSZWFMRjFNbXdQc1VzOHhTR0I5M2l5VWZvNFYyQVBSbjVxZUl4ZUNCc0wtaFRFN2RaYkpqS3g4MXE5ZU1ZXzF5ejJ2OWhVS1BPU3NYa0psNThGRXVaWlBheEpTNkRxbQ?oc=5",
+          "summary": "USPS 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "USPS Service Alerts",
+          "pub_time": "2026-11-07 03:52:51"
+        },
+        {
+          "title": "USPS Could Still Use a Few More Hands This Season",
+          "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQaVNIOW5jNTJ5SDdOTmhoZHF6Y2F2a1d0ZlM3YUh6SC1uMzUwZUtVY1J1YkctZ0lDM3dXTDlmbE5hTzZsWEJoZ0RNWDc1ZDIySnc3d1NYZWp5eVdvOXZjVVlUYlFJSDB2cHdNbnNLejlIa3ZXbFBHQzk1eExEZVdrNjdYTER5aDhuSjBJTzhVeDlBeWZvdGRZRjJrNUZReGZFVUoyNWdZV0t5a2h0UklmTkRkUQ?oc=5",
+          "summary": "USPS 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "USPS Service Alerts",
+          "pub_time": "2026-11-07 03:52:51"
+        },
+        {
+          "title": "USPS Recognizes U.S. Coast Guard’s Longstanding Presence in San Diego",
+          "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPNmZ2QWpPUXJsSEhRTk14OEdzQVBzRE9UbnlKNVNFV2hCSnhzR2NJZFYzRW5DNHd5S0dzdVF2TEk5Q09MZEFjczRJRno0UDBXb0pIOXhPcDZsb2g2S2JfLTd4cUJmY1hfNk91RXhVWDU5RkdBNHhMbGZsNTd0WVo4UWFvaERNamFJSHlGV29lUzdPNjZtYmtTR0NNVnBWS0VjZThpckF1Tkx3QUNwTXlkSW1kZnFCYVpsWTdqWTJJdGI2Tmt0OEttUGJB?oc=5",
+          "summary": "USPS 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "USPS Service Alerts",
+          "pub_time": "2026-11-07 03:52:51"
+        }
+      ],
+      "DHL": [
+        {
+          "title": "Ops Trainer job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPTDVNdGxFYkpUbjJfUFg1bG1pVi1nSGROdWFMRW55NFg2TXpnTmhwUmw1SEtPaUJEWHE0dHJLdHVPX0R1bGZwUnNOcWNzNTBIVFZZQ3U3eW5pcFUxa3RiSE9FV1prdHJZQWZPSXAxV0lndF9KaWlvUlVRTXVVc0hydDFR?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-07 03:52:52"
+        },
+        {
+          "title": "Sr Retail Engineering Manager job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPTGNtQ0tjUVJkRTh0NnZCWEYwMEJFYS1MbURNMHN0TjM2aTJXaVp3TTU2NzRNcDBwNWdkaVhkYTBCSmZhZDFUNlRSWTJJMFNNVlh2S09NUzNVYzEyRjcyeGY4UlpJczMxLUpnWEwwNzF6NUtuTXVjLVFqeUwxNW9fdWlITEhkVUsyeHdBV0R5NVlNdkViLTFrV3dR?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-07 03:52:52"
+        },
+        {
+          "title": "RCG Agent job | jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBtVjVKaEZfYWpzWktqWVFOQ1JMOVZmenBqTWhmSFQwMlpiTmtOTmxxT0g2NHp0dko0U3JpRUZOeHpYeTJhTXFITGc2WDA3U242eW53cTFGbGFMUGJWRXZPVkU2U0pEcGRkMW1WMVR5eWYxZXpXNndjQy1OaUxyNU0?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-07 03:52:52"
+        },
+        {
+          "title": "Warehouse Operative job | Operations jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPX0F3M0VSdVk5Mm1yRERFbFNrUVk2QjJ4eC1GS2NxdkRybnV6bVFHTVU3NDNuRWQ2eE5kdTB2MlRJSzdCeU5Cajc2YUQ4V1NTZ0tjSHM5WFFROXFyOGxTZGRJZEtPX1dCOHpPVExHYjAwUUtEWmFGaE1RcTNudkxDWmtJNW9XSHdpeWpZckp1ZmNJVXJE?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-07 03:52:52"
+        },
+        {
+          "title": "Yard Driver NON DOT job | Prevádzky jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOT081LXAzZHBZSDRCcU80VmlZR0FMaFk0U3dqdG5iRXY5NnFNNjBuNHZOMk8td1ZIOW1COUN0YTR3NFI3eVhYUFMtdnVVZnZQMVZUTDJfc1ZHQWtsX3pscUhjUTBWRjlIdFlES0w2eFhYUXFrVnpROUh6OGxvckMxNm5NYklOYVB3ZWJTdGxIMXlQQ3FIaW00WUpB?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-07 03:52:52"
+        },
+        {
+          "title": "Warehouse & LLP Operations Sr. Manager job | 其他 jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPNVJ5NEx2dkZvUDZ5RXd3dkt1WFJfR3Nlc0JKNmtmMnNqb0E4VllaMWZ0UjdFQ0VSeXBWdng2M1p3WUZVakZReFVKTjZMZHVMLS1aQjdMaWpBUmg0eHpyRkdqSmNFSmFMa1pKRmFINkNWc2RJZTFFRU5OVGtxUW9tdk1NVmNLSWN4azZRcGJHUnV3YlVsY1lDenBiWFRuTGlOb1NrTjRqSHdldVNSYWtHSDRlZ1NaaW8?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-07 03:52:52"
+        },
+        {
+          "title": "Senior Executive - Operations in BANGALORE , Karnātaka, India | at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPUXhFdzRHVmtjQ001c210SkkzSDFnSUJFQ2hxdllINk4wQVBzYmJ4SDRPS2hEU0N4V0F3WnByV0RTYTI4NF9WeklPLXg4YUQ4WTNXUVdXR1pYaGw5S2xtUjY3WDYxRjk3YmEtTEFJSS1aUVZLT3plWnZRTEIzT0hVUm9VazUzOWdrQVhpNUtnbUZTcHFyMjFN?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-07 03:52:53"
+        },
+        {
+          "title": "Business Development Manager - LLP job | Marketing jobs at DHL",
+          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOXy1sSGVaS2pldzhTOEZJWWEyMXZQd1FZcHJLVkVlc0NLNlp4MGRXVUR1N3cxX1NjRlFUNGxQSWhxcDU4SjJtQUlzQm96bWtEelJ2akNpSkF5Ml8yR2pNWkJRTjE4UDFxY1I2cFhvWS0xV2tjWTdjMFgwOTM0WHRNdWFnY0tQSnZDWXhoeEdhWDBOTTNJRTU1XzVWNkdoTTVhWWE3dFlR?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 404 This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get-started).",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-07 03:52:53"
+        }
+      ]
+    },
+    "quarantined": {
+      "GOV.UK": [
+        {
+          "title": "Digital Veteran Card passes 23,000 downloads as veterans encouraged to discover its benefits",
+          "link": "https://www.gov.uk/government/news/digital-veteran-card-passes-23000-downloads-as-veterans-encouraged-to-discover-its-benefits",
+          "summary": "GOV.UK 官方通告",
+          "reject_reason": "未命中任何跨境业务关键词",
+          "rule_triggered": "non_seller_news",
+          "source": "GOV.UK",
+          "pub_time": "2026-11-07 03:52:48"
+        },
+        {
+          "title": "UK military satellite Titania launches into orbit following £3bn space investment into defence of space",
+          "link": "https://www.gov.uk/government/news/uk-military-satellite-titania-launches-into-orbit-following-3bn-space-investment-into-defence-of-space",
+          "summary": "GOV.UK 官方通告",
+          "reject_reason": "未命中任何跨境业务关键词",
+          "rule_triggered": "non_seller_news",
+          "source": "GOV.UK",
+          "pub_time": "2026-11-07 03:52:48"
+        },
+        {
+          "title": "Adviser Finder and Adviser Register temporarily unavailable",
+          "link": "https://www.gov.uk/government/news/adviser-finder-and-adviser-register-temporarily-unavailable",
+          "summary": "GOV.UK 官方通告",
+          "reject_reason": "未命中任何跨境业务关键词",
+          "rule_triggered": "non_seller_news",
+          "source": "GOV.UK",
+          "pub_time": "2026-11-07 03:52:48"
+        }
+      ]
+    },
+    "statuses": {
+      "Amazon Seller News": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "TikTok Shop Seller": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "Shopify Changelog": {
+        "candidates_found": 3,
+        "confirmed_count": 3,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "eBay Seller Updates": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Walmart Release Notes": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "Shopee": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Lazada": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "AliExpress": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Temu": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "SHEIN": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Mercado Libre": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Coupang": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Rakuten": {
+        "candidates_found": 6,
+        "confirmed_count": 6,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "Qoo10": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Allegro": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Kaufland Global": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Alibaba.com": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Global Sources": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Made-in-China": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "BigCommerce": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "WooCommerce": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "SHOPLINE": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "Federal Register": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "GOV.UK": {
+        "candidates_found": 3,
+        "confirmed_count": 0,
+        "quarantined_count": 3,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_all_quarantined"
+      },
+      "CBP": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "USTR": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "EU Taxation": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "海关总署": {
+        "candidates_found": 8,
+        "confirmed_count": 5,
+        "quarantined_count": 0,
+        "dropped_count": 3,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "商务部": {
+        "candidates_found": 7,
+        "confirmed_count": 7,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "税务总局": {
+        "candidates_found": 3,
+        "confirmed_count": 3,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "USPS Service Alerts": {
+        "candidates_found": 3,
+        "confirmed_count": 3,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "DHL": {
+        "candidates_found": 8,
+        "confirmed_count": 8,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_with_confirmed"
+      },
+      "FedEx": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      },
+      "UPS": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-07T03:52:48.621550",
+        "status": "ok_no_candidates"
+      }
+    },
+    "summary": {
+      "total_confirmed": 39,
+      "total_quarantined": 3,
+      "total_dropped": 3
+    }
+  },
+  {
     "date": "2026-11-06",
     "news": {
       "Amazon Seller News": [
