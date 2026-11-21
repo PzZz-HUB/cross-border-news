@@ -1,5 +1,660 @@
 [
   {
+    "date": "2026-11-21",
+    "news": {
+      "Shopify Changelog": [
+        {
+          "title": "Flow: New \"updated\" triggers for orders, customers, and more",
+          "link": "https://changelog.shopify.com/posts/flow-new-updated-triggers-for-orders-customers-and-more",
+          "summary": "Shopify 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Shopify Changelog",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "Email and text receipts now match your printed receipt",
+          "link": "https://changelog.shopify.com/posts/email-and-text-receipts-now-match-your-printed-receip",
+          "summary": "Shopify 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "Shopify Changelog",
+          "pub_time": "2026-11-21 04:55:49"
+        }
+      ],
+      "CBP": [
+        {
+          "title": "Agriculture Permits Overview Webinar - U.S. Customs and Border Protection (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBhZlk4TVZTdHZNMEZYcUdPZGpmVS1ZUTJMN3RpUnNVemxMUUNhSjhZN1Y2bmZlTDVrel9HOV9oS2JzTUNsWTdmTGhpaWF0Q3FaZUJjRVE0dEpPLUE4T1h5Sw?oc=5",
+          "summary": "CBP 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "CBP",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "New World Screwworm (NWS) Impact to the U.S. Webinar - U.S. Customs and Border Protection (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5PZTN5dEZCZENTTmZkaXZQck9uLWJZdlRvbnlDTUlOQ3QxT3M2ZTZ0dHVQS2lBWHl3dHczRERmRHk3WmtfZnpDVFEwMG1tVVNKbzlUQXJaMG9jblBaZDludw?oc=5",
+          "summary": "CBP 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "CBP",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "CBP to hold Global Entry enrollment event at King County International Airport (Boeing Field) - U.S. Customs and Border Protection (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNTjhLRFFhR2ZFZ29SbVpMT0JTRVVXQWNBZkVSSWE2VnBhTVpNUEFSak43emhKRWlDXzFjaWlFVHlGZU5RdGZGNTFOUVMtWmJHM05fV1Z5RFBxc2ZZTGphZGJiNFpxbmFBeExJNEN6SXBxSHBVaktzdXY5eUprQ3h0aDNGc0ZDNVlhVXF4OWFrbFIzQ01uU2RpZ1hFQXkwSTZuSkFOVzREQ0tpX0hDdV91NWQ3bw?oc=5",
+          "summary": "CBP 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "CBP",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "Delays possible during Paso Del Norte construction - U.S. Customs and Border Protection (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQSVltS004X2dSaTB5eTIweG5vVWFiLVRKaUstREg2QzhxTTRNYUVqRTh1eHk5Tl9QNnFvVDcwVEZXb040MFdVSFZfdXpfR2VDVmRCZGg4TUJzOVRnMkFqUFh2Uk5RZEF5eW5lei1Vd1l1VU1JbGlSclhOLUo1RzdxZTlLM3RLbXZKVjQ1b19XSHZQQTB0eGY3Ui1URGhzR0kt?oc=5",
+          "summary": "CBP 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "CBP",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "Introduction to Biological Material Importation: USDA Regulations Webinar - U.S. Customs and Border Protection (.gov)",
+          "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5qY3RTSnZoWlYyNWJDVnpTeG1MTkMzWnR4OUZBRWlsY0JXMk1wMTVPeFBxT0NJc1M3LTA2Z0JBMzhTNm5ZSXRMbXRfR3VHOVhZek85UXZ3R0tqQ2RaNm91SA?oc=5",
+          "summary": "CBP 官方发布",
+          "reject_reason": "源端白名单直通",
+          "rule_triggered": "auto_keep",
+          "source": "CBP",
+          "pub_time": "2026-11-21 04:55:49"
+        }
+      ],
+      "EU Taxation": [
+        {
+          "title": "EU and UK agree to link Emission Trading Systems (ETS) - Taxation and Customs Union",
+          "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNWWxPRF8wWUFTaldlNWwzWFVnVGFIcURfRVlzdzZUcFpiZGpMSVUxTUlJemNMWTFLcUhOWHhkSmFjRjh3THY5bHF4dVBDSnZYLWUySEFjUV9jUFZFSzZwZjh2ekpIZG9jTzJnYTFINFVWZkI4c2poUHg5aDNmQ2l6bzBWckViT3hpMEJOamQzdEtVdHJqNkhjSkdRSXAzWEdWd2pKZmlKUThwZw?oc=5",
+          "summary": "EU Taxation 官方发布",
+          "reject_reason": "命中业务关键词: tax",
+          "rule_triggered": "weak_match",
+          "source": "EU Taxation",
+          "pub_time": "2026-11-21 04:55:49"
+        }
+      ],
+      "海关总署": [
+        {
+          "title": "- 中华人民共和国海关总署",
+          "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNaDhteHZhMV9sY0h5SkVjSHE1QVNxc0RFektGU0V0UjRZRnFKSTFnVGZzV1J6OVJZRWQ0V2NVZ0RVc0EtY3ItdDhaM0hxOURRZURoaTMwam14UER1dTZadnhJMGt3ZmRlTUFobHVjXzFQMDRScmpPbkdySlg0T3FxZFJOTUMzNXRRUDM3ZUZROFpfbGNnUHBacm5HaW81bUFTdl85Tk91VEZUOHNSbjl1eVhwblNZTVF6Z2V1M2hCa0Z2WVFCWGc?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "- 拱北海关",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQS1RFS2VqTkcxMU52N3hwVUVPWmdkOWlvd29LOTFmUTNvUU93S2Z5MENLQTZGUzZZSXRhbnN4dEZJc0x4RW1WVjZsaVRCZEE3Z05vVmF3TmptTW4ySURsVUJSUjh6azJ6TG5DSmw2MnpScDJHTk5QUkZ3b2Y5ajRab1hzVmI1WC1Bcjg5eUxDRmVYQUhRaDRpRXgtb05ldw?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "- 中华人民共和国福州海关",
+          "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQa0Z0a3JjYjR0UGZkZUwzT0hSeEN6TWJSYWRoa01Wa0FlNi1uc2dmLW84MzJBaHBXWUVTdktVczFQNVBXRnA0MVMyT3RZSElHcXRzdkNOYzdsYjlzaUJxRFBMV3FSaHdRa1ZNWEFTWWJKM0N3TG41TEtzX28wZkp4MjhVbUZua0FKdnVjUnNVMlJ4bFBIb2c5NmJ0UHE?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "在线访谈 - 北京海关",
+          "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNZHlnWVlwNk5BWVNrQ3pSWDVoZXI3QjR3cUhmQ0ItVVpWTEJ0TnR6RTh5emlodzBGMWg2UVBpb0NmLTlxUWdYRFNDZXZFeE9OZWR5VnoxWHlaZTFMbUNVQVBobHQtTVp3T1BOaFpBWWw2S2ZrR2Q4V2d3YlRZTjVpag?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "- 石家庄海关",
+          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQUTUwY0gwdmJSbXBzZjNOVXp1NVB1Yjl0ZjFsZUxJWkVOYk1TNzZNZnQwSWNBdk0tM21ZcEdweW0yalk5ZUVHbTBCMk42bEVjTzF4UDJWUmZ5Vi05ZUJPOFZDUUI1UEhwWXZ6dXJ2S1BvQVpKMUNsamU1LV9YanE1NTRRQ2tlUC1wcW1oQTNmcjBXQnlJV04tb2QzN19qNGczZWRLbg?oc=5",
+          "summary": "中国海关总署 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "海关总署",
+          "pub_time": "2026-11-21 04:55:49"
+        }
+      ],
+      "商务部": [
+        {
+          "title": "企业名称: 所属地区: 备案状态 - 商务部 - 商务部",
+          "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNdFpqT0tEWC1PZTBjbXp3NkVTd2lvVTktX1pIMlIyNThsd0xDV2hORmVkVmlXckMwbmpXXzFZSUFLcS0tY25WQVVJMS16aTVIcjI0NmZsYTY5RFBwNEZxajBKUVJPY3JYSWhnbTFoRHhPZ3ZsVzdscDRndEpSMDBHYjJha1c1akxIQm1LaHBEenRGNG9uMkFucDdXMA?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-21 04:55:50"
+        },
+        {
+          "title": "李强同澳大利亚总理阿尔巴尼斯共同出席第九届中澳工商界首席执行官圆桌会 - 商务部",
+          "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPcW1Rc3FPTG0zY3pvZk5VVXF5dnZoYjItSGtLOGo3c2JDMUo1WWQ3dG1kcFM5RlM4cTNQdnpZcVhUSDhSd1NuTUhEejMzM2I0TDNNcHJJRk5KQmtxWVg5dGFqQ0Q2V3F4emdLSzlpM0F0Q1N5eXM1SWZkZFFSSnNJRWFvZ2x1Y1lQWnU2QTBvM20?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-21 04:55:50"
+        },
+        {
+          "title": "- 中国国际招标网",
+          "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNUTU5MmVrQzQwdHlOUzRHVGRXbnFvYkQ0Z044UEx4RHlJUEszNVFkRzVVcVNPeTRaNjhTanVFOV94V1AySzlvbXZnMjgwNk8zeFNDQmpOLWNZQWVlUG1KemtxYWpCa3FSMno5V1Y0QWtFdGVUc0YxYkxVSWdRdE55QWhzYw?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-21 04:55:50"
+        },
+        {
+          "title": "- 中国贸易救济信息网",
+          "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5KMlI2bGUzTzlTOWZ0VFJsRURrYnRJcDlQbi1oaDdVaTJMR2Rha1JCMXZwUFB6ZGVkRExWcmhWelNSdVNFMmpFQVdIcndzWTJublNlZzVzR1lMVkk3UTZ1Nm9rYTQwZUZnWDltWUFianNFamZrRFMtZmdn?oc=5",
+          "summary": "中国商务部 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "商务部",
+          "pub_time": "2026-11-21 04:55:50"
+        }
+      ],
+      "税务总局": [
+        {
+          "title": "海南 - 中国国家税务总局",
+          "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5lVWZXOFBSSW84VXlLSnVja2FvNjhKUXFyR29oYTNscHhITzdkR1FYaXNjbGNkalA4V0tzYnhEYWNldnBPZzVEZF9jNXB3b3VKMTNN?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-11-21 04:55:50"
+        },
+        {
+          "title": "国家税务总局新疆维吾尔自治区税务局关于税务师事务所行政登记基本情况的公示（2026年11月第2批） - 新疆税务局",
+          "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1BXzI4X0EtVjRNVnhfTnZtU1I0dWpwX0w1N1NoSFZJYlo4SkNmMWN2a2NMQmZwSkdEa19oU3RSYkpaekhiM0xWVE5XY0l5WUFLZVd3X09BWlFHZFMtR3hpZkU1d1ZlVV9MRzhHRm9GNHJUZUdtLU1WUklR?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-11-21 04:55:50"
+        },
+        {
+          "title": "青税智播：新增值税报表差额征税合规申报指南 - 青岛市税务局",
+          "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9kdHlVcWl6WTdSRFo2ckEtVFFpYjM3VDAyd3NsRDVMdmF3TnZKdjRoRUR3d1RncWlmZ181Wks4emoyOHlTenZrZ1hIZmVsOWdId3NUVWlEQXk4aXZIYjFwdzNiTWhUSHhtN3I1Q0IzMlNZMDIxOTBKOUVBd3lmMTg?oc=5",
+          "summary": "中国税务总局 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "税务总局",
+          "pub_time": "2026-11-21 04:55:51"
+        }
+      ],
+      "USPS Service Alerts": [
+        {
+          "title": "U.S. Postal Service To Observe Thanksgiving Holiday, Nov. 26",
+          "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOWEgyNi1jTmE5TjdLOHdxVDVXVGpOMUE5LWhNeHZHWHRwZVJ0Z2Zid3RuMGpNbDdlMjB3V0p3TnFWVE1pd3dRd3lZUldsVzJGVTNsOVd3TnlEUFdYelZDVG41NFNFVll3SUx6eW5LX3hPUi04QTJhZWpZZkVwNER4VGcxTWJoM2VZUHB0T3FJRURVWEIwMmFRVk9lcFk2X0FxMk5XbHdtVmx3cXM?oc=5",
+          "summary": "USPS 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "USPS Service Alerts",
+          "pub_time": "2026-11-21 04:55:51"
+        },
+        {
+          "title": "International Service Alerts - Newsroom",
+          "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOd2x3Yzh6eTZIS09LdTZiR084alJtSENoNGN2NU5QMlprV3ZmdWtHalFfbTR0MU94bTRHY0NRS0RickFIb21zb2pIUTRnaHREZDhyU1hrQk0zSTN1aXlIMlZDcWh4ZVp2QnFJLW1nb3l3STY0WkdlZjY0MjQxLVV3bTRjQ1RnQzU5TF9tVlNOSW5RYTN1RV9lYmQ2RQ?oc=5",
+          "summary": "USPS 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "USPS Service Alerts",
+          "pub_time": "2026-11-21 04:55:51"
+        }
+      ],
+      "DHL": [
+        {
+          "title": "Data Analyst in Mumbai, Mahārāshtra, India | at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPaGpWc3JVcUVFQWtqVUJOcnpQdGpBUUpFdl85c1BBYTd0Z3FBODczS3VaelpmMjdfN2ROX05EQXBGNTRXWWoxeC1RSktIOUdVTEYyYmtFUHhEUDdtb1kzMmVjWmp1ZnVBVDFyRTl4R0syOS1FS1E2R190RFZxcU5tUXdYZw?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-21 04:55:51"
+        },
+        {
+          "title": "Operations Executive (RNJ) in RANAGHAT, West Bengal, India | at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPM3NuZ0xVWC1kN2tZTkNlRlNJck14Q3RXYWxSN285RUFMZk9TQ2ZkV2pzUzZuSXhkRmJtOXkxMnIxVXZFMkVESVllaUs5dHJ3VVlRVnQwSllIX1ZwOFJRdmd3RWpVTVI3eGxXOE5Tc2tmbWlNMUdXZVZKWnpGZ0FKUnI2azN3OHhsZGxMQ2x1bHlkRHM?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-21 04:55:51"
+        },
+        {
+          "title": "PT Dockworker job | jobs at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQRk5SQkdwMER5czhqWW9naXROTkVGODRKZTl2eklpM2Y4TFYtUXFlWFBpeWJwTVRzaGE5cXBtX0VkMmZuR3hkQlRjUGxGTXlNVEh1UFp3X0NEZnoyS1p1QjZBcklSNGZIX0dFR1A0eDU0M09jUFJoNGFieHJjb0paNmNwLWRsQ09rbHh3NFUtSQ?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-21 04:55:51"
+        },
+        {
+          "title": "STSR_ FLK in BHATINDA, Punjab, India | at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTFA0Q0Z1V3FHaGhOUzEyeUJvbWhfMTJaWjNCWENEWE16aXFBaVZrclRubm1qZTUxUkJpOFM4cVlEb1NveDA5SkVXclF3bmhCbUpUSmVhVWM2bVd2T3FTWksxc2E2NHNJZ3lpSy14WERwSHFfYV9tdjV1VmhUZUZPdw?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-21 04:55:51"
+        },
+        {
+          "title": "Air Import Agent job | jobs at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxObm50UzBuTDNWRHdDU1ZZdW1wLTd6ZTlNbWxNUnVIMFd2Z05reG5Wdk5mbXE4dWZCWUtiTC1BU3dsRXdydm9UMmJUQ3h4c2R5QmFCSExWdEtFNVZVaWtDNjd4ZjlwZXlqX2FiOGNOTHczamZnU2R3dFZLWUNlVjJFSlpFVEZTdDh3U2c4bmlQR1BKVjQ?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-21 04:55:51"
+        },
+        {
+          "title": "Senior Operations Manager (Operations Manager I) job | Operations jobs at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOYmNOMl9BdjdlZDl1UlRMcm1VMjVQQ0N3VzFnTUMwTVpQSlIxMFExeE0xZDJjUFczMUxfMmlGMVVSZVJRa0E1bEFVem52aWliNUFYOVJHcEUyTjdFbDFwRmprLTl0ME5URjBoeEktUWJMTWhRS2xud1ZKbFRZRXNEVHlhNTd6WjVtNGdvNlRxeEQ1eUdBclh1blZlNnlqQ1V5RFBfU25UaGdva18tenJBQ0EteEVPRnUzczFIMTljLXZyTHozeWlzSw?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-21 04:55:51"
+        },
+        {
+          "title": "Ramp & Sort Warehouse Agents job | jobs at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPTm5pTDdlcjVvVFB3M2NYdklrWmgxcTM0UU51Y1VfWXJqX1dXdHdxT29CVnl1SHBSYzIxZktvendWVHFvNEtDWVNqd3FlbUxLWE9UdjYwZlBub3lHZ2NPcU1kNjVTZXJwWDd2YlJSbHZkTG9jWUsyaUs3aGRESUU1Si1jaUxIaDRldkgtTmN0NkhUejhwb2x4QlFfYW9OenVY?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-21 04:55:52"
+        },
+        {
+          "title": "Business Analyst II in Erlanger, Kentucky, United States of America | at DHL Group",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNajJtdmFSNHpKbVRPWHVvUVVCX2tJWmFZWDB5SzdtLXBCQXJlMkVlZGFmUFpkMVpCTm50VHdDdFZYM2l4V1dNRzJXUF9TX1dyTUpWdUo0SUF0Y0hoWEFYVUVUYUQ1TktNQVFISmNaVS1GTV9ubEQ1UWlZYjg4bE5EQmxtSk1kM0RRaDBYYQ?oc=5",
+          "summary": "DHL 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "DHL",
+          "pub_time": "2026-11-21 04:55:52"
+        }
+      ],
+      "UPS": [
+        {
+          "title": "- UPS",
+          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQX2g1anNjdGtFRzJrWVZpdUVWbkRVRnYyVnU4WGpmWDNpY0FSMEg3N3RmRjEwOC1mcEF4QVJKeXpFcElfYmI2eDB3MXBDdjQ2RFU4bS13TzR5SEd1WEdwWVpIRkI2SWpEM3ZnZnp6Q3lucGFPNmo0S21LS0lhcU93T3dSaDNuSDNpRE41SGJwdnJIVDgzREJWdVhkVEc1OWFt?oc=5",
+          "summary": "UPS 官方发布",
+          "reject_reason": "AI Error: 403 The Gemini API free tier is not available for this project. To use the Gemini API, please set up billing to upgrade to the paid tier at https://aistudio.google.com/billing. For more information, see https://ai.google.dev/gemini-api/docs/troubleshooting#project-unavailable.",
+          "rule_triggered": "ai_error",
+          "source": "UPS",
+          "pub_time": "2026-11-21 04:55:52"
+        }
+      ]
+    },
+    "quarantined": {
+      "GOV.UK": [
+        {
+          "title": "UK and US deepen transport partnership to boost growth, strengthen aviation and back next-generation technology",
+          "link": "https://www.gov.uk/government/news/uk-and-us-deepen-transport-partnership-to-boost-growth-strengthen-aviation-and-back-next-generation-technology",
+          "summary": "GOV.UK 官方通告",
+          "reject_reason": "未命中任何跨境业务关键词",
+          "rule_triggered": "non_seller_news",
+          "source": "GOV.UK",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "Environment Agency grants Cloughton gas exploration proposal",
+          "link": "https://www.gov.uk/government/news/environment-agency-grants-cloughton-gas-exploration-proposal",
+          "summary": "GOV.UK 官方通告",
+          "reject_reason": "未命中任何跨境业务关键词",
+          "rule_triggered": "non_seller_news",
+          "source": "GOV.UK",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "The AAIB has deployed a team to Loch Leven near Kinross, Fife",
+          "link": "https://www.gov.uk/government/news/the-aaib-has-deployed-a-team-to-loch-leven-near-kinross-fife",
+          "summary": "GOV.UK 官方通告",
+          "reject_reason": "未命中任何跨境业务关键词",
+          "rule_triggered": "non_seller_news",
+          "source": "GOV.UK",
+          "pub_time": "2026-11-21 04:55:49"
+        },
+        {
+          "title": "Change of His Majesty’s Ambassador to Mali",
+          "link": "https://www.gov.uk/government/news/change-of-his-majestys-ambassador-to-mali",
+          "summary": "GOV.UK 官方通告",
+          "reject_reason": "未命中任何跨境业务关键词",
+          "rule_triggered": "non_seller_news",
+          "source": "GOV.UK",
+          "pub_time": "2026-11-21 04:55:49"
+        }
+      ]
+    },
+    "statuses": {
+      "Amazon Seller News": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "TikTok Shop Seller": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Shopify Changelog": {
+        "candidates_found": 2,
+        "confirmed_count": 2,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_with_confirmed"
+      },
+      "eBay Seller Updates": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Walmart Release Notes": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Shopee": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Lazada": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "AliExpress": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Temu": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "SHEIN": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Mercado Libre": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Coupang": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Rakuten": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Qoo10": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Allegro": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Kaufland Global": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Alibaba.com": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Global Sources": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Made-in-China": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "BigCommerce": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "WooCommerce": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "SHOPLINE": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "Federal Register": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "GOV.UK": {
+        "candidates_found": 4,
+        "confirmed_count": 0,
+        "quarantined_count": 4,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_all_quarantined"
+      },
+      "CBP": {
+        "candidates_found": 5,
+        "confirmed_count": 5,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_with_confirmed"
+      },
+      "USTR": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "EU Taxation": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_with_confirmed"
+      },
+      "海关总署": {
+        "candidates_found": 5,
+        "confirmed_count": 5,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_with_confirmed"
+      },
+      "商务部": {
+        "candidates_found": 6,
+        "confirmed_count": 4,
+        "quarantined_count": 0,
+        "dropped_count": 2,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_with_confirmed"
+      },
+      "税务总局": {
+        "candidates_found": 3,
+        "confirmed_count": 3,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_with_confirmed"
+      },
+      "USPS Service Alerts": {
+        "candidates_found": 2,
+        "confirmed_count": 2,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_with_confirmed"
+      },
+      "DHL": {
+        "candidates_found": 8,
+        "confirmed_count": 8,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_with_confirmed"
+      },
+      "FedEx": {
+        "candidates_found": 0,
+        "confirmed_count": 0,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_no_candidates"
+      },
+      "UPS": {
+        "candidates_found": 1,
+        "confirmed_count": 1,
+        "quarantined_count": 0,
+        "dropped_count": 0,
+        "error_message": null,
+        "last_run_at": "2026-11-21T04:55:49.174075",
+        "status": "ok_with_confirmed"
+      }
+    },
+    "summary": {
+      "total_confirmed": 31,
+      "total_quarantined": 4,
+      "total_dropped": 2
+    }
+  },
+  {
     "date": "2026-11-20",
     "news": {
       "TikTok Shop Seller": [
